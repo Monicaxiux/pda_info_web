@@ -664,7 +664,7 @@ const initSortable = (className: any) => {
     let dragTable = Sortable.create(table, {
         animation: 150, //动画
         sort: false,
-        disabled: true,
+        // disabled: true,
         group: { name: 'table-group', pull: true, put: true },
         // 开始拖动事件
         onStart: (obj: any) => {
@@ -841,7 +841,7 @@ onMounted(() => {
  
  :deep(.el-table thead.is-group th.el-table__cell) {
      /* background-color: white;
-                                                                                                                                                                                                                                                                                                                                                                                                                        color: black; */
+                                                                                                                                                                                                                                                                                                                                                                                                                          color: black; */
      background-color: #ffffff5e;
      color: #ffffff;
      font-weight: bold;
