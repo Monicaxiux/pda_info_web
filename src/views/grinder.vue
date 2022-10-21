@@ -2,7 +2,7 @@
     <div class="home">
         <div class="tableData">
             <el-table name="A" class="t1" ref="dragTable" @row-dblclick="chang" :data="data.tableData" row-key="id"
-                border>
+                :key="key" border>
                 <el-table-column label="13#磨床">
                     <el-table-column label="操作" width="70">
                         <template #default="scope">
@@ -23,8 +23,8 @@
             </el-table>
         </div>
         <div class="tableData2">
-            <el-table name="B" class="t2" ref="dragTable" @row-dblclick="chang" :data="data.tableData2" row-key="id"
-                border>
+            <el-table name="B" class="t2" ref="dragTable" @row-dblclick="chang" :key="key" :data="data.tableData2"
+                row-key="id" border>
                 <el-table-column label="14#磨床">
                     <el-table-column label="操作" width="70">
                         <template #default="scope">
@@ -45,8 +45,8 @@
             </el-table>
         </div>
         <div class="tableData3">
-            <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :data="data.tableData3" row-key="id"
-                border>
+            <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :key="key" :data="data.tableData3"
+                row-key="id" border>
                 <el-table-column label="人工检测">
                     <el-table-column label="操作" width="70">
                         <template #default="scope">
@@ -72,8 +72,8 @@
             </el-table>
         </div>
         <div class="tableData4">
-            <el-table name="C" class="t4" ref="dragTable" @row-dblclick="chang" :data="data.tableData4" row-key="id"
-                border>
+            <el-table name="C" class="t4" ref="dragTable" @row-dblclick="chang" :key="key" :data="data.tableData4"
+                row-key="id" border>
                 <el-table-column label="U型辊架">
                     <el-table-column label="操作" width="70">
                         <template #default="scope">
@@ -94,7 +94,7 @@
             </el-table>
         </div>
         <div class="tableData5">
-            <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" border>
+            <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key" border>
                 <el-table-column label="机器人">
                     <el-table-column label="操作" width="70">
                         <template #default="scope">
@@ -128,7 +128,7 @@
         </div>
         <div class="tableData6">
             <el-table name="C" class="t6" ref="dragTable" @row-dblclick="chang" :data="data.tableData6" row-key="id"
-                border>
+                :key="key" border>
                 <el-table-column label="AGV1">
                     <el-table-column label="操作" width="70">
                         <template #default="scope">
@@ -150,7 +150,7 @@
         </div>
         <div class="tableData7">
             <el-table name="C" class="t7" ref="dragTable" @row-dblclick="chang" :data="data.tableData7" row-key="id"
-                border>
+                :key="key" border>
                 <el-table-column label="AGV2">
                     <el-table-column label="操作" width="70">
                         <template #default="scope">
@@ -172,7 +172,7 @@
         </div>
         <div class="tableData8">
             <el-table name="C" class="t8" @row-dblclick="chang2" ref="dragTable" :data="data.grindListAll" row-key="id"
-                border>
+                :key="key" border>
                 <el-table-column label="主任务列表">
                     <el-table-column>
                         <template #header>
@@ -188,7 +188,7 @@
             </el-table>
         </div>
         <div class="tableData8">
-            <el-table name="C" class="t9" ref="dragTable" :data="data.grindListAll2" row-key="id" border>
+            <el-table name="C" class="t9" ref="dragTable" :data="data.grindListAll2" row-key="id" border :key="key">
                 <el-table-column v-if="search == 'step1'" label="子任务列表">
                     <el-table-column>
                         <template #header>
@@ -408,7 +408,7 @@
             </el-table-column>
         </el-table>
     </el-dialog>
-    <el-dialog v-model="dialogVisible4" title="确认" width="50%" :before-close="handleClose">
+    <el-dialog v-model="dialogVisible4" :title="title" width="50%" :before-close="handleClose">
         <el-card class="box-card" shadow="hover">
             <el-steps :active="active" finish-status="success">
                 <el-button @click="activeL(0)" class="pos">{{ activeList[0].show ? '启用' : '禁用' }}</el-button>
@@ -477,11 +477,11 @@
 </template>
 <script setup lang="ts">
 import Sortable from "sortablejs";
-import { onMounted, reactive, ref, toRefs } from "vue";
+import { onMounted, reactive, ref, toRefs, getCurrentInstance } from "vue";
 import { ElMessageBox } from 'element-plus'
 import { updateFrame, getFrameChild, getFrame, updateFrameChild, updateElectronic } from '@/api'
 import { Alex } from '@/types'//引入参数规范类型
-const data: any = reactive({
+let data: any = reactive({
     tableData: [],
     tableData2: [],
     tableData3: [],
@@ -617,6 +617,7 @@ const dialogVisible2 = ref(false)
 const dialogVisible3 = ref(false)
 const dialogVisible4 = ref(false)
 const dialogVisible5 = ref(false)
+const title: any = ref('')
 
 const startTable = ref('')
 const endTable = ref('')
@@ -647,7 +648,7 @@ const save = () => {
     })
     dialogVisible.value = false
 }
-
+let key = ref(0)
 const savex = () => {
     console.log('焯');
     dialogVisible4.value = false
@@ -658,8 +659,11 @@ const savex = () => {
 
 // 创建sortable实例
 const initSortable = (className: any) => {
+    let D = JSON.parse(JSON.stringify(data));
+    // console.log(D)
     // 获取表格row的父节点
     const table = document.querySelector('.' + className + ' .el-table__body-wrapper tbody');
+    const tablex = document.querySelector('.' + className + ' .el-table__body-wrapper tbody');
     // 创建拖拽实例
     let dragTable = Sortable.create(table, {
         animation: 150, //动画
@@ -671,13 +675,18 @@ const initSortable = (className: any) => {
             const { from, to, newIndex, oldIndex, path } = obj;
             let targetData = to.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.className;
             startTable.value = targetData
+            console.log(tablex);
+
         },
         // 元素从一个列表拖拽到另一个列表
         onEnd(obj: any) {
+            // let a = data[startTable.value];
+            // console.log()
             const { from, to, newIndex, oldIndex, path } = obj;
+            console.log(obj)
             let selfData = path[8].className;
             let targetData = to.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.className;
-            endTable.value = targetData
+            endTable.value = targetData;
             if (from === to) {
                 // console.log('右边自己内部拖动', newIndex, oldIndex)
                 // const currRow: any = data[selfData].splice(newIndex, 1)[0];
@@ -690,16 +699,49 @@ const initSortable = (className: any) => {
                 // getData();
                 // data[targetData].splice(newIndex, 0, currRow)
                 console.log(currRow);
-
                 // data[targetData].splice(newIndex, 1)
                 // console.log(data[targetData]);
 
                 // data[targetData].splice(newIndex, 0, currRow)
                 // ElMessageBox.confirm('确定移动?')
                 //     .then(() => {
-                console.log(`从'${startTable.value}'表移动到了'${endTable.value}'表`)
+                // console.log(`从'${startTable.value}'的${data[startTable.value][oldIndex].slotPosition}位置移动到了'${endTable.value}'的${data[endTable.value][newIndex].slotPosition}位置`)
                 //         console.log(data[targetData]);
+                console.log(data[startTable.value][oldIndex], data[endTable.value][newIndex]);
+                title.value = `${startTable.value}--${data[startTable.value][oldIndex].slotPosition} ==> ${endTable.value}--${data[endTable.value][newIndex].slotPosition}`
 
+                console.log(startTable.value)
+                // data = data1;
+                data[startTable.value] = []
+                data[endTable.value] = []
+                console.log(data[startTable.value])
+                for (let i in data1[startTable.value]) {
+                    data[startTable.value].push(data1[startTable.value][i])
+                }
+                for (let i in data1[endTable.value]) {
+                    data[endTable.value].push(data1[endTable.value][i])
+                }
+                key.value++
+                // getCurrentInstance().ctx.$forceUpdate();
+                console.log(data[endTable.value])
+
+                // data[startTable.value] = data1[startTable.value]
+                console.log(data1[endTable.value]);
+                setTimeout(() => {
+                    initSortable('t1')
+                    initSortable('t2')
+                    initSortable('t3')
+                    initSortable('t4')
+                    initSortable('t5')
+                    initSortable('t6')
+                    initSortable('t7')
+                })
+
+                // console.log(D)
+                // data.value = D.value;
+                // data[startTable.value].splice(oldIndex, 0, data[endTable.value][newIndex]);
+                // data[startTable.value][oldIndex]
+                // console.log([startTable.value].value[newIndex], [startTable.value].value[newIndex] oldIndex)
                 //     }).catch(() => {
                 //         data[startTable.value].splice(oldIndex, 0, currRow)
                 //         data[targetData].splice(newIndex, 1)
@@ -709,6 +751,25 @@ const initSortable = (className: any) => {
         }
     });
 };
+
+// let tableData = ref([]);
+// let tableData2 = ref([]);
+// let tableData3 = ref([]);
+// let tableData4 = ref([]);
+// let tableData5 = ref([]);
+// let tableData6 = ref([]);
+// let tableData7 = ref([]);
+
+let data1: any = reactive({
+    tableData: [],
+    tableData2: [],
+    tableData3: [],
+    tableData4: [],
+    tableData5: [],
+    tableData6: [],
+    tableData7: [],
+    frameBedList: []
+})
 // 查询辊架数据
 const getData = () => {
     getFrame().then((res: any) => {
@@ -720,6 +781,22 @@ const getData = () => {
         data.tableData5 = res.result.electronicListAll
         data.tableData6 = res.result.frameAgvListAll
         data.tableData7 = res.result.frameAgvListAll2
+
+        data1.grindListAll = JSON.parse(JSON.stringify(res.result.grindListAll))
+        data1.tableData = JSON.parse(JSON.stringify(res.result.frameBedList))
+        data1.tableData2 = JSON.parse(JSON.stringify(res.result.frameBedListTwo))
+        data1.tableData3 = JSON.parse(JSON.stringify(res.result.peopleFrameListAll))
+        data1.tableData4 = JSON.parse(JSON.stringify(res.result.uFrameListAll))
+        data1.tableData5 = JSON.parse(JSON.stringify(res.result.electronicListAll))
+        data1.tableData6 = JSON.parse(JSON.stringify(res.result.frameAgvListAll))
+        data1.tableData7 = JSON.parse(JSON.stringify(res.result.frameAgvListAll2))
+        // tableData.value = res.result.grindListAll
+        // tableData2.value = res.result.frameBedListTwo
+        // tableData3.value = res.result.peopleFrameListAll
+        // tableData4.value = res.result.uFrameListAll
+        // tableData5.value = res.result.electronicListAll
+        // tableData6.value = res.result.frameAgvListAll
+        // tableData7.value = res.result.frameAgvListAll2
         initSortable('t1')
         initSortable('t2')
         initSortable('t3')
@@ -841,7 +918,7 @@ onMounted(() => {
  
  :deep(.el-table thead.is-group th.el-table__cell) {
      /* background-color: white;
-                                                                                                                                                                                                                                                                                                                                                                                                                          color: black; */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            color: black; */
      background-color: #ffffff5e;
      color: #ffffff;
      font-weight: bold;
