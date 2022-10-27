@@ -48,3 +48,38 @@ export const updateElectronic = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+
+//删除主任务
+export const remFrame = ((AlexData: any) => {
+    return request({
+        url: '/grind/deleteGrindById',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//添加主任务
+export const addFrame = ((AlexData: any) => {
+    return request({
+        url: '/frame/insertStepAndData',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询人工检测数据
+export const getDcad = (() => {
+    return request({
+        url: '/detection/selectDetectionAndData',
+        method: 'post'
+    }) as any
+})
+
+//修改人工检测数据
+export const updateDcad = ((AlexData: any) => {
+    return request({
+        url: '/detection/updateDetection',
+        method: 'post',
+        data: AlexData
+    }) as any
+})

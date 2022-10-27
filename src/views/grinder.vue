@@ -10,10 +10,15 @@
                                     class="iconfont icon-guanwangguanli_yidongguandian"></i></el-button>
                         </template>
                     </el-table-column>
-                    <el-table-column label="序号" type="index" width="80" align="center" />
                     <el-table-column prop="slotPosition" label="槽号"></el-table-column>
                     <el-table-column prop="rollId" label="辊号"></el-table-column>
-                    <el-table-column prop="slotStatus" label="状态">
+                    <el-table-column prop="slotStatus" label="检测状态">
+                        <template #default="scope">
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">未检测</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">已检测</el-tag>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="slotStatus" label="任务状态">
                         <template #default="scope">
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">无任务</el-tag>
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">有任务</el-tag>
@@ -32,10 +37,16 @@
                                     class="iconfont icon-guanwangguanli_yidongguandian"></i></el-button>
                         </template>
                     </el-table-column>
-                    <el-table-column label="序号" type="index" width="80" align="center" />
+
                     <el-table-column prop="slotPosition" label="槽号"></el-table-column>
                     <el-table-column prop="rollId" label="辊号"></el-table-column>
-                    <el-table-column prop="slotStatus" label="状态">
+                    <el-table-column prop="slotStatus" label="检测状态">
+                        <template #default="scope">
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">未检测</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">已检测</el-tag>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="slotStatus" label="任务状态">
                         <template #default="scope">
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">无任务</el-tag>
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">有任务</el-tag>
@@ -54,10 +65,16 @@
                                     class="iconfont icon-guanwangguanli_yidongguandian"></i></el-button>
                         </template>
                     </el-table-column>
-                    <el-table-column label="序号" type="index" width="80" align="center" />
+
                     <el-table-column prop="slotPosition" label="槽号"></el-table-column>
                     <el-table-column prop="rollId" label="辊号"></el-table-column>
-                    <el-table-column prop="slotStatus" label="状态">
+                    <el-table-column prop="slotStatus" label="检测状态">
+                        <template #default="scope">
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">未检测</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">已检测</el-tag>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="slotStatus" label="任务状态">
                         <template #default="scope">
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">无任务</el-tag>
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">有任务</el-tag>
@@ -65,7 +82,7 @@
                     </el-table-column>
                     <el-table-column label="操作">
                         <template #default="scope">
-                            <el-button @click="slot(scope.row)">操作</el-button>
+                            <el-button size="small" @click="slot(scope.row, 1)">操作</el-button>
                         </template>
                     </el-table-column>
                 </el-table-column>
@@ -81,10 +98,16 @@
                                     class="iconfont icon-guanwangguanli_yidongguandian"></i></el-button>
                         </template>
                     </el-table-column>
-                    <el-table-column label="序号" type="index" width="80" align="center" />
+
                     <el-table-column prop="slotPosition" label="槽号"></el-table-column>
                     <el-table-column prop="rollId" label="辊号"></el-table-column>
-                    <el-table-column prop="slotStatus" label="状态">
+                    <el-table-column prop="slotStatus" label="检测状态">
+                        <template #default="scope">
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">未检测</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">已检测</el-tag>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="slotStatus" label="任务状态">
                         <template #default="scope">
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">无任务</el-tag>
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">有任务</el-tag>
@@ -102,12 +125,13 @@
                                     class="iconfont icon-guanwangguanli_yidongguandian"></i></el-button>
                         </template>
                     </el-table-column>
-                    <el-table-column label="序号" type="index" width="80" align="center" />
+
+                    <el-table-column prop="ename" label="设备名称" width="120"></el-table-column>
                     <el-table-column prop="jobId" label="辊号"></el-table-column>
                     <el-table-column label="机器状态" width="140">
                         <template #default="scope">
-                            <el-tag class="ml-2" v-if="scope.row.estatus == '1'" type="warning">空闲</el-tag>
-                            <el-tag class="ml-2" v-if="scope.row.estatus == '2'" type="success">有任务</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.estatus == '2'" type="warning">空闲</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.estatus == '1'" type="success">繁忙</el-tag>
                             &nbsp;
                             <el-button v-if="scope.row.estatus != '2'" size="small" @click="chang4(scope.row, 1)">确认
                             </el-button>
@@ -115,8 +139,8 @@
                     </el-table-column>
                     <el-table-column label="任务状态" width="150">
                         <template #default="scope">
-                            <el-tag class="ml-2" v-if="scope.row.jobStatus == '1'" type="warning">进行中</el-tag>
-                            <el-tag class="ml-2" v-if="scope.row.jobStatus == '2'" type="success">已完成</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.jobStatus == '2'" type="warning">无任务</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.jobStatus == '1'" type="success">进行中</el-tag>
                             &nbsp;
                             <el-button v-if="scope.row.jobStatus != '2'" size="small" @click="chang4(scope.row, 2)">确认
                             </el-button>
@@ -136,10 +160,16 @@
                                     class="iconfont icon-guanwangguanli_yidongguandian"></i></el-button>
                         </template>
                     </el-table-column>
-                    <el-table-column label="序号" type="index" width="80" align="center" />
+
                     <el-table-column prop="slotPosition" label="槽号"></el-table-column>
                     <el-table-column prop="rollId" label="辊号"></el-table-column>
-                    <el-table-column prop="slotStatus" label="状态">
+                    <el-table-column prop="slotStatus" label="检测状态">
+                        <template #default="scope">
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">未检测</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">已检测</el-tag>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="slotStatus" label="任务状态">
                         <template #default="scope">
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">无任务</el-tag>
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">有任务</el-tag>
@@ -158,10 +188,16 @@
                                     class="iconfont icon-guanwangguanli_yidongguandian"></i></el-button>
                         </template>
                     </el-table-column>
-                    <el-table-column label="序号" type="index" width="80" align="center" />
+
                     <el-table-column prop="slotPosition" label="槽号"></el-table-column>
                     <el-table-column prop="rollId" label="辊号"></el-table-column>
-                    <el-table-column prop="slotStatus" label="状态">
+                    <el-table-column prop="slotStatus" label="检测状态">
+                        <template #default="scope">
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">未检测</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">已检测</el-tag>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="slotStatus" label="任务状态">
                         <template #default="scope">
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '0'" type="warning">无任务</el-tag>
                             <el-tag class="ml-2" v-if="scope.row.slotStatus == '1'" type="success">有任务</el-tag>
@@ -178,11 +214,17 @@
                         <template #header>
                             <el-button @click="add" style="margin-left:10px" type="primary">新增</el-button>
                         </template>
-                        <el-table-column label="序号" type="index" width="80" align="center" />
+
                         <el-table-column prop="grindId" label="主任务号" width="180"></el-table-column>
                         <el-table-column prop="grindNo" label="轧辊号" width="180"></el-table-column>
                         <el-table-column prop="current" label="当前步骤号"></el-table-column>
-                        <el-table-column prop="current" label="状态"></el-table-column>
+                        <!-- <el-table-column prop="current" label="任务状态"></el-table-column> -->
+                        <el-table-column label="操作" width="140">
+                            <template #default="scope">
+                                <el-button size="small" @click="chang5(scope.row)">删除
+                                </el-button>
+                            </template>
+                        </el-table-column>
                     </el-table-column>
                 </el-table-column>
             </el-table>
@@ -200,13 +242,15 @@
                         </template>
                         <el-table-column label="序号" type="index" width="50" align="center" />
                         <el-table-column prop="handNo" label="轧辊号" width="170"></el-table-column>
-                        <el-table-column label="状态">
+                        <el-table-column label="任务状态">
                             <template #default="scope">
                                 <el-tag class="ml-2" v-if="scope.row.handStatus == 1" type="warning">未发送</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.handStatus == 2">已发送</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.handStatus == 3" type="success">已完成</el-tag>
                             </template>
                         </el-table-column>
+                        <el-table-column prop="" label="起始位置"></el-table-column>
+                        <el-table-column prop="" label="结束位置"></el-table-column>
                         <el-table-column prop="expirationTime" label="开始时间" width="180"></el-table-column>
                         <el-table-column prop="aroundTime" label="结束时间" width="180"></el-table-column>
                         <el-table-column label="操作" width="140">
@@ -229,14 +273,16 @@
                             <el-button @click="getChild" style="margin-left:10px" type="primary">查询</el-button>
                         </template>
                         <el-table-column label="序号" type="index" width="50" align="center" />
-                        <el-table-column prop="machineRollId" label="轧辊号"></el-table-column>
-                        <el-table-column label="状态">
+                        <el-table-column prop="machineNo" label="轧辊号"></el-table-column>
+                        <el-table-column label="任务状态">
                             <template #default="scope">
                                 <el-tag class="ml-2" v-if="scope.row.machineStatus == 1" type="warning">未发送</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.machineStatus == 2">已发送</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.machineStatus == 3" type="success">已完成</el-tag>
                             </template>
                         </el-table-column>
+                        <el-table-column prop="" label="起始位置"></el-table-column>
+                        <el-table-column prop="" label="结束位置"></el-table-column>
                         <el-table-column prop="expirationTime" label="开始时间"></el-table-column>
                         <el-table-column prop="aroundTime" label="结束时间"></el-table-column>
                         <el-table-column label="操作" width="140">
@@ -259,14 +305,16 @@
                             <el-button @click="getChild" style="margin-left:10px" type="primary">查询</el-button>
                         </template>
                         <el-table-column label="序号" type="index" width="50" align="center" />
-                        <el-table-column prop="peelRollId" label="轧辊号"></el-table-column>
-                        <el-table-column label="状态">
+                        <el-table-column prop="peelNo" label="轧辊号"></el-table-column>
+                        <el-table-column label="任务状态">
                             <template #default="scope">
                                 <el-tag class="ml-2" v-if="scope.row.peelStatus == 1" type="warning">未发送</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.peelStatus == 2">已发送</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.peelStatus == 3" type="success">已完成</el-tag>
                             </template>
                         </el-table-column>
+                        <el-table-column prop="" label="起始位置"></el-table-column>
+                        <el-table-column prop="" label="结束位置"></el-table-column>
                         <el-table-column prop="expirationTime" label="开始时间"></el-table-column>
                         <el-table-column prop="aroundTime" label="结束时间"></el-table-column>
                         <el-table-column label="操作" width="140">
@@ -289,14 +337,16 @@
                             <el-button @click="getChild" style="margin-left:10px" type="primary">查询</el-button>
                         </template>
                         <el-table-column label="序号" type="index" width="50" align="center" />
-                        <el-table-column prop="captainRollId" label="轧辊号"></el-table-column>
-                        <el-table-column label="状态">
+                        <el-table-column prop="captainNo" label="轧辊号"></el-table-column>
+                        <el-table-column label="任务状态">
                             <template #default="scope">
                                 <el-tag class="ml-2" v-if="scope.row.captainStatus == 1" type="warning">未发送</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.captainStatus == 2">已发送</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.captainStatus == 3" type="success">已完成</el-tag>
                             </template>
                         </el-table-column>
+                        <el-table-column prop="" label="起始位置"></el-table-column>
+                        <el-table-column prop="" label="结束位置"></el-table-column>
                         <el-table-column prop="captainDate" label="开始时间"></el-table-column>
                         <el-table-column prop="aroundTime" label="结束时间"></el-table-column>
                         <el-table-column label="操作" width="140">
@@ -321,7 +371,7 @@
                 <el-form-item label="轧辊号">
                     <el-input v-model="form.rollId" placeholder="请输入轧辊号" clearable />
                 </el-form-item>
-                <el-form-item label="状态">
+                <el-form-item label="任务状态">
                     <el-switch v-model="form.slotStatus" active-text="有任务" inactive-text="无任务" />
                 </el-form-item>
             </el-form>
@@ -377,61 +427,68 @@
         </el-descriptions>
     </el-dialog>
     <el-dialog v-model="dialogVisible3" title="确认" width="50%" :before-close="handleClose">
-        <el-table ref="dragTable" :data="data.grindListAll2" row-key="id" border>
+        <el-table ref="dragTable" :data="detectionListIsNull" row-key="id" border>
             <el-table-column label="待确认列表">
-                <el-table-column label="序号" type="index" width="80" align="center" />
-                <el-table-column prop="rollId" label="任务号"></el-table-column>
-                <el-table-column prop="current" label="轧辊号"></el-table-column>
-                <el-table-column prop="current" label="检查时间"></el-table-column>
-                <el-table-column prop="grindId" label="检查人"></el-table-column>
+
+                <el-table-column prop="dno" label="任务号"></el-table-column>
+                <el-table-column prop="rollerId" label="轧辊号"></el-table-column>
+                <el-table-column prop="dtime" label="检查时间"></el-table-column>
+                <el-table-column prop="diameter" label="轧辊直径"></el-table-column>
+                <el-table-column prop="dpeople" label="检查人"></el-table-column>
+                <el-table-column prop="dremarks" label="备注"></el-table-column>
+                <el-table-column label="任务状态">
+                    <template #default="scope">
+                        <el-tag class="ml-2" v-if="scope.row.dstatus == 0" type="warning">未确认</el-tag>
+                        <el-tag class="ml-2" v-if="scope.row.dstatus == 1" type="success">已确认</el-tag>
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作">
                     <template #default="scope">
-                        <el-button @click="slot(scope.row)">确认</el-button>
+                        <el-button @click="slot(scope.row, 2)">确认</el-button>
                     </template>
                 </el-table-column>
             </el-table-column>
         </el-table>
         <br />
         <br />
-        <el-table ref="dragTable" :data="data.grindListAll2" row-key="id" border>
+        <el-table ref="dragTable" :data="detectionListIsNotNull" row-key="id" border>
             <el-table-column label="已确认列表">
-                <el-table-column label="序号" type="index" width="80" align="center" />
-                <el-table-column prop="rollId" label="任务号"></el-table-column>
-                <el-table-column prop="current" label="轧辊号"></el-table-column>
-                <el-table-column prop="current" label="检查时间"></el-table-column>
-                <el-table-column prop="grindId" label="检查人"></el-table-column>
-                <el-table-column label="操作">
+
+                <el-table-column prop="dno" label="任务号"></el-table-column>
+                <el-table-column prop="rollerId" label="轧辊号"></el-table-column>
+                <el-table-column prop="dtime" label="检查时间"></el-table-column>
+                <el-table-column prop="diameter" label="轧辊直径"></el-table-column>
+                <el-table-column prop="dpeople" label="检查人"></el-table-column>
+                <el-table-column prop="dremarks" label="备注"></el-table-column>
+                <el-table-column label="任务状态">
                     <template #default="scope">
-                        <el-button @click="slot(scope.row)">确认</el-button>
+                        <el-tag class="ml-2" v-if="scope.row.dstatus == 0" type="warning">未确认</el-tag>
+                        <el-tag class="ml-2" v-if="scope.row.dstatus == 1" type="success">已确认</el-tag>
                     </template>
                 </el-table-column>
             </el-table-column>
         </el-table>
     </el-dialog>
-    <el-dialog v-model="dialogVisible4" :title="title" width="50%" :before-close="handleClose">
+    <el-dialog v-model="dialogVisible4" title="创建主任务" width="50%" :before-close="handleClose">
         <el-card class="box-card" shadow="hover">
-            <el-steps :active="active" finish-status="success">
-                <el-button @click="activeL(0)" class="pos">{{ activeList[0].show ? '启用' : '禁用' }}</el-button>
-                <el-step />
-                <el-button @click="activeL(1)" class="pos">{{ activeList[1].show ? '启用' : '禁用' }}</el-button>
-                <el-step />
-                <el-button @click="activeL(2)" class="pos">{{ activeList[2].show ? '启用' : '禁用' }}</el-button>
-                <el-step />
-                <el-button @click="activeL(3)" class="pos">{{ activeList[3].show ? '启用' : '禁用' }}</el-button>
-                <el-step />
-                <el-button @click="activeL(4)" class="pos">{{ activeList[4].show ? '启用' : '禁用' }}</el-button>
-                <el-step />
-                <el-button @click="activeL(5)" class="pos">{{ activeList[5].show ? '启用' : '禁用' }}</el-button>
-                <el-step />
-            </el-steps>
+            <h1>主任务</h1>
+            <el-checkbox v-model="step.step1" label="Step1(AGV->辊架)" :disabled="d1" />
+            <el-checkbox v-model="step.step2" label="Step2(U辊架->磨床)" :disabled="d2" />
+            <el-checkbox v-model="step.step3" label="Step3(磨床->人工检测)" :disabled="d3" />
+            <el-checkbox v-model="step.step4" label="Step4(人工检测->U型辊架)" :disabled="d4" />
         </el-card><br />
         <el-card class="box-card" shadow="hover">
-
+            <h1>子任务</h1>
+            起始位置：{{ sTable }}<br /><br />
+            终点位置：{{ eTable }}<br /><br />
+            轧辊号：{{ formData.rollId }}<br /><br />
+            优先执行：
+            <el-switch v-model="value" active-text="是" inactive-text="否" />
         </el-card>
         <template #footer>
             <span class="dialog-footer">
                 <el-button @click="dialogVisible4 = false">取消</el-button>
-                <el-button type="primary" @click="savex">确定</el-button>
+                <el-button type="primary" @click="createTask">确定</el-button>
             </span>
         </template>
     </el-dialog>
@@ -478,9 +535,10 @@
 <script setup lang="ts">
 import Sortable from "sortablejs";
 import { onMounted, reactive, ref, toRefs, getCurrentInstance } from "vue";
-import { ElMessageBox } from 'element-plus'
-import { updateFrame, getFrameChild, getFrame, updateFrameChild, updateElectronic } from '@/api'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { updateFrame, getFrameChild, getFrame, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad } from '@/api'
 import { Alex } from '@/types'//引入参数规范类型
+import { stat } from "fs";
 let data: any = reactive({
     tableData: [],
     tableData2: [],
@@ -489,10 +547,12 @@ let data: any = reactive({
     tableData5: [],
     tableData6: [],
     tableData7: [],
-    frameBedList: []
+    frameBedList: [],
 })
 const inputform: any = ref({})
+const value: any = ref(false)
 const form: any = ref({})
+const formData: any = ref({})
 const options = ref([
     {
         label: 'Step1(AGV->辊架)',
@@ -513,30 +573,10 @@ const options = ref([
 ])
 const search = ref('step1')
 const from: any = ref()
-const active = ref(1)
-const activeList = ref([
-    {
-        show: false
-    },
-    {
-        show: true
-    },
-    {
-        show: false
-    },
-    {
-        show: false
-    },
-    {
-        show: false
-    },
-    {
-        show: false
-    },
-])
-const activeL = (i: any) => {
-    activeList.value[i].show = !activeList.value[i].show
-}
+const checkList = ref(['step1'])
+const sTable = ref('');
+const eTable = ref('');
+
 const chang = (row: any) => {
     // console.log(row);
     switch (row.slotStatus) {
@@ -551,6 +591,18 @@ const chang = (row: any) => {
     console.log(form);
     dialogVisible.value = true
 }
+const step = ref({
+    step1: false,
+    step2: false,
+    step3: false,
+    step4: false
+})
+const detectionListIsNull: any = ref([])
+const detectionListIsNotNull: any = ref([])
+const d1 = ref(false)
+const d2 = ref(false)
+const d3 = ref(false)
+const d4 = ref(false)
 const chang2 = (row: any) => {
     console.log(row);
     from.value = row
@@ -558,29 +610,53 @@ const chang2 = (row: any) => {
 }
 const chang3 = (row: any) => {
     console.log(row, search.value);
+
+
     switch (search.value) {
         case 'step1':
-            row.handStatus = 3
+            // row.handStatus = 3
             break;
         case 'step2':
-            row.machineStatus = 3
+            // row.machineStatus = 3
             break;
         case 'step3':
-            row.peelStatus = 3
+            // row.peelStatus = 3
             break;
         case 'step4':
-            row.captainStatus = 3
+            // row.captainStatus = 3
             break;
     }
+    // row.aroundTime = getNow();
     let alex = new Alex
     alex.parameter = {
         stepNumber: search.value,
-        updateData: row
+        // updateData: row
     }
     updateFrameChild(alex).then((res: any) => {
-        getChild();
+        setTimeout(() => {
+            getData();
+            getChild();
+            init();
+        }, 1000)
     })
-
+}
+function getNow() {
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = change(d.getMonth() + 1);
+    var day = change(d.getDate());
+    var hour = change(d.getHours());
+    var minute = change(d.getMinutes());
+    var second = change(d.getSeconds());
+    function change(t: any) {
+        if (t < 10) {
+            return "0" + t;
+        } else {
+            return t;
+        }
+    }
+    var time = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+    return time;
 }
 const chang4 = (row: any, i: any) => {
     let alex = new Alex
@@ -597,16 +673,61 @@ const chang4 = (row: any, i: any) => {
     }
     alex.parameter.updateElectronicList[0] = row
     updateElectronic(alex).then((res: any) => {
-        getData();
+        setTimeout(() => {
+            getData();
+            getChild();
+            init();
+
+        }, 1000)
+
+
+    })
+}
+const chang5 = (row: any) => {
+    console.log(row);
+    let alex = new Alex
+    alex.parameter = {
+        grindArray: [row]
+    }
+    remFrame(alex).then((res: any) => {
+        setTimeout(() => {
+            getChild();
+            getData();
+            init();
+
+        }, 1000)
     })
 }
 const add = () => {
 
     dialogVisible5.value = true
 }
-const slot = (row: any) => {
+const slot = (row: any, i: any) => {
+    switch (i) {
+        case 1:
+            getDcadx();
+            break;
+        case 2:
+            row.dstatus = 1
+            let alex = new Alex
+            alex.parameter = {
+                updateDetectionList: [row]
+            }
+            updateDcad(alex).then((res: any) => {
+                getDcadx()
+            })
+            break;
+        case 3:
+            break;
+    }
     dialogVisible3.value = true
-
+}
+const getDcadx = () => {
+    getDcad().then((res: any) => {
+        console.log(res);
+        detectionListIsNotNull.value = res.result.detectionListIsNotNull
+        detectionListIsNull.value = res.result.detectionListIsNull
+    })
 }
 const dialogVisible = ref(false)
 
@@ -618,7 +739,8 @@ const dialogVisible3 = ref(false)
 const dialogVisible4 = ref(false)
 const dialogVisible5 = ref(false)
 const title: any = ref('')
-
+const stepParm: any = ref('1')
+const flag: any = ref('U')
 const startTable = ref('')
 const endTable = ref('')
 // 修改辊架信息
@@ -644,19 +766,92 @@ const save = () => {
         ]
     }
     updateFrame(alex).then((res: any) => {
-        getData();
+        setTimeout(() => {
+            getData();
+            getChild();
+            init();
+        }, 1000)
+
     })
     dialogVisible.value = false
 }
 let key = ref(0)
 const savex = () => {
-    console.log('焯');
     dialogVisible4.value = false
     setTimeout(() => {
         location.reload()
     }, 1000)
 }
+const stat = ref(false)
+const createTask = () => {
+    dialogVisible4.value = false
+    let alex = new Alex
+    alex.parameter = {
+        stepParm: stepParm.value,
+        insertPoll: {
+            step_01_Hand: step.value.step1 ? '1' : '0',
+            step_02_Machine: step.value.step2 ? '1' : '0',
+            step_03_Peel: step.value.step3 ? '1' : '0',
+            step_04_CaptainId: step.value.step4 ? '1' : '0',
+            grindNo: formData.value.rollId
+        },
+        insertData: {
+            handStart: sTable.value,
+            handEnd: eTable.value,
+            handLevel: value.value ? 1 : 0,
+            flag: flag.value
+        }
+    }
+    if (flag.value == 'B') {
+        alex.parameter.insertData = {
+            machineStart: sTable.value,
+            machineEnd: eTable.value,
+            machineLevel: value.value ? 1 : 0,
+            flag: flag.value
+        }
+        delete alex.parameter.insertPoll.grindNo
 
+    }
+    if (flag.value == 'P') {
+        alex.parameter.insertData = {
+            peelStart: sTable.value,
+            peelEnd: eTable.value,
+            peelLevel: value.value ? 1 : 0,
+            flag: flag.value
+        }
+        delete alex.parameter.insertPoll.grindNo
+
+    }
+    if (flag.value == 'U' && stat.value) {
+        alex.parameter.insertData = {
+            captainStart: sTable.value,
+            captainEnd: eTable.value,
+            captainLevel: value.value ? 1 : 0,
+            flag: flag.value
+        }
+        delete alex.parameter.insertPoll.grindNo
+
+    }
+    addFrame(alex).then((res: any) => {
+        if (res.message.msg == '终点位置被占用 重新添加') {
+            ElMessage.error('终点位置被占用 重新添加')
+        }
+        setTimeout(() => {
+            getData();
+            getChild();
+            init();
+        }, 1000)
+
+    })
+    console.log(alex.parameter);
+
+}
+// document.addEventListener('mousemove', function (e) {
+//     //mousemove 只要鼠标一移动，就会触发事件
+//     //获取鼠标最新的坐标
+//     console.log(e.pageY, 'Y')
+//     console.log(e.pageX, 'X');
+// })
 // 创建sortable实例
 const initSortable = (className: any) => {
     let D = JSON.parse(JSON.stringify(data));
@@ -675,90 +870,166 @@ const initSortable = (className: any) => {
             const { from, to, newIndex, oldIndex, path } = obj;
             let targetData = to.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.className;
             startTable.value = targetData
-            console.log(tablex);
-
+            // switch (startTable.value) {
+            //     case 'tableData':
+            //         sTable.value = '13#磨床'
+            //         break;
+            //     case 'tableData2':
+            //         sTable.value = '14#磨床'
+            //         break;
+            //     case 'tableData3':
+            //         sTable.value = '人工检测'
+            //         break;
+            //     case 'tableData4':
+            //         sTable.value = 'U型辊架'
+            //         break;
+            //     case 'tableData6':
+            //         sTable.value = 'AGV1'
+            //         break;
+            //     case 'tableData7':
+            //         sTable.value = 'AGV2'
+            //         break;
+            // }
         },
         // 元素从一个列表拖拽到另一个列表
         onEnd(obj: any) {
             // let a = data[startTable.value];
             // console.log()
             const { from, to, newIndex, oldIndex, path } = obj;
-            console.log(obj)
             let selfData = path[8].className;
             let targetData = to.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.className;
             endTable.value = targetData;
+            console.log(endTable.value);
+            // switch (endTable.value) {
+            //     case 'tableData':
+            //         eTable.value = '13#磨床'
+            //         break;
+            //     case 'tableData2':
+            //         eTable.value = '14#磨床'
+            //         break;
+            //     case 'tableData3':
+            //         eTable.value = '人工检测'
+            //         break;
+            //     case 'tableData4':
+            //         eTable.value = 'U型辊架'
+            //         break;
+            //     case 'tableData6':
+            //         eTable.value = 'AGV1'
+            //         break;
+            //     case 'tableData7':
+            //         eTable.value = 'AGV2'
+            //         break;
+            // }
             if (from === to) {
                 // console.log('右边自己内部拖动', newIndex, oldIndex)
                 // const currRow: any = data[selfData].splice(newIndex, 1)[0];
                 // console.log(currRow);
                 // data[selfData].splice(newIndex, 0, currRow)
+                init();
+
             } else if (from !== to) {
-                // const currRow: any = data[selfData].splice(oldIndex, 1)[0];
                 const currRow: any = data[selfData][oldIndex]
-                dialogVisible4.value = true
-                // getData();
-                // data[targetData].splice(newIndex, 0, currRow)
-                console.log(currRow);
-                // data[targetData].splice(newIndex, 1)
-                // console.log(data[targetData]);
+                // console.log(currRow);
+                formData.value = currRow
+                if (currRow.rollId) {
+                    // console.log(data[endTable.value][newIndex]);
+                    if (data[endTable.value][newIndex]) {
+                        eTable.value = data[endTable.value][newIndex].slotPosition
+                        sTable.value = data[startTable.value][oldIndex].slotPosition
+                        if (eTable.value && sTable.value) {
+                            title.value = `${startTable.value}--${data[startTable.value][oldIndex].slotPosition} ==> ${endTable.value}--${data[endTable.value][newIndex].slotPosition}`
+                            data[startTable.value] = []
+                            data[endTable.value] = []
+                            for (let i in data1[startTable.value]) {
+                                data[startTable.value].push(data1[startTable.value][i])
+                            }
+                            for (let i in data1[endTable.value]) {
+                                data[endTable.value].push(data1[endTable.value][i])
+                            }
+                            init()
+                            if (startTable.value == 'tableData6' && endTable.value == 'tableData4') {
+                                dialogVisible4.value = true
+                                d1.value = true
+                                d2.value = false
+                                d3.value = false
+                                d4.value = false
+                                step.value.step1 = true
+                                step.value.step2 = false
+                                step.value.step3 = false
+                                step.value.step4 = false
+                                stepParm.value = '1'
+                                flag.value = 'U'
+                            } else if (startTable.value == 'tableData4' && endTable.value == 'tableData') {
+                                dialogVisible4.value = true
+                                d1.value = true
+                                d2.value = true
+                                d3.value = false
+                                d4.value = false
+                                step.value.step4 = false
+                                step.value.step3 = false
+                                step.value.step2 = true
+                                step.value.step1 = false
+                                stepParm.value = '2'
+                                flag.value = 'B'
+                            } else if (startTable.value == 'tableData' && endTable.value == 'tableData3') {
+                                dialogVisible4.value = true
+                                d1.value = true
+                                d2.value = true
+                                d3.value = true
+                                d4.value = false
+                                step.value.step4 = false
+                                step.value.step3 = true
+                                step.value.step2 = false
+                                step.value.step1 = false
+                                stepParm.value = '3'
+                                flag.value = 'P'
+                            } else if (startTable.value == 'tableData3' && endTable.value == 'tableData4') {
+                                dialogVisible4.value = true
+                                d1.value = true
+                                d2.value = true
+                                d3.value = true
+                                d4.value = true
+                                step.value.step4 = true
+                                step.value.step3 = false
+                                step.value.step2 = false
+                                step.value.step1 = false
+                                stepParm.value = '4'
+                                flag.value = 'U'
+                                stat.value = true
+                            } else {
+                                console.log('来了');
 
-                // data[targetData].splice(newIndex, 0, currRow)
-                // ElMessageBox.confirm('确定移动?')
-                //     .then(() => {
-                // console.log(`从'${startTable.value}'的${data[startTable.value][oldIndex].slotPosition}位置移动到了'${endTable.value}'的${data[endTable.value][newIndex].slotPosition}位置`)
-                //         console.log(data[targetData]);
-                console.log(data[startTable.value][oldIndex], data[endTable.value][newIndex]);
-                title.value = `${startTable.value}--${data[startTable.value][oldIndex].slotPosition} ==> ${endTable.value}--${data[endTable.value][newIndex].slotPosition}`
+                                init()
+                            }
+                        } else {
+                            init()
+                        }
+                    } else {
+                        init()
 
-                console.log(startTable.value)
-                // data = data1;
-                data[startTable.value] = []
-                data[endTable.value] = []
-                console.log(data[startTable.value])
-                for (let i in data1[startTable.value]) {
-                    data[startTable.value].push(data1[startTable.value][i])
+                    }
+                } else {
+                    ElMessage.error('请输入轧辊号！')
+                    init()
+
                 }
-                for (let i in data1[endTable.value]) {
-                    data[endTable.value].push(data1[endTable.value][i])
-                }
-                key.value++
-                // getCurrentInstance().ctx.$forceUpdate();
-                console.log(data[endTable.value])
-
-                // data[startTable.value] = data1[startTable.value]
-                console.log(data1[endTable.value]);
-                setTimeout(() => {
-                    initSortable('t1')
-                    initSortable('t2')
-                    initSortable('t3')
-                    initSortable('t4')
-                    initSortable('t5')
-                    initSortable('t6')
-                    initSortable('t7')
-                })
-
-                // console.log(D)
-                // data.value = D.value;
-                // data[startTable.value].splice(oldIndex, 0, data[endTable.value][newIndex]);
-                // data[startTable.value][oldIndex]
-                // console.log([startTable.value].value[newIndex], [startTable.value].value[newIndex] oldIndex)
-                //     }).catch(() => {
-                //         data[startTable.value].splice(oldIndex, 0, currRow)
-                //         data[targetData].splice(newIndex, 1)
-                //     })
 
             }
+        },
+        // 拖拽移动的时候
+        onMove: function (/**Event*/evt: any, /**Event*/originalEvent: any) {
+            // Example: https://jsbin.com/nawahef/edit?js,output
+            evt.dragged; // dragged HTMLElement
+            evt.draggedRect; // DOMRect {left, top, right, bottom}
+            evt.related; // HTMLElement on which have guided
+            evt.relatedRect; // DOMRect
+            evt.willInsertAfter; // Boolean that is true if Sortable will insert drag element after target by default
+            originalEvent.clientY; // mouse position
+            evt.related.style.backgroundColor = 'white'
+            evt.related.style.color = 'black'
         }
     });
 };
-
-// let tableData = ref([]);
-// let tableData2 = ref([]);
-// let tableData3 = ref([]);
-// let tableData4 = ref([]);
-// let tableData5 = ref([]);
-// let tableData6 = ref([]);
-// let tableData7 = ref([]);
 
 let data1: any = reactive({
     tableData: [],
@@ -790,13 +1061,12 @@ const getData = () => {
         data1.tableData5 = JSON.parse(JSON.stringify(res.result.electronicListAll))
         data1.tableData6 = JSON.parse(JSON.stringify(res.result.frameAgvListAll))
         data1.tableData7 = JSON.parse(JSON.stringify(res.result.frameAgvListAll2))
-        // tableData.value = res.result.grindListAll
-        // tableData2.value = res.result.frameBedListTwo
-        // tableData3.value = res.result.peopleFrameListAll
-        // tableData4.value = res.result.uFrameListAll
-        // tableData5.value = res.result.electronicListAll
-        // tableData6.value = res.result.frameAgvListAll
-        // tableData7.value = res.result.frameAgvListAll2
+        init();
+    })
+}
+const init = () => {
+    key.value++
+    setTimeout(() => {
         initSortable('t1')
         initSortable('t2')
         initSortable('t3')
@@ -815,135 +1085,141 @@ const getChild = () => {
     getFrameChild(alex).then((res: any) => {
         // console.log(res.result.listAndChild);
         data.grindListAll2 = res.result.listAndChild
+        init();
     })
 }
 onMounted(() => {
     getData();
     getChild();
+    setInterval(async () => {
+        await getData();
+        await getChild();
+        await init();
+    }, 10000)
 })
 
 </script>
- <style scoped>
- i {
-     color: white;
-     font-size: 25px;
- }
- 
- .move {
-     cursor: move;
- }
- 
- .home {
-     display: flex;
-     height: 80vh;
- }
- 
- .t1 {
-     position: absolute;
-     top: 70px;
-     height: 150px;
-     width: 400px;
- }
- 
- .t2 {
-     position: absolute;
-     top: 70px;
-     left: 1110px;
-     height: 150px;
-     width: 400px;
- }
- 
- .t3 {
-     position: absolute;
-     top: 70px;
-     left: 500px;
-     height: 150px;
-     width: 600px;
- }
- 
- .t4 {
-     position: absolute;
-     top: 230px;
-     left: 500px;
-     height: 450px;
-     width: 600px;
- }
- 
- .t5 {
-     position: absolute;
-     top: 710px;
-     left: 500px;
-     height: 250px;
-     width: 600px;
- }
- 
- .t6 {
-     position: absolute;
-     top: 230px;
-     height: 500px;
-     /* left: 0; */
-     width: 400px;
- }
- 
- .t7 {
-     position: absolute;
-     top: 230px;
-     /* right: 70px; */
-     left: 1110px;
-     height: 500px;
-     width: 400px;
- }
- 
- .t8 {
-     position: absolute;
-     top: 70px;
-     right: 10px;
-     height: 350px;
-     /* display: none; */
-     width: 800px;
- }
- 
- .t9 {
-     position: absolute;
-     top: 500px;
-     right: 10px;
-     height: 450px;
-     /* display: none; */
-     width: 800px;
- }
- 
- :deep(.el-table--fit) {
-     background-color: #ffffff21;
- }
- 
- :deep(.el-table thead.is-group th.el-table__cell) {
-     /* background-color: white;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            color: black; */
-     background-color: #ffffff5e;
-     color: #ffffff;
-     font-weight: bold;
- }
- 
- :deep(.el-table thead.is-group th.el-table__cell:hover) {
-     color: black;
- }
- 
- :deep(.el-table tr) {
-     background-color: transparent;
-     color: white;
- }
- 
- :deep(.el-table tr:hover) {
-     color: black;
-     background-color: white;
- }
- 
- :deep(.el-select .el-input__wrapper) {
-     background: #ffffffb8;
-     color: white;
- }
- 
- :deep(.el-select .el-input__inner) {
-     /* color: white; */
- }
- </style>
+<style scoped>
+i {
+    color: white;
+    font-size: 25px;
+}
+
+.move {
+    cursor: move;
+}
+
+.home {
+    display: flex;
+    height: 80vh;
+}
+
+.t1 {
+    position: absolute;
+    top: 70px;
+    height: 150px;
+    width: 400px;
+}
+
+.t2 {
+    position: absolute;
+    top: 70px;
+    left: 1110px;
+    height: 150px;
+    width: 400px;
+}
+
+.t3 {
+    position: absolute;
+    top: 70px;
+    left: 500px;
+    height: 150px;
+    width: 600px;
+}
+
+.t4 {
+    position: absolute;
+    top: 230px;
+    left: 500px;
+    height: 450px;
+    width: 600px;
+}
+
+.t5 {
+    position: absolute;
+    top: 710px;
+    left: 500px;
+    height: 250px;
+    width: 600px;
+}
+
+.t6 {
+    position: absolute;
+    top: 230px;
+    height: 500px;
+    /* left: 0; */
+    width: 400px;
+}
+
+.t7 {
+    position: absolute;
+    top: 230px;
+    /* right: 70px; */
+    left: 1110px;
+    height: 500px;
+    width: 400px;
+}
+
+.t8 {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    height: 350px;
+    /* display: none; */
+    width: 800px;
+}
+
+.t9 {
+    position: absolute;
+    top: 500px;
+    right: 10px;
+    height: 450px;
+    /* display: none; */
+    width: 800px;
+}
+
+:deep(.el-table--fit) {
+    background-color: #ffffff21;
+}
+
+:deep(.el-table thead.is-group th.el-table__cell) {
+    /* background-color: white;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   color: black; */
+    background-color: #ffffff5e;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+:deep(.el-table thead.is-group th.el-table__cell:hover) {
+    color: black;
+}
+
+:deep(.el-table tr) {
+    background-color: transparent;
+    color: white;
+}
+
+:deep(.el-table tr:hover) {
+    color: black;
+    background-color: white;
+}
+
+:deep(.el-select .el-input__wrapper) {
+    background: #ffffffb8;
+    color: white;
+}
+
+:deep(.el-select .el-input__inner) {
+    /* color: white; */
+}
+</style>
