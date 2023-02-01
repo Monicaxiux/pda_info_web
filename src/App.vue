@@ -3,8 +3,13 @@
 </script>
 
 <template>
-  <router-view></router-view>
+  <dv-full-screen-container>
+    <router-view></router-view>
+  </dv-full-screen-container>
+
+
 </template>
 
-<style scoped>
+<style>
+
 </style>

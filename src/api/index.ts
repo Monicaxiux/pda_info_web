@@ -1,11 +1,5 @@
 import request from "@/utils/request";
-//查询辊架信息
-export const getFrame = (() => {
-    return request({
-        url: '/frame/selectFrameListPostData',
-        method: 'post'
-    })
-})
+
 //用户登陆
 export const login = ((eilnfoData: any) => {
     return request({
@@ -14,6 +8,16 @@ export const login = ((eilnfoData: any) => {
         data: eilnfoData
     }) as any
 })
+
+
+//查询辊架信息
+export const getFrame = (() => {
+    return request({
+        url: '/frame/selectFrameListPostData',
+        method: 'post'
+    })
+})
+
 //修改辊架
 export const updateFrame = ((AlexData: any) => {
     return request({
@@ -25,7 +29,7 @@ export const updateFrame = ((AlexData: any) => {
 //查询辊架子任务
 export const getFrameChild = ((AlexData: any) => {
     return request({
-        url: '/frame/selectChildAllAndInfo',
+        url: '/grind/selectOtherStepInfo',
         method: 'post',
         data: AlexData
     }) as any
@@ -79,6 +83,85 @@ export const getDcad = (() => {
 export const updateDcad = ((AlexData: any) => {
     return request({
         url: '/detection/updateDetection',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询磨床的基本信息
+export const getFrameInfo = ((AlexData: any) => {
+    return request({
+        url: '/frame/selectFrameInfoData',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询主任务信息
+export const getGrindAllAndData = ((AlexData: any) => {
+    return request({
+        url: '/grind/selectGrindParameterData',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询子任务信息
+export const getOtherStepInfo = ((AlexData: any) => {
+    return request({
+        url: '/grind/selectOtherStepInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询AGV主任务信息
+export const getAGVGrindAllAndData = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/selectAgv_Main_All',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询AGV子任务信息
+export const getAGVOtherStepInfo = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/selectAgvMainOtherStepInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//修改子任务信息
+export const updateAGVChild = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/updateCurrentStepOrInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//AGV半自动任务数据
+export const selectAgvCarryInfo = (() => {
+    return request({
+        url: '/Agv_Carry/selectAgvCarryInfo',
+        method: 'post'
+    }) as any
+})
+
+//机器人半自动任务数据
+export const selectGrindCarryInfo = (() => {
+    return request({
+        url: '/Grind_Carry/selectGrindCarryInfo',
+        method: 'post'
+    }) as any
+})
+
+//根据具体位置查询所有的轧辊信息
+export const selectAgvFrameRegionMany = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/selectAgvFrameRegionMany',
         method: 'post',
         data: AlexData
     }) as any

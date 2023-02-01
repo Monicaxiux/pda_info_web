@@ -56,22 +56,18 @@ const logins = () => {
             loadingInstance = ElLoading.service({
                 background: 'rgba(0, 0, 0, 0.7)'
             }),
-            setTimeout(() => {
-                loadingInstance.close()
-                //登陆成功跳转至我的考试界面
-                router.replace({ path: "/grinder" })
-            }, 1300)
-            //调用登陆方法传入eilnfo对象
+
+            // // 调用登陆方法传入eilnfo对象
             // login(alex).then((res: any) => {
             //     const loadingInstance = ElLoading.service()
             //     res.sys.status != -1 ? (
             //         //把userinfo存入pinia
             //         store.userInfo = res.userInfo,
-            //         setTimeout(() => {
-            //             loadingInstance.close()
-            //             //登陆成功跳转至我的考试界面
-            //             router.replace({ path: "/myPractice" })
-            //         }, 1300)
+            setTimeout(() => {
+                loadingInstance.close()
+                //登陆成功跳转至我的考试界面
+                router.replace({ path: "/grinder" })
+            }, 1300)
 
             //     ) : (
             //         //登陆失败后重置表单

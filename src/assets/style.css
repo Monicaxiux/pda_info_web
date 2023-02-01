@@ -1,8 +1,11 @@
 body {
     background-image: url('./bg.jpg');
+    /* filter: brightness(10%); */
+    /* -webkit-filter: brightness(50%); */
     /* background-color: #03044a; */
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 0;
     margin: 0;
+    overflow: hidden;
 }

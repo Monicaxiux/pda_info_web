@@ -13,6 +13,36 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'grinder',
                 component: () => import('../views/grinder.vue'),
             },
+            {
+                path: '/rollqr',
+                name: 'rollqr',
+                component: () => import('../views/rollQrCode.vue'),
+            },
+            {
+                path: '/aRollerFrame',
+                name: 'aRollerFrame',
+                component: () => import('../views/aRollerFrame.vue'),
+            },
+            {
+                path: '/overview',
+                name: 'overview',
+                component: () => import('../views/overview.vue'),
+            },
+            {
+                path: '/AgvAutoInfo',
+                name: 'AgvAutoInfo',
+                component: () => import('../views/AgvAutoInfo.vue'),
+            },
+            {
+                path: '/GrindAutoInfo',
+                name: 'GrindAutoInfo',
+                component: () => import('../views/GrindAutoInfo.vue'),
+            },
+            // {
+            //     path: '/test',
+            //     name: 'test',
+            //     component: () => import('../views/test.vue'),
+            // },
         ]
     },
     {
