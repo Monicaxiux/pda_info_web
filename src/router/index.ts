@@ -38,6 +38,11 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'GrindAutoInfo',
                 component: () => import('../views/GrindAutoInfo.vue'),
             },
+            {
+                path: '/grinders',
+                name: 'grinders',
+                component: () => import('../views/grinders.vue'),
+            },
             // {
             //     path: '/test',
             //     name: 'test',

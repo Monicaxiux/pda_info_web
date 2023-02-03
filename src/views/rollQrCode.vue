@@ -1,7 +1,7 @@
 <template>
     <dv-border-box11 title="轧辊" class="box">
         <el-table class="table" ref="dragTable" :data="tableData" border>
-            <el-table-column prop="slotPosition" label="槽号"></el-table-column>
+            <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
             <el-table-column prop="rollId" label="辊号"></el-table-column>
             <el-table-column label="操作">
                 <template #default="scope">

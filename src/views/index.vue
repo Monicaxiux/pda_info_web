@@ -19,7 +19,7 @@
                             <i class="iconfont icon-caidan"></i>&nbsp;
                             <span>13#14#磨床区</span>
                         </el-menu-item>
-                        <el-menu-item index="">
+                        <el-menu-item index="/grinders">
                             <i class="iconfont icon-caidan"></i>&nbsp;
                             <span>15#16#磨床区</span>
                         </el-menu-item>
