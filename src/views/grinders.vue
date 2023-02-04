@@ -28,6 +28,8 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
+          
+
             <dv-border-box-13 title="13#磨床" class="box11">
                 <span id="ftext">13#磨床</span>
                 <div class="tableData">
@@ -55,37 +57,59 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-            <dv-border-box-13 title="人工检测" class="box11">
-                <span id="ftext">人工检测</span>
+            <dv-border-box-13 title="一号机器人" class="box11">
+                <span id="ftext">一号机器人</span>
                 <div class="tableData3">
-                    <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :key="key"
-                        :data="data.tableData3" row-key="id" border>
+                    <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key"
+                        border>
 
-                        <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
-                        <el-table-column prop="rollId" label="辊号"></el-table-column>
-                        <el-table-column prop="slotStatus" label="检测状态">
+                        <el-table-column prop="ename" label="设备名称" width="120"></el-table-column>
+                        <el-table-column prop="jobId" label="辊号"></el-table-column>
+                        <el-table-column label="机器状态" width="140">
                             <template #default="scope">
-                                <el-tag class="ml-2" v-if="scope.row.isFinish == 0" type="warning">未检测</el-tag>
-                                <el-tag class="ml-2" v-if="scope.row.isFinish == 1" type="success">已检测</el-tag>
+                                <template v-if="scope.row.ename == '一号机器人'">
+                                    <el-tag class="ml-2" v-if="scope.row.estatus == '2'" type="warning">空闲</el-tag>
+                                    <el-tag class="ml-2" v-if="scope.row.estatus == '1'" type="success">繁忙</el-tag>
+                                </template>
+                                <template v-else>
+                                    <el-tag class="ml-2" v-if="scope.row.estatus == '3'" type="warning">空闲</el-tag>
+                                    <el-tag class="ml-2" v-if="scope.row.estatus == '2'" type="success">繁忙</el-tag>
+                                </template>
+                                &nbsp;
+                                <el-button v-if="scope.row.estatus != '2'" size="small" @click="chang4(scope.row, 1)">确认
+                                </el-button>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="slotStatus" label="任务状态">
+                        <el-table-column label="任务状态" width="150">
                             <template #default="scope">
-                                <el-tag class="ml-2" v-if="scope.row.isRefer == 0" type="warning">无任务</el-tag>
-                                <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
+                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '2'" type="warning">无任务</el-tag>
+                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '1'" type="success">进行中</el-tag>
+                                &nbsp;
+                                <el-button v-if="scope.row.jobStatus != '2'" size="small" @click="chang4(scope.row, 2)">
+                                    确认
+                                </el-button>
                             </template>
                         </el-table-column>
-                        <!-- <el-table-column prop="" label="上次直径"></el-table-column> -->
-                        <!-- <el-table-column prop="" label="上次辊种"></el-table-column> -->
-                        <!-- <el-table-column prop="" label="状态"></el-table-column> -->
-                        <!-- <el-table-column prop="" label="本次辊种"></el-table-column> -->
-                        <!-- <el-table-column prop="" label="轧机号"></el-table-column> -->
-                        <el-table-column label="操作">
+                        <el-table-column label="在线状态" width="120">
                             <template #default="scope">
-                                <el-button size="small" @click="slot(scope.row, 1)">操作</el-button>
+                                <el-tag class="ml-2" v-if="scope.row.Grind_CurrentState == '0'" type="danger">未连接
+                                </el-tag>
+                                <el-tag class="ml-2" v-if="scope.row.Grind_CurrentState == '1'" type="success">在线
+                                </el-tag>
                             </template>
                         </el-table-column>
-
+                        <el-table-column label="上料状态" width="120">
+                            <template #default="scope">
+                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '0'" type="danger">禁止上料</el-tag>
+                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '1'" type="success">允许上料</el-tag>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="下料状态" width="120">
+                            <template #default="scope">
+                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '0'" type="danger">禁止下料</el-tag>
+                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '1'" type="success">允许下料</el-tag>
+                            </template>
+                        </el-table-column>
                     </el-table>
                 </div>
             </dv-border-box-13>
@@ -172,59 +196,38 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-            <dv-border-box-13 title="设备实时状态" class="box11" style="width: 1000px;height:240px;margin: 0 auto;">
-                <span id="ftext">设备实时状态</span>
+            <dv-border-box-13 title="人工检测平台" class="box11" style="width: 1000px;height:240px;margin: 0 auto;">
+                <span id="ftext">人工检测平台</span>
                 <div class="tableData5">
-                    <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key"
-                        border>
+                
+                    <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :key="key"
+                        :data="data.tableData3" row-key="id" border>
 
-                        <el-table-column prop="ename" label="设备名称" width="120"></el-table-column>
-                        <el-table-column prop="jobId" label="辊号"></el-table-column>
-                        <el-table-column label="机器状态" width="140">
+                        <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
+                        <el-table-column prop="rollId" label="辊号"></el-table-column>
+                        <el-table-column prop="slotStatus" label="检测状态">
                             <template #default="scope">
-                                <template v-if="scope.row.ename == '一号机器人'">
-                                    <el-tag class="ml-2" v-if="scope.row.estatus == '2'" type="warning">空闲</el-tag>
-                                    <el-tag class="ml-2" v-if="scope.row.estatus == '1'" type="success">繁忙</el-tag>
-                                </template>
-                                <template v-else>
-                                    <el-tag class="ml-2" v-if="scope.row.estatus == '3'" type="warning">空闲</el-tag>
-                                    <el-tag class="ml-2" v-if="scope.row.estatus == '2'" type="success">繁忙</el-tag>
-                                </template>
-                                &nbsp;
-                                <el-button v-if="scope.row.estatus != '2'" size="small" @click="chang4(scope.row, 1)">确认
-                                </el-button>
+                                <el-tag class="ml-2" v-if="scope.row.isFinish == 0" type="warning">未检测</el-tag>
+                                <el-tag class="ml-2" v-if="scope.row.isFinish == 1" type="success">已检测</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column label="任务状态" width="150">
+                        <el-table-column prop="slotStatus" label="任务状态">
                             <template #default="scope">
-                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '2'" type="warning">无任务</el-tag>
-                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '1'" type="success">进行中</el-tag>
-                                &nbsp;
-                                <el-button v-if="scope.row.jobStatus != '2'" size="small" @click="chang4(scope.row, 2)">
-                                    确认
-                                </el-button>
+                                <el-tag class="ml-2" v-if="scope.row.isRefer == 0" type="warning">无任务</el-tag>
+                                <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column label="在线状态" width="120">
+                        <el-table-column prop="" label="上次直径"></el-table-column>
+                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="" label="状态"></el-table-column>
+                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="" label="轧机号"></el-table-column>
+                        <el-table-column label="操作">
                             <template #default="scope">
-                                <el-tag class="ml-2" v-if="scope.row.Grind_CurrentState == '0'" type="danger">未连接
-                                </el-tag>
-                                <el-tag class="ml-2" v-if="scope.row.Grind_CurrentState == '1'" type="success">在线
-                                </el-tag>
+                                <el-button size="small" @click="slot(scope.row, 1)">操作</el-button>
                             </template>
                         </el-table-column>
-                        <el-table-column label="上料状态" width="120">
-                            <template #default="scope">
-                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '0'" type="danger">禁止上料</el-tag>
-                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '1'" type="success">允许上料</el-tag>
-                            </template>
-                        </el-table-column>
-                        <el-table-column label="下料状态" width="120">
-                            <template #default="scope">
-                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '0'" type="danger">禁止下料</el-tag>
-                                <el-tag class="ml-2" v-if="scope.row.jobStatus == '1'" type="success">允许下料</el-tag>
-                            </template>
-                        </el-table-column>
+
                     </el-table>
                 </div>
             </dv-border-box-13>
@@ -405,7 +408,7 @@
         </el-table>
         <br />
         <br />
-        <el-table ref="dragTable" :data="detectionListIsNotNull" row-key="id" border>
+        <!-- <el-table ref="dragTable" :data="detectionListIsNotNull" row-key="id" border>
             <el-table-column label="已确认列表">
 
                 <el-table-column prop="dno" label="任务号"></el-table-column>
@@ -421,7 +424,7 @@
                     </template>
                 </el-table-column>
             </el-table-column>
-        </el-table>
+        </el-table> -->
     </el-dialog>
     <el-dialog v-model="dialogVisible4" title="创建主任务" width="50%" :before-close="handleClose">
         <el-card class="box-card" shadow="hover">
@@ -1425,7 +1428,7 @@ i {
 
 .t3 {
     margin: 50px auto;
-    height: 90px;
+    height: 160px;
     width: 90%;
 }
 
@@ -1436,7 +1439,7 @@ i {
 }
 
 .t5 {
-    height: 160px;
+    height: 100px;
     margin: 50px auto;
     width: 90%;
 }

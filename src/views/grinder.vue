@@ -408,7 +408,7 @@
         </el-table>
         <br />
         <br />
-        <el-table ref="dragTable" :data="detectionListIsNotNull" row-key="id" border>
+        <!-- <el-table ref="dragTable" :data="detectionListIsNotNull" row-key="id" border>
             <el-table-column label="已确认列表">
 
                 <el-table-column prop="dno" label="任务号"></el-table-column>
@@ -424,7 +424,7 @@
                     </template>
                 </el-table-column>
             </el-table-column>
-        </el-table>
+        </el-table> -->
     </el-dialog>
     <el-dialog v-model="dialogVisible4" title="创建主任务" width="50%" :before-close="handleClose">
         <el-card class="box-card" shadow="hover">
