@@ -28,7 +28,7 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-          
+
 
             <dv-border-box-13 title="13#磨床" class="box11">
                 <span id="ftext">13#磨床</span>
@@ -199,32 +199,43 @@
             <dv-border-box-13 title="人工检测平台" class="box11" style="width: 1000px;height:240px;margin: 0 auto;">
                 <span id="ftext">人工检测平台</span>
                 <div class="tableData5">
-                
+
                     <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :key="key"
                         :data="data.tableData3" row-key="id" border>
 
                         <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
                         <el-table-column prop="rollId" label="辊号"></el-table-column>
-                        <el-table-column prop="slotStatus" label="检测状态">
+                        <el-table-column label="检测状态">
                             <template #default="scope">
-                                <el-tag class="ml-2" v-if="scope.row.isFinish == 0" type="warning">未检测</el-tag>
-                                <el-tag class="ml-2" v-if="scope.row.isFinish == 1" type="success">已检测</el-tag>
+                                <div v-if="scope.row.detection">
+                                    <el-tag class="ml-2" v-if="scope.row.detection.dstatus == 1"
+                                        type="warning">待确认</el-tag>
+                                    <el-tag class="ml-2" v-if="scope.row.detection.dstatus == 2"
+                                        type="success">已确认</el-tag>
+                                </div>
+                                <div v-else>
+                                    <el-tag class="ml-2" type="warning">等待上辊</el-tag>
+                                </div>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="slotStatus" label="任务状态">
+                        <el-table-column label="任务状态">
                             <template #default="scope">
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 0" type="warning">无任务</el-tag>
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
-                        <el-table-column prop="" label="状态"></el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
-                        <el-table-column prop="" label="轧机号"></el-table-column>
+                        <el-table-column label="检测人">
+                            <template #default="scope">
+                                {{ scope.row.detection.dpeople }}
+                            </template>
+                        </el-table-column>
+                        <!-- <el-table-column prop="" label="上次辊种"></el-table-column> -->
+                        <!-- <el-table-column prop="" label="状态"></el-table-column> -->
+                        <!-- <el-table-column prop="" label="本次辊种"></el-table-column> -->
+                        <!-- <el-table-column prop="" label="轧机号"></el-table-column> -->
                         <el-table-column label="操作">
                             <template #default="scope">
-                                <el-button size="small" @click="slot(scope.row, 1)">操作</el-button>
+                                <el-button size="small" @click="slot(scope.row, 4)">操作</el-button>
                             </template>
                         </el-table-column>
 
@@ -382,28 +393,25 @@
             </el-descriptions-item>
         </el-descriptions>
     </el-dialog>
-    <el-dialog v-model="dialogVisible3" title="确认" width="50%" :before-close="handleClose">
+    <el-dialog v-model="dialogVisible3" title="待确认列表" width="50%" :before-close="handleClose">
         <el-table ref="dragTable" :data="detectionListIsNull" row-key="id" border>
-            <el-table-column label="待确认列表">
-
-                <el-table-column prop="dno" label="任务号"></el-table-column>
-                <el-table-column prop="rollerId" label="轧辊号"></el-table-column>
-                <el-table-column prop="dtime" label="检查时间"></el-table-column>
-                <el-table-column prop="diameter" label="轧辊直径"></el-table-column>
-                <el-table-column prop="dpeople" label="检查人"></el-table-column>
-                <el-table-column prop="dremarks" label="备注"></el-table-column>
-                <el-table-column label="任务状态">
-                    <template #default="scope">
-                        <el-tag class="ml-2" v-if="scope.row.dstatus == 0" type="warning">未确认</el-tag>
-                        <el-tag class="ml-2" v-if="scope.row.dstatus == 1" type="success">已确认</el-tag>
-                    </template>
-                </el-table-column>
-                <el-table-column label="操作">
-                    <template #default="scope">
-                        <el-button @click="slot(scope.row, 4)">查看</el-button>
-                        <!-- <el-button @click="slot(scope.row, 2)">确认</el-button> -->
-                    </template>
-                </el-table-column>
+            <el-table-column prop="dno" label="任务号"></el-table-column>
+            <el-table-column prop="rollerId" label="轧辊号"></el-table-column>
+            <el-table-column prop="dtime" label="检查时间"></el-table-column>
+            <el-table-column prop="diameter" label="轧辊直径"></el-table-column>
+            <!-- <el-table-column prop="dpeople" label="检查人"></el-table-column> -->
+            <!-- <el-table-column prop="dremarks" label="备注"></el-table-column> -->
+            <el-table-column label="任务状态">
+                <template #default="scope">
+                    <el-tag class="ml-2" v-if="scope.row.dstatus == 1" type="warning">未确认</el-tag>
+                    <el-tag class="ml-2" v-if="scope.row.dstatus == 2" type="success">已确认</el-tag>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template #default="scope">
+                    <el-button @click="slot(scope.row, 4)">查看</el-button>
+                    <!-- <el-button @click="slot(scope.row, 2)">确认</el-button> -->
+                </template>
             </el-table-column>
         </el-table>
         <br />
@@ -506,12 +514,12 @@
                 <el-form-item label="检查人">
                     <el-input placeholder="请输入检查人" disabled v-model="form.dpeople" />
                 </el-form-item>
-                <el-form-item label="轧辊类型">
+                <!-- <el-form-item label="轧辊类型">
                     <el-input placeholder="请输入轧辊类型" disabled v-model="form.rollType" />
-                </el-form-item>
+                </el-form-item> -->
                 <el-divider />
                 <el-form-item label="机组号">
-                    <el-select v-model="form.unitNum" class="m-2" placeholder="请选择机组号">
+                    <el-select v-model="form.unitNum" disabled class="m-2" placeholder="请选择机组号">
                         <el-option v-for="item in unitNumList" :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
@@ -529,12 +537,12 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="班组">
-                    <el-select v-model="form.team" class="m-2" placeholder="请选择班组">
+                    <el-select v-model="form.team" disabled class="m-2" placeholder="请选择班组">
                         <el-option v-for="item in teamList" :key="item.value" :label="item.label" :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="班次">
-                    <el-select v-model="form.classTimes" class="m-2" placeholder="请选择班次">
+                    <el-select v-model="form.classTimes" disabled class="m-2" placeholder="请选择班次">
                         <el-option v-for="item in classTimesList" :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
@@ -545,9 +553,23 @@
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
-
-                <el-form-item label="备注">
-                    <el-input placeholder="请输入备注信息" v-model="form.dremarks" />
+                <el-form-item label="检测结果">
+                    <el-select v-model="form.testResult" class="m-2" placeholder="请选择检测结果">
+                        <el-option v-for="item in testResultList" :key="item.value" :label="item.label"
+                            :value="item.value" />
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="异常处理">
+                    <el-select v-model="form.exception" class="m-2" placeholder="请选择异常处理">
+                        <el-option v-for="item in exceptionList" :key="item.value" :label="item.label"
+                            :value="item.value" />
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="异常原因">
+                    <el-select v-model="form.dremarks" class="m-2" placeholder="请选择异常原因">
+                        <el-option v-for="item in dremarksList" :key="item.value" :label="item.label"
+                            :value="item.value" />
+                    </el-select>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -688,14 +710,44 @@ const d1 = ref(false)
 const d2 = ref(false)
 const d3 = ref(false)
 const d4 = ref(false)
+const exceptionList = ref([
+    {
+        label: '重磨',
+        value: '1'
+    },
+    {
+        label: '报废',
+        value: '2'
+    },
+])
+const dremarksList = ref([
+    {
+        label: '轧辊破裂 ',
+        value: '1'
+    },
+    {
+        label: '轧辊直径错误',
+        value: '2'
+    },
+])
+const testResultList = ref([
+    {
+        label: '合格',
+        value: '1'
+    },
+    {
+        label: '异常',
+        value: '2'
+    },
+])
 const tableFaceList = ref([
     {
         label: '正常',
-        value: '正常'
+        value: "1"
     },
     {
-        label: '缺陷',
-        value: '缺陷'
+        label: '异常',
+        value: "2"
     },
 ])
 const classTimesList = ref([
@@ -905,6 +957,7 @@ const slot = (row: any, i: any) => {
         case 2:
             // row.dstatus = 1
             let alex = new Alex
+            row.dstatus = 2
             alex.parameter = {
                 updateDetectionList: [row]
             }
@@ -922,11 +975,11 @@ const slot = (row: any, i: any) => {
         case 4:
             console.log(row);
 
-            form.value = JSON.parse(JSON.stringify(row))
+            form.value = JSON.parse(JSON.stringify(row.detection))
             dialogVisible6.value = true;
             break;
     }
-    dialogVisible3.value = true
+    // dialogVisible3.value = true
 }
 const getDcadx = () => {
     getDcad().then((res: any) => {
