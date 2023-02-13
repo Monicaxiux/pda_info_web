@@ -244,10 +244,9 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-            <dv-border-box-13 title="人工检测平台" class="box11" style="width: 1000px;height:240px;margin: 0 auto;">
-                <span id="ftext">人工检测平台</span>
+            <dv-border-box-13 title="一号人工检测平台" class="box11" style="width: 1000px;height:240px;margin: 0 auto;">
+                <span id="ftext">一号人工检测平台</span>
                 <div class="tableData5">
-
                     <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :key="key"
                         :data="data.tableData3" row-key="id" border>
                         <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
@@ -287,8 +286,9 @@
                         <!-- <el-table-column prop="" label="轧机号 "></el-table-column> -->
                         <el-table-column label="操作">
                             <template #default="scope">
-                                <el-button size="small" :disabled="scope.row.detection ? false : true"
-                                    @click="slot(scope.row, 4)">操作</el-button>
+                                <!-- <el-button size="small" :disabled="scope.row.detection ? false : true"
+                                    @click="slot(scope.row, 4)">操作</el-button> -->
+                                <el-button size="small" @click="slot(scope.row, 4)">操作</el-button>
                             </template>
                         </el-table-column>
 
@@ -321,7 +321,11 @@
                                     </el-radio-group>
                                 </template>
                                 <el-table-column prop="grindId" label="主任务号" width="180"></el-table-column>
-                                <el-table-column prop="grindNo" label="轧辊号" width="180"></el-table-column>
+                                <el-table-column label="轧辊号" width="180">
+                                    <template #default="scope">
+                                        {{ scope.row.agv_roller.rollerName }}
+                                    </template>
+                                </el-table-column>
                                 <el-table-column prop="current" label="当前步骤号"></el-table-column>
                                 <el-table-column label="操作" width="140">
                                     <template #default="scope">
@@ -336,7 +340,11 @@
                         <el-table name="C" class="t9" ref="dragTable" :data="data.grindListAll2" row-key="id" border
                             :key="key">
                             <el-table-column prop="num" label="步骤" width="60"></el-table-column>
-                            <el-table-column prop="rimNum" label="轧辊号" width="100"></el-table-column>
+                            <el-table-column prop="rimNum" label="轧辊号" width="100">
+                                <template #default="scope">
+                                    {{ scope.row.agv_roller.rollerName }}
+                                </template>
+                            </el-table-column>
                             <el-table-column label="任务状态">
                                 <template #default="scope">
                                     <el-tag class="ml-2" v-if="scope.row.status == 1" type="warning">未发送
@@ -353,17 +361,17 @@
                             </el-table-column>
                             <el-table-column label="结束位置" width="100">
                                 <template #default="scope">
-                                    {{ scope.row.fname + '-' + scope.row.end }}
+                                    {{ scope.row.endName + '-' + scope.row.end }}
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="createTime" label="开始时间" width="110"></el-table-column>
-                            <el-table-column prop="okTime" label="结束时间" width="110"></el-table-column>
+                            <el-table-column prop="expirationTime" label="开始时间" width="110"></el-table-column>
+                            <el-table-column prop="aroundTime" label="结束时间" width="110"></el-table-column>
                             <el-table-column label="操作" width="140">
                                 <template #default="scope">
-                                    <el-button v-if="scope.row.handStatus != 3" size="small" @click="chang3(scope.row)">
+                                    <el-button v-if="scope.row.status != 3" size="small" @click="chang3(scope.row)">
                                         确认
                                     </el-button>
-                                    <el-button v-if="scope.row.handStatus != 3" size="small" @click="chang3(scope.row)">
+                                    <el-button v-if="scope.row.status != 3" size="small" @click="chang3(scope.row)">
                                         删除
                                     </el-button>
                                 </template>
@@ -436,12 +444,12 @@
 " label-align="right" align="center">
                 {{ from.step_04_CaptainId }}
             </el-descriptions-item>
-            <el-descriptions-item label="磨床-人工检测平台
+            <el-descriptions-item label="磨床-一号人工检测平台
 
 " label-align="right" align="center">
                 {{ from.step_05_PlatformId }}
             </el-descriptions-item>
-            <el-descriptions-item label="人工检测平台-磨床摆渡区" label-align="right" align="center">
+            <el-descriptions-item label="一号人工检测平台-磨床摆渡区" label-align="right" align="center">
                 {{ from.step_06_BothId }}
             </el-descriptions-item>
         </el-descriptions>
@@ -636,7 +644,7 @@
     <el-dialog draggable v-model="dialogVisible7" title="1号U型辊架状态" width="50%">
         <el-table :key="dialogVisible7" :row-style="{ height: '0' }" :cell-style="{ padding: '0' }"
             ref="multipleTableRef" @selection-change="handleSelectionChange" :data="UData" row-key="id" border>
-            <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
+            <el-table-column prop="slotPosition" label="槽号"></el-table-column>
             <el-table-column label="轧辊号 ">
                 <template #default="scope">
                     <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.rollerName }}</span>
@@ -675,6 +683,7 @@
                     <el-radio style="color: black" label="14">下发至14号磨床</el-radio><br /><br />
 
                 </el-radio-group>
+                <br /><br />
                 <el-radio-group v-model="radio2" class="ml-4">
                     <el-radio style="color: black" label="C02">C02工位辊框</el-radio>
                     <el-radio style="color: black" label="C03">C03工位辊框</el-radio>
@@ -1295,7 +1304,10 @@ const createTask = () => {
             handEnd: eTable.value,
             handLevel: value.value ? 1 : 0,
             flag: flag.value
-        }
+        },
+        // insertRoller:{
+
+        // }
     }
     if (flag.value == 'B') {
         alex.parameter.insertData = {
@@ -1650,7 +1662,7 @@ onMounted(() => {
 
 .bottombox {
     display: flex;
-    height: 58px;
+    height: 111px;
     align-items: center;
 }
 
@@ -1692,7 +1704,7 @@ onMounted(() => {
 .rightTable {
     position: absolute;
     right: -310px;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(30px);
     top: 70px;
     transform: rotate(90deg);
     width: 800px;

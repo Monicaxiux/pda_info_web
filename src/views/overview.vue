@@ -2,168 +2,174 @@
     <div class="bodyBox">
         <div class="left">
             <div class="box" id="ARegion">
-                <div class="droptarget" id="A01" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="A01" @click="chang(['A0101', 'A0102'])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+
                     <!-- <div class="Q">·</div> -->
                 </div>
-                <div class="droptarget" id="A02" @click="chang(['A0201','A0202'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                 
+                <div class="droptarget" id="A02" @click="chang(['A0201', 'A0202'])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+
                 </div>
-                <div class="droptarget" id="A03" @click="chang(['A0301','A0302'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="A03" @click="chang(['A0301', 'A0302'])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+
                 </div>
-                <div class="droptarget" id="A05" @click="chang(['A0501','A0502'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="A05" @click="chang(['A0501', 'A0502'])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+
                 </div>
-                <div class="droptarget" id="A04" @click="chang(['A0401','A0402'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="A04" @click="chang(['A0401', 'A0402'])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+
                 </div>
-                <div class="droptarget" id="A06" @click="chang(['A0601','A0602'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="A06" @click="chang(['A0601', 'A0602'])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+
                 </div>
             </div>
             <div class="box" id="BRegion">
-                <div class="droptarget" @click="chang(['C04'])" id="C04" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" @click="chang(['C04'])" id="C04" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" @click="chang(['C03'])" id="C03" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" @click="chang(['C03'])" id="C03" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="C02" @click="chang(['C02'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="C02" @click="chang(['C02'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="C01" @click="chang(['C01'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="C01" @click="chang(['C01'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
             </div>
             <div class="box" id="CRegion">
-                <div class="droptarget" id="F22" @click="chang(['F22'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F22" @click="chang(['F22'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F21" @click="chang(['F21'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F21" @click="chang(['F21'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F20" @click="chang(['F20'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F20" @click="chang(['F20'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F19" @click="chang(['F19'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F19" @click="chang(['F19'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F08" @click="chang(['F08'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F08" @click="chang(['F08'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F07" @click="chang(['F07'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">  
+                <div class="droptarget" id="F07" @click="chang(['F07'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F06" @click="chang(['F06'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F06" @click="chang(['F06'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F05" @click="chang(['F05'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F05" @click="chang(['F05'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F04" @click="chang(['F04'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F04" @click="chang(['F04'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F03" @click="chang(['F03'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F03" @click="chang(['F03'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F02" @click="chang(['F02'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F02" @click="chang(['F02'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
-                <div class="droptarget" id="F01" @click="chang(['F01'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" id="F01" @click="chang(['F01'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
                 </div>
             </div>
             <div class="box" id="DRegion">
-                <div class="droptarget" id="F16" @click="chang(['F16'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                  
+                <div class="droptarget" id="F16" @click="chang(['F16'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F15" @click="chang(['F15'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                 
+                <div class="droptarget" id="F15" @click="chang(['F15'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F17" @click="chang(['F17'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                   
+                <div class="droptarget" id="F17" @click="chang(['F17'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F18" @click="chang(['F18'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="F18" @click="chang(['F18'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="B03" @click="chang(['B03'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                   
+                <div class="droptarget" id="B03" @click="chang(['B03'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="B01" @click="chang(['B01'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="B01" @click="chang(['B01'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="B02" @click="chang(['B02'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="B02" @click="chang(['B02'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
             </div>
             <div class="box" id="ERegion">
-                <div class="droptarget" id="C07" @click="chang(['C07'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="C07" @click="chang(['C07'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="C06" @click="chang(['C06'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="C06" @click="chang(['C06'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="C05" @click="chang(['C05'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                  
+                <div class="droptarget" id="C05" @click="chang(['C05'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F14" @click="chang(['F14'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="F14" @click="chang(['F14'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F13" @click="chang(['F13'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                   
+                <div class="droptarget" id="F13" @click="chang(['F13'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F12" @click="chang(['F12'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="F12" @click="chang(['F12'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F11" @click="chang(['F11'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                    
+                <div class="droptarget" id="F11" @click="chang(['F11'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F10" @click="chang(['F10'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                  
+                <div class="droptarget" id="F10" @click="chang(['F10'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="F09" @click="chang(['F09'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                   
+                <div class="droptarget" id="F09" @click="chang(['F09'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
             </div>
             <div class="box" id="FRegion">
-                <div class="droptarget" id="C11" @click="chang(['C11'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                 
+                <div class="droptarget" id="C11" @click="chang(['C11'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="C09" @click="chang(['C09'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                  
+                <div class="droptarget" id="C09" @click="chang(['C09'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
-                <div class="droptarget" id="C08" @click="chang(['C08'])" :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave"
-                    :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                 
+                <div class="droptarget" id="C08" @click="chang(['C08'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+
                 </div>
             </div>
         </div>
@@ -193,14 +199,14 @@
                                     </el-radio-group>
                                 </template>
                                 <el-table-column prop="mid" label="主任务号" width="180"></el-table-column>
-                                <el-table-column prop="rimNum" label="辊框号" width="180"></el-table-column>
+                                <el-table-column prop="boxId" label="辊框号" width="180"></el-table-column>
                                 <el-table-column prop="currentStep" label="当前步骤号"></el-table-column>
-                                <el-table-column label="操作" width="140">
-                                    <template #default="scope">
-                                        <!-- <el-button size="small" @click="chang5(scope.row)">删除 -->
-                                        <!-- </el-button> -->
-                                    </template>
-                                </el-table-column>
+                                <!-- <el-table-column label="操作" width="140"> -->
+                                <!-- <template #default="scope"> -->
+                                <!-- <el-button size="small" @click="chang5(scope.row)">删除 -->
+                                <!-- </el-button> -->
+                                <!-- </template> -->
+                                <!-- </el-table-column> -->
                             </el-table-column>
                         </el-table>
                     </div>
@@ -208,7 +214,7 @@
                         <el-table name="A03" class="t9" ref="dragTable" :data="data.grindListAll2" row-key="id" border
                             :key="key">
                             <el-table-column prop="currentStep" label="步骤" width="60"></el-table-column>
-                            <el-table-column prop="rimNum" label="辊框号" width="100"></el-table-column>
+                            <el-table-column prop="boxId" label="辊框号" width="100"></el-table-column>
                             <el-table-column label="任务状态">
                                 <template #default="scope">
                                     <el-tag class="ml-2" v-if="scope.row.status == 0" type="warning">等待发送
@@ -293,40 +299,69 @@
         <el-dialog v-model="dialogVisible" title="拖拽详情" width="80%" :before-close="handleClose">
             {{ title }}
         </el-dialog>
-        <el-dialog v-model="dialogVisible3" style="position: absolute;right: 0;bottom: 122px;" title="详情" width="60%" :before-close="handleClose">
-            <el-table :data="agvrollerList" >
-                <el-table-column prop="rollerNum" label="轧辊号" />
-                <el-table-column prop="rimNum" label="框号" />
-                <el-table-column prop="remarks" label="备注"/>
+        <el-dialog v-model="dialogVisible3" title="详情" width="60%" :before-close="handleClose">
+            <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button>
+
+            <el-card class="box-card" shadow="hover">
+                起始位置：{{ stitle }}<br /><br />
+                终点位置：{{ etitle }}<br /><br />
+                轧辊号：{{ formData.rollId }}<br /><br />
+                任务类型： <el-radio-group v-model="radio" class="ml-4">
+                    <el-radio style="color: black" label="半自动">半自动</el-radio>
+                    <el-radio style="color: black" label="全自动">全自动</el-radio><br /><br />
+                </el-radio-group>
+                <br />
+                优先执行：
+                <el-switch v-model="value" active-text="是" inactive-text="否" />
+            </el-card>
+            <br /><br />
+            <el-table :data="agvrollerList">
+                <el-table-column prop="" label="辊框号">
+                    <template #default="scope">
+                        {{ scope.row.agv_main.boxId }}
+                    </template>
+                </el-table-column>
+                <el-table-column prop="rollerName" label="轧辊号" />
+                <el-table-column prop="remarks" label="备注" />
                 <el-table-column prop="slotName" label="卡槽位置" />
                 <el-table-column prop="rollType" label="轧辊类型" />
                 <el-table-column prop="accident" label="轧辊事故类型" />
-                <el-table-column prop="rollStatus" label="轧辊是否拆装" />
+                <!-- <el-table-column prop="rollStatus" label="轧辊是否拆装" />
                 <el-table-column prop="rootHead" label="轧辊方向" />
                 <el-table-column prop="outRoller" label="出辊状态" />
                 <el-table-column prop="boxId" label="框号" />
-                <el-table-column prop="grinderNo" label="磨床号" />
+                <el-table-column prop="grinderNo" label="磨床号" /> -->
             </el-table>
             <br />
             <br />
             <el-table :data="rollerList">
-                <el-table-column prop="rollerNum" label="轧辊号" />
-                <el-table-column prop="rimNum" label="框号" />
-                <el-table-column prop="remarks" label="备注"/>
+                <el-table-column prop="" label="辊框号">
+                    <template #default="scope">
+                        {{ scope.row.agv_main.boxId }}
+                    </template>
+                </el-table-column>
+                <el-table-column prop="rollerName" label="轧辊号" />
+                <el-table-column prop="remarks" label="备注" />
                 <el-table-column prop="slotName" label="卡槽位置" />
                 <el-table-column prop="rollType" label="轧辊类型" />
                 <el-table-column prop="accident" label="轧辊事故类型" />
-                <el-table-column prop="rollStatus" label="轧辊是否拆装" />
+                <!-- <el-table-column prop="rollStatus" label="轧辊是否拆装" />
                 <el-table-column prop="rootHead" label="轧辊方向" />
                 <el-table-column prop="outRoller" label="出辊状态" />
                 <el-table-column prop="boxId" label="框号" />
-                <el-table-column prop="grinderNo" label="磨床号" />
+                <el-table-column prop="grinderNo" label="磨床号" /> -->
             </el-table>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button @click="dialogVisible4 = false">取消</el-button>
+                    <el-button type="primary" @click="createTask">确定</el-button>
+                </span>
+            </template>
         </el-dialog>
     </div>
 </template>
 <script setup lang="ts">
-import { getFrameChild, getGrindAllAndData, getAGVOtherStepInfo, getAGVGrindAllAndData,selectAgvFrameRegionMany, updateFrameChild, updateAGVChild } from '@/api';
+import { getFrameChild, getGrindAllAndData, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, updateFrameChild, updateAGVChild } from '@/api';
 import { Alex } from '@/types';
 import { ElMessage } from 'element-plus';
 import { title } from 'process';
@@ -336,7 +371,20 @@ const dialogVisible = ref(false);
 const dialogVisible3 = ref(false);
 const title = ref('');
 const agvrollerList = ref([]);
+const stitle: any = ref('')
+const etitle: any = ref('')
+const radio = ref();
+const sTable = ref('');
+const eTable = ref('');
+const value = ref('');
+const formData: any = ref({})
 const rollerList = ref([]);
+const step = ref({
+    step1: false,
+    step2: false,
+    step3: false,
+    step4: false
+});
 const data: any = reactive({
     dataA: [
         {
@@ -353,17 +401,19 @@ const data: any = reactive({
 })
 
 const chang = (row: any) => {
+    stitle.value = row[0];
+    dialogVisible3.value = true
 
     console.log(row);
-    
-    let alex=new Alex();
-    alex.parameter={
-        flag:row
+
+    let alex = new Alex();
+    alex.parameter = {
+        flag: row
     }
     selectAgvFrameRegionMany(alex).then((res: any) => {
         dialogVisible3.value = true
         console.log(res);
-        if(res.result){
+        if (res.result) {
             agvrollerList.value = res.result.agv_rollerList;
             rollerList.value = res.result.rollerList;
         }
@@ -490,6 +540,7 @@ onUnmounted(() => {
 #ARegion {
     left: 650px;
     top: 500px;
+
     #A01 {
         left: 14px;
         bottom: 14px;
@@ -506,6 +557,7 @@ onUnmounted(() => {
         bottom: 14px;
 
     }
+
     #A04 {
         right: 38px;
         transform: rotateZ(-90deg);
@@ -517,6 +569,7 @@ onUnmounted(() => {
         transform: rotateZ(-90deg);
         top: 134px;
     }
+
     #A06 {
         right: 38px;
         transform: rotateZ(-90deg);
@@ -531,21 +584,25 @@ onUnmounted(() => {
 #BRegion {
     left: 1260px;
     top: -250px;
-    #C04{
+
+    #C04 {
         left: 17px;
         bottom: 35px;
     }
-    #C03{
+
+    #C03 {
         left: 90px;
         bottom: 35px;
 
     }
-    #C02{
+
+    #C02 {
         left: 155px;
         bottom: 35px;
 
     }
-    #C01{
+
+    #C01 {
         left: 222px;
         bottom: 35px;
 
@@ -555,6 +612,7 @@ onUnmounted(() => {
 #CRegion {
     left: 950px;
     top: -405px;
+
     #F22 {
         left: 25px;
         bottom: 181px;
@@ -619,35 +677,42 @@ onUnmounted(() => {
 #DRegion {
     left: 600px;
     top: -798px;
-    #F16{
+
+    #F16 {
         left: 10px;
         transform: rotateZ(-90deg);
         top: 40px;
     }
-    #F15{
+
+    #F15 {
         left: 10px;
         transform: rotateZ(-90deg);
         top: 120px;
     }
-    #F17{
+
+    #F17 {
         left: 150px;
         transform: rotateZ(-90deg);
         top: 120px;
     }
-    #F18{
+
+    #F18 {
         left: 150px;
         transform: rotateZ(-90deg);
         top: 40px;
     }
-    #B03{
+
+    #B03 {
         left: 91px;
         bottom: 8px;
     }
-    #B01{
+
+    #B01 {
         left: 153px;
         bottom: 8px;
     }
-    #B02{
+
+    #B02 {
         left: 220px;
         bottom: 8px;
     }
@@ -656,39 +721,48 @@ onUnmounted(() => {
 #ERegion {
     left: 300px;
     top: -1006px;
-    #C07{
+
+    #C07 {
         top: 90px;
         left: 90px
     }
-    #C06{
+
+    #C06 {
         top: 90px;
         left: 156px
     }
-    #C05{
+
+    #C05 {
         top: 90px;
         left: 222px
     }
-    #F14{
+
+    #F14 {
         bottom: 88px;
         left: 60px
     }
-    #F13{
+
+    #F13 {
         bottom: 48px;
         left: 60px
     }
-    #F12{
+
+    #F12 {
         bottom: 88px;
         left: 135px
     }
-    #F11{
+
+    #F11 {
         bottom: 48px;
         left: 135px
     }
-    #F10{
+
+    #F10 {
         bottom: 88px;
         left: 202px
     }
-    #F09{
+
+    #F09 {
         bottom: 48px;
         left: 202px
     }
@@ -697,15 +771,18 @@ onUnmounted(() => {
 #FRegion {
     left: 5px;
     top: -1393px;
-    #C11{
+
+    #C11 {
         left: 16px;
         bottom: 55px;
     }
-    #C09{
+
+    #C09 {
         left: 97px;
         bottom: 96px;
     }
-    #C08{
+
+    #C08 {
         right: 68px;
         bottom: 95px;
     }
@@ -752,7 +829,7 @@ onUnmounted(() => {
 .rightTable {
     position: absolute;
     right: -310px;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(30px);
     top: 70px;
     transform: rotate(90deg);
     width: 800px;

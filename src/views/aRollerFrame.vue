@@ -1,5 +1,139 @@
 <template>
-    <dv-border-box11 title="A区辊架" class="box">
+    <div class="bodyBox">
+        <div class="box_x">
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+        </div>
+        <div class="box_x2">
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+        </div>
+        <div class="box_x3">
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+            <div class="conent">
+                <el-button>出库工位</el-button>
+                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </div>
+        </div>
+    </div>
+    <!-- <dv-border-box11 title="A区辊架" class="box">
         <el-table :data="tableData" border class="table">
             <el-table-column prop="location" label="辊框位置"></el-table-column>
             <el-table-column prop="rollId1" label="1号辊槽"></el-table-column>
@@ -16,7 +150,7 @@
     </dv-border-box11>
     <el-dialog v-model="dialogVisible" title="详情信息" width="30%" :before-close="handleClose">
 
-    </el-dialog>
+    </el-dialog> -->
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
@@ -84,6 +218,63 @@ const tableData = ref([
     height: 70vh;
     margin: 50px auto;
     width: 95%;
+}
+
+.m-2 {
+    width: 100px;
+}
+
+.box_x {
+    width: 25%;
+    display: flex;
+    margin-left: 50px;
+    justify-content: center;
+    /* margin-top: 5px; */
+    flex-wrap: wrap;
+    height: 90%;
+}
+
+.box_x2 {
+    width: 25%;
+    display: flex;
+    margin-left: 9px;
+    justify-content: center;
+    /* margin-top: 5px; */
+    flex-wrap: wrap;
+    height: 90%;
+}
+
+.box_x3 {
+    width: 25%;
+    display: flex;
+    margin-left: 75px;
+    justify-content: center;
+    /* margin-top: 5px; */
+    flex-wrap: wrap;
+    height: 90%;
+}
+
+.conent {
+    width: 60%;
+    height: 80px;
+    align-items: flex-end;
+    margin-left: -20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row
+}
+
+.bodyBox {
+    /* width: 83vw; */
+    width: 94vw;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    height: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    background-image: url(../assets/background.png);
+    color: white;
+    background-color: white;
 }
 
 .box {

@@ -1,8 +1,8 @@
 <template>
     <div id="box">
         <div class="home">
-            <dv-border-box-13 title="16#磨床" class="box11">
-                <span id="ftext">16#磨床</span>
+            <dv-border-box-13 title="18#磨床" class="box11">
+                <span id="ftext">18#磨床</span>
                 <div class="tableData2">
                     <el-table name="B" class="t2" ref="dragTable" @row-dblclick="chang" :key="key"
                         :data="data.tableData2" row-key="id" border>
@@ -45,8 +45,8 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-            <dv-border-box-13 title="15#磨床" class="box11">
-                <span id="ftext">15#磨床</span>
+            <dv-border-box-13 title="17#磨床" class="box11">
+                <span id="ftext">17#磨床</span>
                 <div class="tableData">
                     <el-table name="A" class="t1" ref="dragTable" @row-dblclick="chang" :data="data.tableData"
                         row-key="id" :key="key" border>
@@ -89,8 +89,8 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-            <dv-border-box-13 title="二号机器人" class="box11">
-                <span id="ftext">二号机器人</span>
+            <dv-border-box-13 title="三号机器人" class="box11">
+                <span id="ftext">三号机器人</span>
                 <div class="tableData3">
                     <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key"
                         border>
@@ -103,7 +103,7 @@
                         </el-table-column>
                         <el-table-column label="机器状态" width="140">
                             <template #default="scope">
-                                <template v-if="scope.row.ename == '二号机器人'">
+                                <template v-if="scope.row.ename == '三号机器人'">
                                     <el-tag class="ml-2" v-if="scope.row.estatus == '2'" type="warning">空闲</el-tag>
                                     <el-tag class="ml-2" v-if="scope.row.estatus == '1'" type="success">繁忙</el-tag>
                                 </template>
@@ -149,8 +149,8 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-            <dv-border-box-13 title="C06" class="box11" style="height:420px">
-                <span id="ftext">C06</span>
+            <dv-border-box-13 title="C08" class="box11" style="height:420px">
+                <span id="ftext">C08</span>
                 <div class="tableData6">
                     <el-table name="C" class="t6" ref="dragTable" @row-dblclick="chang" :data="data.tableData6"
                         row-key="id" :key="key" border>
@@ -213,8 +213,8 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-            <dv-border-box-13 title="C07" class="box11" style="height:420px">
-                <span id="ftext">C07</span>
+            <dv-border-box-13 title="C09" class="box11" style="height:420px">
+                <span id="ftext">C09</span>
                 <div class="tableData7">
                     <el-table name="C" class="t7" ref="dragTable" @row-dblclick="chang" :data="data.tableData7"
                         row-key="id" :key="key" border>
@@ -244,8 +244,8 @@
                     </el-table>
                 </div>
             </dv-border-box-13>
-            <dv-border-box-13 title="二号人工检测平台" class="box11" style="width: 1000px;height:240px;margin: 0 auto;">
-                <span id="ftext">二号人工检测平台</span>
+            <dv-border-box-13 title="三号人工检测平台" class="box11" style="width: 1000px;height:240px;margin: 0 auto;">
+                <span id="ftext">三号人工检测平台</span>
                 <div class="tableData5">
 
                     <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :key="key"
@@ -445,12 +445,12 @@
 " label-align="right" align="center">
                 {{ from.step_04_CaptainId }}
             </el-descriptions-item>
-            <el-descriptions-item label="磨床-二号人工检测平台
+            <el-descriptions-item label="磨床-三号人工检测平台
 
 " label-align="right" align="center">
                 {{ from.step_05_PlatformId }}
             </el-descriptions-item>
-            <el-descriptions-item label="二号人工检测平台-磨床摆渡区" label-align="right" align="center">
+            <el-descriptions-item label="三号人工检测平台-磨床摆渡区" label-align="right" align="center">
                 {{ from.step_06_BothId }}
             </el-descriptions-item>
         </el-descriptions>
@@ -680,14 +680,14 @@
         <div class="bottombox">
             <div class="my-2 flex items-center text-sm">
                 <el-radio-group v-model="radio" class="ml-4">
-                    <el-radio style="color: black" label="16">下发至16号磨床</el-radio>
-                    <el-radio style="color: black" label="17">下发至17号磨床</el-radio><br /><br />
+                    <el-radio style="color: black" label="17">下发至17号磨床</el-radio>
+                    <el-radio style="color: black" label="18">下发至18号磨床</el-radio><br /><br />
 
                 </el-radio-group>
                 <br /><br />
                 <el-radio-group v-model="radio2" class="ml-4">
-                    <el-radio style="color: black" label="C06">C06工位辊框</el-radio>
-                    <el-radio style="color: black" label="C07">C07工位辊框</el-radio>
+                    <el-radio style="color: black" label="C08">C08工位辊框</el-radio>
+                    <el-radio style="color: black" label="C09">C09工位辊框</el-radio>
 
                 </el-radio-group>
             </div>
@@ -699,7 +699,7 @@
 import Sortable from "sortablejs";
 import { onMounted, reactive, ref, onBeforeUnmount, toRefs, getCurrentInstance, onUnmounted } from "vue";
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { updateFrame, getFrameChild, insertProduce, getGrindAllAndData, getFrame, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo } from '@/apis'
+import { updateFrame, getFrameChild, insertProduce, getGrindAllAndData, getFrame, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo } from '@/apiz'
 import { Alex } from '@/types'//引入参数规范类型
 let data: any = reactive({
     tableData: [],
@@ -733,7 +733,7 @@ const selectable = (row: any) => {
 const multipleTableRef = ref();
 const handleSelectionChange = (val: any) => {
     // for (let i = 0; i < val.length; i++) {
-    //     val[i].work = 'C06'
+    //     val[i].work = 'C08'
     // }
     multipleSelection.value = val
     console.log(multipleSelection.value);
@@ -880,10 +880,10 @@ const insertP = () => {
                     multipleSelection.value[i].grinderNo = radio.value
                     multipleSelection.value[i].mainNo = multipleSelection.value[i].rollId
                     delete multipleSelection.value[i].rollId
-                    if (radio2.value == 'C06') {
-                        multipleSelection.value[i].work = 'C06'
+                    if (radio2.value == 'C08') {
+                        multipleSelection.value[i].work = 'C08'
                     } else {
-                        multipleSelection.value[i].work = 'C07'
+                        multipleSelection.value[i].work = 'C09'
                     }
                     multipleSelection.value[i].region = 'A区'
                 }
@@ -1424,7 +1424,7 @@ const initSortable = (className: any) => {
                             }
                             init()
                             if (startTable.value == 'tableData6' && endTable.value == 'tableData4') {
-                                stitle.value = "C07"
+                                stitle.value = "C09"
                                 etitle.value = "U型辊架"
                                 dialogVisible4.value = true
                                 d1.value = true
@@ -1438,7 +1438,7 @@ const initSortable = (className: any) => {
                                 stepParm.value = '1'
                                 flag.value = 'U'
                             } else if (startTable.value == 'tableData7' && endTable.value == 'tableData4') {
-                                stitle.value = "C06"
+                                stitle.value = "C08"
                                 etitle.value = "U型辊架"
                                 dialogVisible4.value = true
                                 d1.value = true
@@ -1453,7 +1453,7 @@ const initSortable = (className: any) => {
                                 flag.value = 'U'
                             } else if (startTable.value == 'tableData4' && endTable.value == 'tableData') {
                                 stitle.value = "U型辊架"
-                                etitle.value = "15#磨床"
+                                etitle.value = "17#磨床"
                                 dialogVisible4.value = true
                                 d1.value = true
                                 d2.value = true
@@ -1466,7 +1466,7 @@ const initSortable = (className: any) => {
                                 stepParm.value = '2'
                                 flag.value = 'B'
                             } else if (startTable.value == 'tableData' && endTable.value == 'tableData3') {
-                                stitle.value = "15#磨床"
+                                stitle.value = "17#磨床"
                                 etitle.value = "人工检测"
                                 dialogVisible4.value = true
                                 d1.value = true

@@ -1,4 +1,4 @@
-import request from "@/utils/requests";
+import request from "@/utils/requestz";
 
 //用户登陆
 export const login = ((eilnfoData: any) => {

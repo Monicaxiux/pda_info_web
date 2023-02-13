@@ -24,7 +24,7 @@
                             <i class="iconfont icon-caidan"></i>&nbsp;
                             <span>15#16#磨床区</span>
                         </el-menu-item>
-                        <el-menu-item index="">
+                        <el-menu-item index="/grinderz">
                             <i class="iconfont icon-caidan"></i>&nbsp;
                             <span>17#18#磨床区</span>
                         </el-menu-item>
@@ -44,6 +44,10 @@
                     <el-menu-item index="/GrindAutoInfo">
                         <i class="iconfont icon-caidan"></i>&nbsp;
                         <span>机器人半自动任务查询</span>
+                    </el-menu-item>
+                    <el-menu-item index="/GrindAutoInfo">
+                        <i class="iconfont icon-caidan"></i>&nbsp;
+                        <span>出库排程</span>
                     </el-menu-item>
                 </el-menu>
             </el-aside>
