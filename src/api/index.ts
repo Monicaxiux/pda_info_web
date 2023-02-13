@@ -166,3 +166,12 @@ export const selectAgvFrameRegionMany = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+
+//制定计划添加数据
+export const insertProduce = ((AlexData: any) => {
+    return request({
+        url: '/Produce/insertProduce',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
