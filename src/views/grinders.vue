@@ -40,7 +40,7 @@
                                 </div>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
                     </el-table>
                 </div>
@@ -84,7 +84,7 @@
                                 </div>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
                     </el-table>
                 </div>
@@ -172,10 +172,11 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
+                        <el-table-column prop="last_Rol1TypeCode" label="上次辊种"></el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
+                        <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
 
                     </el-table>
@@ -205,10 +206,11 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
+                        <el-table-column prop="last_Rol1TypeCode" label="上次辊种"></el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
+                        <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
                     </el-table>
                 </div>
@@ -236,10 +238,11 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
+                        <el-table-column prop="last_Rol1TypeCode" label="上次辊种"></el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
+                        <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
                     </el-table>
                 </div>
@@ -283,7 +286,7 @@
                         </el-table-column>
                         <!-- <el-table-column prop="" label="上次辊种"></el-table-column> -->
                         <!-- <el-table-column prop="" label="状态"></el-table-column> -->
-                        <!-- <el-table-column prop="" label="本次辊种"></el-table-column> -->
+                        <!-- <el-table-column prop="" label="当前辊种"></el-table-column> -->
                         <!-- <el-table-column prop="" label="轧机号 "></el-table-column> -->
                         <el-table-column label="操作">
                             <template #default="scope">
@@ -642,7 +645,7 @@
             </span>
         </template>
     </el-dialog>
-    <el-dialog draggable v-model="dialogVisible7" title="1号U型辊架状态" width="50%">
+    <el-dialog draggable v-model="dialogVisible7" title="2号U型辊架状态" width="50%">
         <el-table :key="dialogVisible7" :row-style="{ height: '0' }" :cell-style="{ padding: '0' }"
             ref="multipleTableRef" @selection-change="handleSelectionChange" :data="UData" row-key="id" border>
             <el-table-column prop="slotPosition" label="槽号"></el-table-column>
@@ -651,16 +654,17 @@
                     <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.rollerName }}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="" label="上次直径"></el-table-column>
-            <el-table-column prop="" label="上次辊种"></el-table-column>
-            <!-- <el-table-column prop="" label="状态"></el-table-column> -->
-            <el-table-column prop="" label="本次辊种">
-                <template #default="scope">
-                    <el-select v-model="scope.row.rollType" class="m-2" placeholder="选择辊种" size="small">
-                        <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                            :value="item.value" />
-                    </el-select>
-                </template>
+            <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
+            <el-table-column prop="last_Rol1TypeCode" label="上次辊种"></el-table-column>
+            <el-table-column prop="" label="状态"></el-table-column>
+            <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
+            <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
+            <template #default="scope">
+                <el-select v-model="scope.row.rollType" class="m-2" placeholder="选择辊种" size="small">
+                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                        :value="item.value" />
+                </el-select>
+            </template>
             </el-table-column>
             <el-table-column prop="" label="轧机号 ">
                 <template #default="scope">

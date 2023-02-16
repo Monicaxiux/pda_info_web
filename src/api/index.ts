@@ -72,10 +72,11 @@ export const addFrame = ((AlexData: any) => {
 })
 
 //查询人工检测数据
-export const getDcad = (() => {
+export const getDcad = ((AlexData: any) => {
     return request({
-        url: '/detection/selectDetectionAndData',
-        method: 'post'
+        url: '/detection/getDetectionOne',
+        method: 'post',
+        data: AlexData
     }) as any
 })
 
@@ -171,6 +172,24 @@ export const selectAgvFrameRegionMany = ((AlexData: any) => {
 export const insertProduce = ((AlexData: any) => {
     return request({
         url: '/Produce/insertProduce',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//分开查询指定所有的辊架的信息
+export const selectAgvFrameAppointInfo = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/selectAgvFrameStatusInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//半自动数据的添加
+export const selectAgv_CarryInfo = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/selectAgv_CarryInfo',
         method: 'post',
         data: AlexData
     }) as any

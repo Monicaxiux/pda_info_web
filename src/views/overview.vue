@@ -353,7 +353,7 @@
             </el-table>
             <template #footer>
                 <span class="dialog-footer">
-                    <el-button @click="dialogVisible4 = false">取消</el-button>
+                    <el-button @click="dialogVisible3 = false">取消</el-button>
                     <el-button type="primary" @click="createTask">确定</el-button>
                 </span>
             </template>
@@ -369,6 +369,7 @@ import { onMounted, onUnmounted, reactive, ref } from 'vue';
 const key = ref(0);
 const dialogVisible = ref(false);
 const dialogVisible3 = ref(false);
+
 const title = ref('');
 const agvrollerList = ref([]);
 const stitle: any = ref('')
@@ -399,7 +400,9 @@ const data: any = reactive({
     ],
     grindListAll2: []
 })
+const createTask = () => {
 
+}
 const chang = (row: any) => {
     stitle.value = row[0];
     dialogVisible3.value = true

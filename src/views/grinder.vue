@@ -40,7 +40,7 @@
                                 </div>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="" label="当前辊种"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
                     </el-table>
                 </div>
@@ -84,7 +84,7 @@
                                 </div>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
                     </el-table>
                 </div>
@@ -172,12 +172,12 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
+                        <el-table-column prop="last_RollTypeCode" label="上次辊种"></el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
+                        <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
-
                     </el-table>
                 </div>
             </dv-border-box-13>
@@ -205,10 +205,11 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
+                        <el-table-column prop="last_RollTypeCode" label="上次辊种"></el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
+                        <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
                     </el-table>
                 </div>
@@ -236,10 +237,11 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
+                        <el-table-column prop="last_RollTypeCode" label="上次辊种"></el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
-                        <el-table-column prop="" label="本次辊种"></el-table-column>
+                        <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
+                        <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
                         <el-table-column prop="" label="轧机号 "></el-table-column>
                     </el-table>
                 </div>
@@ -282,7 +284,7 @@
                         </el-table-column>
                         <!-- <el-table-column prop="" label="上次辊种"></el-table-column> -->
                         <!-- <el-table-column prop="" label="状态"></el-table-column> -->
-                        <!-- <el-table-column prop="" label="本次辊种"></el-table-column> -->
+                        <!-- <el-table-column prop="" label="当前辊种"></el-table-column> -->
                         <!-- <el-table-column prop="" label="轧机号 "></el-table-column> -->
                         <el-table-column label="操作">
                             <template #default="scope">
@@ -569,31 +571,9 @@
                 <el-form-item label="检查时间">
                     <el-input placeholder="请输入检查时间" disabled v-model="form.dtime" />
                 </el-form-item>
-                <el-form-item label="轧辊直径">
-                    <el-input placeholder="请输入轧辊直径" disabled v-model="form.diameter" />
-                </el-form-item>
-                <el-form-item label="检查人">
-                    <el-input placeholder="请输入检查人" disabled v-model="form.dpeople" />
-                </el-form-item>
-                <!-- <el-form-item label="轧辊类型">
-                    <el-input placeholder="请输入轧辊类型" disabled v-model="form.rollType" />
-                </el-form-item> -->
-                <el-divider />
                 <el-form-item label="机组号">
                     <el-select v-model="form.unitNum" disabled class="m-2" placeholder="请选择机组号">
                         <el-option v-for="item in unitNumList" :key="item.value" :label="item.label"
-                            :value="item.value" />
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="磨床号">
-                    <el-select v-model="form.grindNum" class="m-2" placeholder="请选择磨床">
-                        <el-option v-for="item in grindNumNoList" :key="item.value" :label="item.label"
-                            :value="item.value" />
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="辊种">
-                    <el-select v-model="form.rollType" class="m-2" placeholder="请选择辊种">
-                        <el-option v-for="item in rollTypeList" :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
@@ -608,6 +588,30 @@
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
+                <el-form-item label="检查人">
+                    <el-input placeholder="请输入检查人" disabled v-model="form.dpeople" />
+                </el-form-item>
+                <!-- <el-form-item label="轧辊类型">
+                    <el-input placeholder="请输入轧辊类型" disabled v-model="form.rollType" />
+                </el-form-item> -->
+                <el-divider />
+
+                <el-form-item label="轧辊直径">
+                    <el-input placeholder="请输入轧辊直径" v-model="form.diameter" />
+                </el-form-item>
+                <el-form-item label="磨床号">
+                    <el-select v-model="form.grindNum" class="m-2" placeholder="请选择磨床">
+                        <el-option v-for="item in grindNumNoList" :key="item.value" :label="item.label"
+                            :value="item.value" />
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="辊种">
+                    <el-select v-model="form.rollType" class="m-2" placeholder="请选择辊种">
+                        <el-option v-for="item in rollTypeList" :key="item.value" :label="item.label"
+                            :value="item.value" />
+                    </el-select>
+                </el-form-item>
+
                 <el-form-item label="表面状态">
                     <el-select v-model="form.tableFace" class="m-2" placeholder="请选择轧辊表面状态">
                         <el-option v-for="item in tableFaceList" :key="item.value" :label="item.label"
@@ -615,19 +619,21 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="检测结果">
-                    <el-select v-model="form.testResult" class="m-2" placeholder="请选择检测结果">
+                    <el-select v-model="form.testResult" @change="sss" class="m-2" placeholder="请选择检测结果">
                         <el-option v-for="item in testResultList" :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="异常处理">
-                    <el-select v-model="form.exception" class="m-2" placeholder="请选择异常处理">
+                    <el-select v-model="form.exception" :disabled="form.testResult == 2 ? false : true" class="m-2"
+                        placeholder="请选择异常处理">
                         <el-option v-for="item in exceptionList" :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="异常原因">
-                    <el-select v-model="form.dremarks" class="m-2" placeholder="请选择异常原因">
+                    <el-select v-model="form.dremarks" :disabled="form.testResult == 2 ? false : true" class="m-2"
+                        placeholder="请选择异常原因">
                         <el-option v-for="item in dremarksList" :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
@@ -637,7 +643,7 @@
         <template #footer>
             <span class="dialog-footer">
                 <el-button @click="dialogVisible6 = false">取消</el-button>
-                <el-button type="primary" @click="slot(form, 2)">确定</el-button>
+                <el-button type="primary" :disabled="form.dno ? false : true" @click="slot(form, 2)">确定</el-button>
             </span>
         </template>
     </el-dialog>
@@ -650,10 +656,10 @@
                     <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.rollerName }}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="" label="上次直径"></el-table-column>
-            <el-table-column prop="" label="上次辊种"></el-table-column>
+            <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
+            <el-table-column prop="last_RollTypeCode" label="上次辊种"></el-table-column>
             <!-- <el-table-column prop="" label="状态"></el-table-column> -->
-            <el-table-column prop="" label="本次辊种">
+            <el-table-column prop="" label="当前辊种">
                 <template #default="scope">
                     <el-select v-model="scope.row.rollType" class="m-2" placeholder="选择辊种" size="small">
                         <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
@@ -932,7 +938,7 @@ const dremarksList = ref([
 ])
 const testResultList = ref([
     {
-        label: '合格',
+        label: '正常',
         value: '1'
     },
     {
@@ -1167,6 +1173,14 @@ const chang4 = (row: any, i: any) => {
     })
 }
 
+const sss = () => {
+    console.log('来了');
+
+    form.value.dremarks = ''
+    form.value.exception = ''
+
+}
+
 const chang5 = (row: any) => {
     console.log(row);
     let alex = new Alex
@@ -1188,7 +1202,7 @@ const add = () => {
 const slot = (row: any, i: any) => {
     switch (i) {
         case 1:
-            getDcadx();
+            // getDcadx();
             break;
         case 2:
             // row.dstatus = 1
@@ -1198,7 +1212,6 @@ const slot = (row: any, i: any) => {
                 updateDetectionList: [row]
             }
             updateDcad(alex).then((res: any) => {
-                getDcadx()
                 dialogVisible6.value = false;
                 ElMessage({
                     message: '操作成功！',
@@ -1209,19 +1222,26 @@ const slot = (row: any, i: any) => {
         case 3:
             break;
         case 4:
-            console.log(row);
-
-            form.value = JSON.parse(JSON.stringify(row.detection))
-            dialogVisible6.value = true;
+            console.log(row.rollId);
+            // form.value = JSON.parse(JSON.stringify(row.detection))
+            getDcadx(row.rollId);
             break;
     }
     // dialogVisible3.value = true
 }
-const getDcadx = () => {
-    getDcad().then((res: any) => {
-        console.log(res);
-        detectionListIsNotNull.value = res.result.detectionListIsNotNull
-        detectionListIsNull.value = res.result.detectionListIsNull
+const getDcadx = (id: any) => {
+    let alex = new Alex
+    alex.parameter = {
+        id: id
+    }
+    getDcad(alex).then((res: any) => {
+        dialogVisible6.value = true;
+        // detectionListIsNotNull.value = res.result.detectionListIsNotNull
+        // detectionListIsNull.value = res.result.detectionListIsNull
+        if (res.result.detectionOne) {
+
+            form.value = JSON.parse(JSON.stringify(res.result.detectionOne))
+        }
     })
 }
 

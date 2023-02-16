@@ -1,135 +1,30 @@
 <template>
     <div class="bodyBox">
         <div class="box_x">
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
+            <div v-for="item in List" class="conent">
+                <el-button @click="select([item.position],)">出库配辊</el-button>
+                <el-tag class="m-2" v-if="item.pstatus == 0" size="large" type="warning">未占用</el-tag>
+                <el-tag class="m-2" v-if="item.pstatus == 1" size="large" type="success">已占用
+                </el-tag>
+                <el-button>终点位置</el-button>
             </div>
         </div>
         <div class="box_x2">
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
+            <div v-for="item in List2" class="conent">
+                <el-button @click="select([item.position])">出库配辊</el-button>
+                <el-tag class="m-2" v-if="item.pstatus == 0" size="large" type="warning">未占用</el-tag>
+                <el-tag class="m-2" v-if="item.pstatus == 1" size="large" type="success">已占用
+                </el-tag>
+                <el-button>终点位置</el-button>
             </div>
         </div>
         <div class="box_x3">
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </div>
-            <div class="conent">
-                <el-button>出库工位</el-button>
-                <el-select v-model="rollType" class="m-2" placeholder="选择辊种">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
+            <div v-for="item in List3" class="conent">
+                <el-button @click="select([item.position])">出库配辊</el-button>
+                <el-tag class="m-2" v-if="item.pstatus == 0" size="large" type="warning">未占用</el-tag>
+                <el-tag class="m-2" v-if="item.pstatus == 1" size="large" type="success">已占用
+                </el-tag>
+                <el-button>终点位置</el-button>
             </div>
         </div>
     </div>
@@ -151,67 +46,179 @@
     <el-dialog v-model="dialogVisible" title="详情信息" width="30%" :before-close="handleClose">
 
     </el-dialog> -->
+    <el-dialog v-model="dialogVisible3" title="详情" width="60%" :before-close="handleClose">
+        <el-card class="box-card" shadow="hover">
+            起始位置：{{ stitle }}<br /><br />
+            终点位置：<el-select v-model="position" placeholder="选择位置">
+                <el-option v-for="item in positionList" :key="item.position" :label="item.position"
+                    :value="item.position" />
+            </el-select><br /><br />
+            辊框号：{{ boxId }}<br /><br />
+            优先执行：
+            <el-switch v-model="value" active-text="是" inactive-text="否" />
+        </el-card>
+        <br /><br />
+        <el-table :data="agvrollerList">
+            <el-table-column prop="" label="辊框号">
+                <template #default="scope">
+                    {{ scope.row.agv_main.boxId }}
+                </template>
+            </el-table-column>
+            <el-table-column prop="rollerName" label="轧辊号" />
+            <el-table-column prop="remarks" label="备注" />
+            <el-table-column prop="slotName" label="卡槽位置" />
+            <el-table-column prop="rollType" label="轧辊类型" />
+            <el-table-column prop="accident" label="轧辊事故类型" />
+        </el-table>
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button @click="dialogVisible3 = false">取消</el-button>
+                <el-button type="primary" @click="createTask">确定</el-button>
+            </span>
+        </template>
+    </el-dialog>
 </template>
 <script setup lang="ts">
+import { selectAgvFrameAppointInfo, selectAgvFrameRegionMany, selectAgv_CarryInfo } from '@/api';
 import { onMounted, ref } from 'vue';
+import { Alex } from '@/types';
+import { ElMessage } from 'element-plus';
 const dialogVisible = ref(false)
+const dialogVisible3 = ref(false)
+const agvrollerList: any = ref([])
+const stitle: any = ref('')
+const etitle: any = ref('')
+const boxId: any = ref('')
+const value: any = ref('否')
+const List: any = ref([])
+const List2: any = ref([])
+const List3: any = ref([])
+const position: any = ref([])
+const positionList: any = ref([])
+onMounted(() => {
+    selectList(1);
+    selectList(2);
+    selectList(3);
 
+})
+const selectList = (i: any) => {
+    let alex = new Alex();
+    switch (i) {
+        case 1:
+            alex.parameter = {
+                flag: '工作辊货架'
+            }
+            selectAgvFrameAppointInfo(alex).then((res: any) => {
+                for (let i = 0; i < 6; i++) {
+                    console.log(res.result.agv_frameList[i]);
+                    List.value.push(res.result.agv_frameList[i])
+                }
+                for (let i = 6; i < 12; i++) {
+                    console.log(res.result.agv_frameList[i]);
+                    List2.value.push(res.result.agv_frameList[i])
+                }
+            })
+            console.log(List.value);
+            break;
+        case 2:
+            alex.parameter = {
+                flag: '中间辊货架'
+            }
+            selectAgvFrameAppointInfo(alex).then((res: any) => {
+                for (let i = 0; i < 6; i++) {
+                    console.log(res.result.agv_frameList[i]);
+                    List3.value.push(res.result.agv_frameList[i])
+                }
+            })
+            console.log(List2.value);
+
+            break;
+        case 3:
+            alex.parameter = {
+                flag: '出入库区域'
+            }
+            selectAgvFrameAppointInfo(alex).then((res: any) => {
+                positionList.value = res.result.agv_frameList
+            })
+
+            console.log(List3.value);
+
+
+            // while (true) {
+            //     let Person: any = new Object()
+            //     Person.name = '陈需要'
+            //     Person.sex = '女'
+            //     Person.age = 18
+            //     console.log(Person);
+            // }
+
+
+
+            break;
+    }
+}
 const handleClose = (done: () => void) => {
     done()
 }
-const tableData = ref([
-    {
-        location: '001',
-        rollId1: 'asd',
-        rollId2: 'asd',
-        rollId3: 'asd',
-        rollId4: 'asd',
-        rollId5: 'asd',
-        rollId6: 'asd',
-        type: '工作辊'
-    },
-    {
-        location: '002',
-        rollId1: 'asd',
-        rollId2: 'asd',
-        rollId3: 'asd',
-        rollId4: 'asd',
-        rollId5: 'asd',
-        rollId6: 'asd',
-        type: '中间辊'
-    },
-    {
-        location: '003',
-        rollId1: 'asd',
-        rollId2: 'asd',
-        rollId3: 'asd',
-        rollId4: 'asd',
-        rollId5: 'asd',
-        rollId6: 'asd',
-        type: '工作辊'
-    },
-    {
-        location: '004',
-        rollId1: 'asd',
-        rollId2: 'asd',
-        rollId3: 'asd',
-        rollId4: 'asd',
-        rollId5: 'asd',
-        rollId6: 'asd',
-        type: '中间辊'
-    },
-    {
-        location: '005',
-        rollId1: 'asd',
-        rollId2: 'asd',
-        rollId3: 'asd',
-        rollId4: 'asd',
-        rollId5: 'asd',
-        rollId6: 'asd',
-        type: '工作辊'
+const select = (row: any) => {
+    position.value = ''
+    stitle.value = row[0];
+    console.log(row);
+    let alex = new Alex();
+    alex.parameter = {
+        flag: row
     }
-])
+    selectAgvFrameRegionMany(alex).then((res: any) => {
+        dialogVisible3.value = true
+        console.log(res);
+        if (res.result) {
+            agvrollerList.value = res.result.agv_rollerList;
+            if (agvrollerList.value) {
+                boxId.value = agvrollerList.value[0].agv_main.boxId
+            } else {
+                boxId.value = ''
+            }
+        }
+    })
+}
+const createTask = () => {
+    console.log(agvrollerList.value);
+    if (agvrollerList.value) {
+        let sn = '';
+        if (stitle.value != 'A30' && stitle.value != 'A31' && stitle.value != 'A32' && stitle.value != 'A33' && stitle.value != 'A34' && stitle.value != 'A35') {
+            sn = '工作辊货架'
+        } else {
+            sn = '中间辊货架'
+        }
+        let alex = new Alex();
+        alex.parameter = {
+            rollerType: agvrollerList.value[0].agv_main.rollType,
+            agv_Carry: {
+                workId: agvrollerList.value[0].rimNum,
+                boxId: agvrollerList.value[0].agv_main.boxId,
+                start: stitle.value,
+                startName: sn,
+                end: position.value,
+                fname: '出入库区域',
+                ename: '叉车AGV',
+                priority: 5
+            }
+        }
+        selectAgv_CarryInfo(alex).then((res: any) => {
+            ElMessage({
+                message: res.message.msg,
+                type: 'success',
+            })
+            dialogVisible3.value = false;
+        })
+    } else {
+        ElMessage({
+            message: '没有辊框号',
+            type: 'warning',
+        })
+    }
 
+}
 </script>
 <style scoped>
 .table {
@@ -221,7 +228,7 @@ const tableData = ref([
 }
 
 .m-2 {
-    width: 100px;
+    width: 80px;
 }
 
 .box_x {
