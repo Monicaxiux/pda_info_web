@@ -56,7 +56,7 @@ export const updateElectronic = ((AlexData: any) => {
 //删除主任务
 export const remFrame = ((AlexData: any) => {
     return request({
-        url: '/grind/deleteGrindById',
+        url: '/grind/updateGrindByIdInfo',
         method: 'post',
         data: AlexData
     }) as any
@@ -171,6 +171,14 @@ export const selectAgvFrameRegionMany = ((AlexData: any) => {
 export const insertProduce = ((AlexData: any) => {
     return request({
         url: '/Produce/insertProduce',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+//根据主任务数据查询终止的数据信息
+export const selectGrindParameterTry = ((AlexData: any) => {
+    return request({
+        url: '/grind/selectGrindParameterTry',
         method: 'post',
         data: AlexData
     }) as any

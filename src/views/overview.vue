@@ -2,35 +2,29 @@
     <div class="bodyBox">
         <div class="left">
             <div class="box" id="ARegion">
-                <div class="droptarget" id="A01" @click="chang(['A0101', 'A0102'])" :ondrop="drop"
-                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
-                    draggable="true">
+                <div class="droptarget" id="A01" @click="chang(['A0101', 'A0102'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
 
                     <!-- <div class="Q">·</div> -->
                 </div>
-                <div class="droptarget" id="A02" @click="chang(['A0201', 'A0202'])" :ondrop="drop"
-                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
-                    draggable="true">
+                <div class="droptarget" id="A02" @click="chang(['A0201', 'A0202'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
 
                 </div>
-                <div class="droptarget" id="A03" @click="chang(['A0301', 'A0302'])" :ondrop="drop"
-                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
-                    draggable="true">
+                <div class="droptarget" id="A03" @click="chang(['A0301', 'A0302'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
 
                 </div>
-                <div class="droptarget" id="A05" @click="chang(['A0501', 'A0502'])" :ondrop="drop"
-                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
-                    draggable="true">
+                <div class="droptarget" id="A05" @click="chang(['A0501', 'A0502'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
 
                 </div>
-                <div class="droptarget" id="A04" @click="chang(['A0401', 'A0402'])" :ondrop="drop"
-                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
-                    draggable="true">
+                <div class="droptarget" id="A04" @click="chang(['A0401', 'A0402'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
 
                 </div>
-                <div class="droptarget" id="A06" @click="chang(['A0601', 'A0602'])" :ondrop="drop"
-                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
-                    draggable="true">
+                <div class="droptarget" id="A06" @click="chang(['A0601', 'A0602'])" :ondrop="drop" :ondragenter="dragEnter"
+                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
 
                 </div>
             </div>
@@ -256,39 +250,39 @@
         <el-dialog v-model="dialogVisible2" title="主任务详情" width="80%" :before-close="handleClose">
             <el-descriptions title="" :column="3" border>
                 <el-descriptions-item label="主任务编号
-        " label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
+                " label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
                     {{ from.grindId }}
                 </el-descriptions-item>
                 <el-descriptions-item label="主任务订单号
-        " label-align="right" align="center">
+                " label-align="right" align="center">
                     {{ from.grindNo }}
                 </el-descriptions-item>
                 <el-descriptions-item label="磨床编号
-        " label-align="right" align="center">
+                " label-align="right" align="center">
                     {{ from.grinderNumber }}
                 </el-descriptions-item>
                 <el-descriptions-item label="辊轴位置
-        " label-align="right" align="center">
+                " label-align="right" align="center">
                     {{ from.position }}
                 </el-descriptions-item>
                 <el-descriptions-item label="磨床摆渡区-磨床待磨区
-        " label-align="right" align="center">
+                " label-align="right" align="center">
                     {{ from.step_01_Hand }}
                 </el-descriptions-item>
                 <el-descriptions-item label="磨床待磨区-磨床
-        " label-align="right" align="center">
+                " label-align="right" align="center">
                     {{ from.step_02_Machine }}
                 </el-descriptions-item>
                 <el-descriptions-item label="磨床待磨区" label-align="right" align="center">
                     {{ from.step_03_Peel }}
                 </el-descriptions-item>
                 <el-descriptions-item label="磨床磨削
-        " label-align="right" align="center">
+                " label-align="right" align="center">
                     {{ from.step_04_CaptainId }}
                 </el-descriptions-item>
                 <el-descriptions-item label="磨床-人工检测平台
         
-        " label-align="right" align="center">
+                " label-align="right" align="center">
                     {{ from.step_05_PlatformId }}
                 </el-descriptions-item>
                 <el-descriptions-item label="人工检测平台-磨床摆渡区" label-align="right" align="center">

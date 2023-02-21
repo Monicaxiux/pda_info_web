@@ -56,11 +56,12 @@ export const updateElectronic = ((AlexData: any) => {
 //删除主任务
 export const remFrame = ((AlexData: any) => {
     return request({
-        url: '/grind/deleteGrindById',
+        url: '/grind/updateGrindByIdInfo',
         method: 'post',
         data: AlexData
     }) as any
 })
+
 
 //添加主任务
 export const addFrame = ((AlexData: any) => {
@@ -190,6 +191,15 @@ export const selectAgvFrameAppointInfo = ((AlexData: any) => {
 export const selectAgv_CarryInfo = ((AlexData: any) => {
     return request({
         url: '/AgvMain/selectAgv_CarryInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//根据主任务数据查询终止的数据信息
+export const selectGrindParameterTry = ((AlexData: any) => {
+    return request({
+        url: '/grind/selectGrindParameterTry',
         method: 'post',
         data: AlexData
     }) as any

@@ -27,7 +27,7 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template #default="scope">
-                    <el-button>删除</el-button>
+                    <el-button @click="upd(scope.row)">确认</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -35,14 +35,31 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { selectGrindCarryInfo } from '@/api'
+import { selectGrindCarryInfo, updateFrameChild } from '@/api'
+import { Alex } from '@/types';
+import { ElMessage } from 'element-plus';
 const tableData = ref([]);
 onMounted(() => {
-    selectGrindCarryInfo().then((res: any) => {
-
-    })
+    selectDtat();
 })
-
+const selectDtat = () => {
+    selectGrindCarryInfo().then((res: any) => {
+        tableData.value = res.result.grindCarryList;
+    })
+}
+const upd = (row: any) => {
+    let alex = new Alex
+    alex.parameter = {
+        stepNumber: 'step1',
+    }
+    updateFrameChild(alex).then((res: any) => {
+        ElMessage({
+            message: '操作成功！',
+            type: 'success',
+        });
+        selectDtat();
+    })
+}
 </script>
 <style scoped>
 .table {

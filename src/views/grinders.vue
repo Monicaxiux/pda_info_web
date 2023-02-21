@@ -4,8 +4,8 @@
             <dv-border-box-13 title="16#磨床" class="box11">
                 <span id="ftext">16#磨床</span>
                 <div class="tableData2">
-                    <el-table name="B" class="t2" ref="dragTable" @row-dblclick="chang" :key="key"
-                        :data="data.tableData2" row-key="id" border>
+                    <el-table name="B" class="t2" ref="dragTable" @row-dblclick="chang" :key="key" :data="data.tableData2"
+                        row-key="id" border>
                         <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
                         <el-table-column label="轧辊号">
                             <template #default="scope">
@@ -24,8 +24,16 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="" label="上次直径">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_Diameter }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="last_RollTypeCode" label="上次辊种">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_RollTypeCode }}</span>
+                            </template>
+                        </el-table-column>
                         <el-table-column prop="" label="状态">
                             <template #default="scope">
                                 <div v-if="scope.row.electronic">
@@ -48,8 +56,8 @@
             <dv-border-box-13 title="15#磨床" class="box11">
                 <span id="ftext">15#磨床</span>
                 <div class="tableData">
-                    <el-table name="A" class="t1" ref="dragTable" @row-dblclick="chang" :data="data.tableData"
-                        row-key="id" :key="key" border>
+                    <el-table name="A" class="t1" ref="dragTable" @row-dblclick="chang" :data="data.tableData" row-key="id"
+                        :key="key" border>
                         <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
                         <el-table-column label="轧辊号 ">
                             <template #default="scope">
@@ -68,8 +76,16 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="" label="上次直径"></el-table-column>
-                        <el-table-column prop="" label="上次辊种"></el-table-column>
+                        <el-table-column prop="" label="上次直径">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_Diameter }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="last_RollTypeCode" label="上次辊种">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_RollTypeCode }}</span>
+                            </template>
+                        </el-table-column>
                         <el-table-column prop="" label="状态">
                             <template #default="scope">
                                 <div v-if="scope.row.electronic">
@@ -92,8 +108,7 @@
             <dv-border-box-13 title="二号机器人" class="box11">
                 <span id="ftext">二号机器人</span>
                 <div class="tableData3">
-                    <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key"
-                        border>
+                    <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key" border>
 
                         <el-table-column prop="ename" label="设备名称" width="120"></el-table-column>
                         <el-table-column label="轧辊号 ">
@@ -152,8 +167,8 @@
             <dv-border-box-13 title="C06" class="box11" style="height:420px">
                 <span id="ftext">C06</span>
                 <div class="tableData6">
-                    <el-table name="C" class="t6" ref="dragTable" @row-dblclick="chang" :data="data.tableData6"
-                        row-key="id" :key="key" border>
+                    <el-table name="C" class="t6" ref="dragTable" @row-dblclick="chang" :data="data.tableData6" row-key="id"
+                        :key="key" border>
                         <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
                         <el-table-column label="轧辊号 ">
                             <template #default="scope">
@@ -172,8 +187,16 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
-                        <el-table-column prop="last_Rol1TypeCode" label="上次辊种"></el-table-column>
+                        <el-table-column prop="" label="上次直径">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_Diameter }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="last_RollTypeCode" label="上次辊种">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_RollTypeCode }}</span>
+                            </template>
+                        </el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
                         <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
                         <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
@@ -186,8 +209,8 @@
                 <span id="ftext">U型辊架</span>
                 <el-button id="fbutton" type="primary" @click="selectU" plain size="small">查看</el-button>
                 <div class="tableData4">
-                    <el-table name="C" class="t4" ref="dragTable" @row-dblclick="chang" :key="key"
-                        :data="data.tableData4" row-key="id" border>
+                    <el-table name="C" class="t4" ref="dragTable" @row-dblclick="chang" :key="key" :data="data.tableData4"
+                        row-key="id" border>
                         <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
                         <el-table-column label="轧辊号 ">
                             <template #default="scope">
@@ -206,8 +229,16 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
-                        <el-table-column prop="last_Rol1TypeCode" label="上次辊种"></el-table-column>
+                        <el-table-column prop="" label="上次直径">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_Diameter }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="last_RollTypeCode" label="上次辊种">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_RollTypeCode }}</span>
+                            </template>
+                        </el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
                         <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
                         <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
@@ -218,8 +249,8 @@
             <dv-border-box-13 title="C07" class="box11" style="height:420px">
                 <span id="ftext">C07</span>
                 <div class="tableData7">
-                    <el-table name="C" class="t7" ref="dragTable" @row-dblclick="chang" :data="data.tableData7"
-                        row-key="id" :key="key" border>
+                    <el-table name="C" class="t7" ref="dragTable" @row-dblclick="chang" :data="data.tableData7" row-key="id"
+                        :key="key" border>
                         <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
                         <el-table-column label="轧辊号 ">
                             <template #default="scope">
@@ -238,8 +269,16 @@
                                 <el-tag class="ml-2" v-if="scope.row.isRefer == 1" type="success">有任务</el-tag>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
-                        <el-table-column prop="last_Rol1TypeCode" label="上次辊种"></el-table-column>
+                        <el-table-column prop="" label="上次直径">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_Diameter }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="last_RollTypeCode" label="上次辊种">
+                            <template #default="scope">
+                                <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_RollTypeCode }}</span>
+                            </template>
+                        </el-table-column>
                         <el-table-column prop="" label="状态"></el-table-column>
                         <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
                         <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
@@ -251,8 +290,8 @@
                 <span id="ftext">二号人工检测平台</span>
                 <div class="tableData5">
 
-                    <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :key="key"
-                        :data="data.tableData3" row-key="id" border>
+                    <el-table name="C" class="t3" @row-dblclick="chang" ref="dragTable" :key="key" :data="data.tableData3"
+                        row-key="id" border>
                         <!-- <el-table-column prop="slotPosition" label="槽号"></el-table-column> -->
                         <el-table-column label="轧辊号 ">
                             <template #default="scope">
@@ -262,9 +301,11 @@
                         <el-table-column label="检测状态">
                             <template #default="scope">
                                 <div v-if="scope.row.detection">
-                                    <el-tag class="ml-2" v-if="scope.row.detection.dstatus == 1" type="warning">待确认
+                                    <el-tag class="ml-2" v-if="scope.row.detection.dstatus == 1" type="warning">允许下料
                                     </el-tag>
-                                    <el-tag class="ml-2" v-if="scope.row.detection.dstatus == 2" type="success">已确认
+                                    <el-tag class="ml-2" v-if="scope.row.detection.dstatus == 3" type="warning">允许上料
+                                    </el-tag>
+                                    <el-tag class="ml-2" v-if="scope.row.detection.dstatus == 2" type="success">待机
                                     </el-tag>
                                 </div>
                                 <div v-else>
@@ -322,6 +363,7 @@
                                     <el-radio-group @change="getGrindData" v-model="finishStatus">
                                         <el-radio label="true" border>已完成</el-radio>
                                         <el-radio label="false" border>未完成</el-radio>
+                                        <el-radio label="50" border>已终止</el-radio>
                                     </el-radio-group>
                                 </template>
                                 <el-table-column prop="grindId" label="主任务号" width="180"></el-table-column>
@@ -331,9 +373,13 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="current" label="当前步骤号"></el-table-column>
-                                <el-table-column label="操作" width="140">
+                                <el-table-column label="操作" width="190">
                                     <template #default="scope">
-                                        <el-button size="small" @click="chang5(scope.row)">删除
+                                        <el-button size="small" @click="chang5(scope.row, '优先')">优先
+                                        </el-button>
+                                        <el-button size="small" @click="chang5(scope.row, '终止')">终止任务
+                                        </el-button>
+                                        <el-button size="small" @click="getGrindData">刷新
                                         </el-button>
                                     </template>
                                 </el-table-column>
@@ -418,39 +464,47 @@
     <el-dialog v-model="dialogVisible2" title="主任务详情" width="80%" :before-close="handleClose">
         <el-descriptions title="" :column="3" border>
             <el-descriptions-item label="主任务编号
-" label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
+                                                                                                    " label-align="right"
+                align="center" label-class-name="my-label" class-name="my-content" width="150px">
                 {{ from.grindId }}
             </el-descriptions-item>
             <el-descriptions-item label="主任务订单号
-" label-align="right" align="center">
+                                                                                                    " label-align="right"
+                align="center">
                 {{ from.grindNo }}
             </el-descriptions-item>
             <el-descriptions-item label="磨床编号
-" label-align="right" align="center">
+                                                                                                    " label-align="right"
+                align="center">
                 {{ from.grinderNumber }}
             </el-descriptions-item>
             <el-descriptions-item label="辊轴位置
-" label-align="right" align="center">
+                                                                                                    " label-align="right"
+                align="center">
                 {{ from.position }}
             </el-descriptions-item>
             <el-descriptions-item label="磨床摆渡区-磨床待磨区
-" label-align="right" align="center">
+                                                                                                    " label-align="right"
+                align="center">
                 {{ from.step_01_Hand }}
             </el-descriptions-item>
             <el-descriptions-item label="磨床待磨区-磨床
-" label-align="right" align="center">
+                                                                                                    " label-align="right"
+                align="center">
                 {{ from.step_02_Machine }}
             </el-descriptions-item>
             <el-descriptions-item label="磨床待磨区" label-align="right" align="center">
                 {{ from.step_03_Peel }}
             </el-descriptions-item>
             <el-descriptions-item label="磨床磨削
-" label-align="right" align="center">
+                                                                                                    " label-align="right"
+                align="center">
                 {{ from.step_04_CaptainId }}
             </el-descriptions-item>
             <el-descriptions-item label="磨床-二号人工检测平台
 
-" label-align="right" align="center">
+                                                                                                    " label-align="right"
+                align="center">
                 {{ from.step_05_PlatformId }}
             </el-descriptions-item>
             <el-descriptions-item label="二号人工检测平台-磨床摆渡区" label-align="right" align="center">
@@ -585,8 +639,7 @@
                 <el-divider />
                 <el-form-item label="机组号">
                     <el-select v-model="form.unitNum" disabled class="m-2" placeholder="请选择机组号">
-                        <el-option v-for="item in unitNumList" :key="item.value" :label="item.label"
-                            :value="item.value" />
+                        <el-option v-for="item in unitNumList" :key="item.value" :label="item.label" :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="磨床号">
@@ -597,8 +650,7 @@
                 </el-form-item>
                 <el-form-item label="辊种">
                     <el-select v-model="form.rollType" class="m-2" placeholder="请选择辊种">
-                        <el-option v-for="item in rollTypeList" :key="item.value" :label="item.label"
-                            :value="item.value" />
+                        <el-option v-for="item in rollTypeList" :key="item.value" :label="item.label" :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="班组">
@@ -632,8 +684,7 @@
                 </el-form-item>
                 <el-form-item label="异常原因">
                     <el-select v-model="form.dremarks" class="m-2" placeholder="请选择异常原因">
-                        <el-option v-for="item in dremarksList" :key="item.value" :label="item.label"
-                            :value="item.value" />
+                        <el-option v-for="item in dremarksList" :key="item.value" :label="item.label" :value="item.value" />
                     </el-select>
                 </el-form-item>
             </el-form>
@@ -646,25 +697,34 @@
         </template>
     </el-dialog>
     <el-dialog draggable v-model="dialogVisible7" title="2号U型辊架状态" width="50%">
-        <el-table :key="dialogVisible7" :row-style="{ height: '0' }" :cell-style="{ padding: '0' }"
-            ref="multipleTableRef" @selection-change="handleSelectionChange" :data="UData" row-key="id" border>
+        <el-table :key="dialogVisible7" :row-style="{ height: '0' }" :cell-style="{ padding: '0' }" ref="multipleTableRef"
+            @selection-change="handleSelectionChange" :data="UData" row-key="id" border>
             <el-table-column prop="slotPosition" label="槽号"></el-table-column>
             <el-table-column label="轧辊号 ">
                 <template #default="scope">
                     <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.rollerName }}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="last_Diameter" label="上次直径"></el-table-column>
-            <el-table-column prop="last_Rol1TypeCode" label="上次辊种"></el-table-column>
+            <el-table-column prop="" label="上次直径">
+                <template #default="scope">
+                    <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_Diameter }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column prop="last_RollTypeCode" label="上次辊种">
+                <template #default="scope">
+                    <span v-if="scope.row.grind">{{ scope.row.grind.agv_roller.last_RollTypeCode }}</span>
+                </template>
+            </el-table-column>
             <el-table-column prop="" label="状态"></el-table-column>
             <el-table-column prop="current_RollTypeCode" label="当前辊种"></el-table-column>
             <el-table-column prop="current_Diameter" label="当前直径"></el-table-column>
-            <template #default="scope">
-                <el-select v-model="scope.row.rollType" class="m-2" placeholder="选择辊种" size="small">
-                    <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
-                        :value="item.value" />
-                </el-select>
-            </template>
+            <el-table-column label="选择辊种">
+                <template #default="scope">
+                    <el-select v-model="scope.row.rollType" class="m-2" placeholder="选择辊种" size="small">
+                        <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                            :value="item.value" />
+                    </el-select>
+                </template>
             </el-table-column>
             <el-table-column prop="" label="轧机号 ">
                 <template #default="scope">
@@ -703,7 +763,7 @@
 import Sortable from "sortablejs";
 import { onMounted, reactive, ref, onBeforeUnmount, toRefs, getCurrentInstance, onUnmounted } from "vue";
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { updateFrame, getFrameChild, insertProduce, getGrindAllAndData, getFrame, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo } from '@/apis'
+import { updateFrame, getFrameChild, insertProduce, selectGrindParameterTry, getGrindAllAndData, getFrame, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo } from '@/apis'
 import { Alex } from '@/types'//引入参数规范类型
 let data: any = reactive({
     tableData: [],
@@ -869,6 +929,7 @@ const insertP = () => {
                     type: 'warning',
                 })
             } else {
+                let status = true;
                 for (let i = 0; i < multipleSelection.value.length; i++) {
                     delete multipleSelection.value[i].detection
                     delete multipleSelection.value[i].difference
@@ -884,24 +945,37 @@ const insertP = () => {
                     multipleSelection.value[i].grinderNo = radio.value
                     multipleSelection.value[i].mainNo = multipleSelection.value[i].rollId
                     delete multipleSelection.value[i].rollId
-                    if (radio2.value == 'C06') {
-                        multipleSelection.value[i].work = 'C06'
+                    if (radio2.value == 'C02') {
+                        multipleSelection.value[i].work = 'C02'
                     } else {
-                        multipleSelection.value[i].work = 'C07'
+                        multipleSelection.value[i].work = 'C03'
                     }
                     multipleSelection.value[i].region = 'A区'
                 }
-                let alex = new Alex
-                alex.parameter = {
-                    addProduceList: multipleSelection.value
+                for (let i = 0; i < multipleSelection.value.length; i++) {
+                    if (!multipleSelection.value[i].rollerName) {
+                        status = false
+                    }
                 }
-                insertProduce(alex).then((res: any) => {
-                    ElMessage({
-                        message: res.message.msg,
-                        type: 'success',
+                if (status) {
+                    let alex = new Alex
+                    alex.parameter = {
+                        addProduceList: multipleSelection.value
+                    }
+                    insertProduce(alex).then((res: any) => {
+                        ElMessage({
+                            message: res.message.msg,
+                            type: 'success',
+                        })
+                        dialogVisible7.value = false;
                     })
-                    dialogVisible7.value = false;
-                })
+                } else {
+                    ElMessage({
+                        message: '选择了没有轧辊号的数据！',
+                        type: 'warning',
+                    })
+                }
+
             }
 
         })
@@ -1172,13 +1246,18 @@ const chang4 = (row: any, i: any) => {
     })
 }
 
-const chang5 = (row: any) => {
+const chang5 = (row: any, status: string) => {
     console.log(row);
     let alex = new Alex
     alex.parameter = {
-        grindArray: [row]
+        flag: status,
+        grindOne: row
     }
     remFrame(alex).then((res: any) => {
+        ElMessage({
+            message: '修改成功',
+            type: 'success',
+        })
         setTimeout(() => {
             getChild();
             getData();
@@ -1582,15 +1661,24 @@ const init = () => {
 // 查询主任务
 const getGrindData = () => {
     data.grindListAll2 = []
-
     let alex = new Alex
-    alex.parameter = {
-        current: finishStatus.value == 'true' ? true : false
+    if (finishStatus.value != '50') {
+        alex.parameter = {
+            current: finishStatus.value == 'true' ? true : false
+        }
+        getGrindAllAndData(alex).then((res: any) => {
+            console.log(res);
+            data.grindListAll = res.result.grindListAll
+        })
+    } else {
+        alex.parameter = {
+            current: 50
+        }
+        selectGrindParameterTry(alex).then((res: any) => {
+            console.log(res);
+            data.grindListAll = res.result.grindListAll
+        })
     }
-    getGrindAllAndData(alex).then((res: any) => {
-        console.log(res);
-        data.grindListAll = res.result.grindListAll
-    })
 }
 const updRow = (rowx: any) => {
     row.value = rowx;
@@ -1636,9 +1724,9 @@ onMounted(() => {
         await getChild();
     }, 60000)
 })
-// onUnmounted(() => {
-//     clearInterval(id.value);
-// })
+onUnmounted(() => {
+    clearInterval(id.value);
+})
 </script>
 <style scoped>
 #box {

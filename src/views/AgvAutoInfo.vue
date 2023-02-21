@@ -17,7 +17,7 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template #default="scope">
-                    <el-button>删除</el-button>
+                    <el-button @click="upd(scope.row)">确认</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -25,15 +25,32 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { selectAgvCarryInfo } from '@/api'
+import { selectAgvCarryInfo, updateAGVChild } from '@/api'
+import { Alex } from '@/types';
+import { ElMessage } from 'element-plus';
 
 const tableData = ref([]);
 onMounted(() => {
+    selectDtat();
+})
+const selectDtat = () => {
     selectAgvCarryInfo().then((res: any) => {
         tableData.value = res.result.agvCarryList
     })
-})
-
+}
+const upd = (row: any) => {
+    let alex = new Alex
+    alex.parameter = {
+        rimNum: row.rimNum
+    }
+    updateAGVChild(alex).then((res: any) => {
+        ElMessage({
+            message: '操作成功！',
+            type: 'success',
+        })
+        selectDtat();
+    })
+}
 </script>
 <style scoped>
 .table {
