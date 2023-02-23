@@ -204,3 +204,12 @@ export const selectGrindParameterTry = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+
+//根据主任号查询所有的任务信息
+export const selectProduceAll = ((AlexData: any) => {
+    return request({
+        url: '/Produce/selectProduceAll',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
