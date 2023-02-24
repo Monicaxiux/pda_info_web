@@ -213,3 +213,21 @@ export const selectProduceAll = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+
+//根据具体位置查询区域
+export const selectAgvFramePositionInfo = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/selectAgvFramePositionInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//添加agv的半自动出库
+export const insertOutMainList = ((AlexData: any) => {
+    return request({
+        url: '/OutMain/insertOutMainList',
+        method: 'post',
+        data: AlexData
+    }) as any
+})

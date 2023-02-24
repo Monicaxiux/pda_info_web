@@ -207,6 +207,8 @@
             <dv-border-box-13 title="U型辊架" class="box11" style="height:420px">
                 <span id="ftext">U型辊架</span>
                 <el-button id="fbutton" type="primary" @click="selectU" plain size="small">查看</el-button>
+                <el-button id="fbutton2" type="primary" @click="selectU" plain size="small">维护</el-button>
+                <el-button id="fbutton3" type="primary" @click="selectU" plain size="small">盘库</el-button>
                 <div class="tableData4">
                     <el-table name="C" class="t4" ref="dragTable" @row-dblclick="chang" :key="key" :data="data.tableData4"
                         row-key="id" border>
@@ -376,6 +378,7 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="current" label="当前步骤号"></el-table-column>
+                                <el-table-column prop="level" label="优先级别"></el-table-column>
                                 <el-table-column label="操作" width="190">
                                     <template #default="scope">
                                         <el-button size="small" @click="chang5(scope.row, '优先')">优先
@@ -420,6 +423,7 @@
                             </el-table-column>
                             <el-table-column prop="expirationTime" label="开始时间" width="110"></el-table-column>
                             <el-table-column prop="aroundTime" label="结束时间" width="110"></el-table-column>
+                            <el-table-column prop="level" label="优先级别"></el-table-column>
                             <el-table-column label="操作" width="140">
                                 <template #default="scope">
                                     <el-button v-if="scope.row.status != 3" size="small" @click="chang3(scope.row)">
@@ -468,38 +472,37 @@
     <el-dialog v-model="dialogVisible2" title="主任务详情" width="80%" :before-close="handleClose">
         <el-descriptions title="" :column="3" border>
             <el-descriptions-item
-                label="主任务编号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                label="主任务编号                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             "
                 label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
                 {{ from.grindId }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="主任务订单号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
                 label-align="right" align="center">
                 {{ from.grindNo }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床编号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
                 label-align="right" align="center">
                 {{ from.grinderNumber }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="辊轴位置
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
                 label-align="right" align="center">
                 {{ from.position }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床摆渡区-磨床待磨区
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
                 label-align="right" align="center">
                 {{ from.step_01_Hand }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床待磨区-磨床
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
                 label-align="right" align="center">
                 {{ from.step_02_Machine }}
             </el-descriptions-item>
@@ -508,14 +511,14 @@
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床磨削
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
                 label-align="right" align="center">
                 {{ from.step_04_CaptainId }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床-一号人工检测平台
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
                 label-align="right" align="center">
                 {{ from.step_05_PlatformId }}
             </el-descriptions-item>
@@ -1810,6 +1813,20 @@ onUnmounted(() => {
     font-weight: bold;
     top: 20px;
     left: 105px;
+}
+
+#fbutton2 {
+    position: absolute;
+    font-weight: bold;
+    top: 20px;
+    left: 145px;
+}
+
+#fbutton3 {
+    position: absolute;
+    font-weight: bold;
+    top: 20px;
+    left: 197px;
 }
 
 .bottombox {

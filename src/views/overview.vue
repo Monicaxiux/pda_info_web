@@ -249,40 +249,56 @@
         </div>
         <el-dialog v-model="dialogVisible2" title="主任务详情" width="80%" :before-close="handleClose">
             <el-descriptions title="" :column="3" border>
-                <el-descriptions-item label="主任务编号
-                " label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
+                <el-descriptions-item
+                    label="主任务编号
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                    label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
                     {{ from.grindId }}
                 </el-descriptions-item>
-                <el-descriptions-item label="主任务订单号
-                " label-align="right" align="center">
+                <el-descriptions-item
+                    label="主任务订单号
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                    label-align="right" align="center">
                     {{ from.grindNo }}
                 </el-descriptions-item>
-                <el-descriptions-item label="磨床编号
-                " label-align="right" align="center">
+                <el-descriptions-item
+                    label="磨床编号
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                    label-align="right" align="center">
                     {{ from.grinderNumber }}
                 </el-descriptions-item>
-                <el-descriptions-item label="辊轴位置
-                " label-align="right" align="center">
+                <el-descriptions-item
+                    label="辊轴位置
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                    label-align="right" align="center">
                     {{ from.position }}
                 </el-descriptions-item>
-                <el-descriptions-item label="磨床摆渡区-磨床待磨区
-                " label-align="right" align="center">
+                <el-descriptions-item
+                    label="磨床摆渡区-磨床待磨区
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                    label-align="right" align="center">
                     {{ from.step_01_Hand }}
                 </el-descriptions-item>
-                <el-descriptions-item label="磨床待磨区-磨床
-                " label-align="right" align="center">
+                <el-descriptions-item
+                    label="磨床待磨区-磨床
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                    label-align="right" align="center">
                     {{ from.step_02_Machine }}
                 </el-descriptions-item>
                 <el-descriptions-item label="磨床待磨区" label-align="right" align="center">
                     {{ from.step_03_Peel }}
                 </el-descriptions-item>
-                <el-descriptions-item label="磨床磨削
-                " label-align="right" align="center">
+                <el-descriptions-item
+                    label="磨床磨削
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                    label-align="right" align="center">
                     {{ from.step_04_CaptainId }}
                 </el-descriptions-item>
-                <el-descriptions-item label="磨床-人工检测平台
+                <el-descriptions-item
+                    label="磨床-人工检测平台
         
-                " label-align="right" align="center">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                    label-align="right" align="center">
                     {{ from.step_05_PlatformId }}
                 </el-descriptions-item>
                 <el-descriptions-item label="人工检测平台-磨床摆渡区" label-align="right" align="center">
@@ -294,15 +310,21 @@
             {{ title }}
         </el-dialog>
         <el-dialog v-model="dialogVisible3" title="详情" width="60%" :before-close="handleClose">
-            <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button>
-
+            <!-- <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button> -->
             <el-card class="box-card" shadow="hover">
                 起始位置：{{ stitle }}<br /><br />
-                终点位置：{{ etitle }}<br /><br />
-                轧辊号：{{ formData.rollId }}<br /><br />
-                任务类型： <el-radio-group v-model="radio" class="ml-4">
-                    <el-radio style="color: black" label="半自动">半自动</el-radio>
-                    <el-radio style="color: black" label="全自动">全自动</el-radio><br /><br />
+                终点位置： <el-select v-model="etitle" @change="echange" class="m-2" placeholder="请选择终点位置">
+                    <el-option v-for="item in endList" :key="item.position" :label="item.position" :value="item.position" />
+                </el-select><br /><br />
+                辊种类型： <el-select v-model="rollerType" class="m-2" placeholder="请选择终点位置">
+                    <el-option v-for="item in rollerTypeList" :key="item.rollerType" :label="item.rollerType"
+                        :value="item.rollerType" />
+                </el-select><br /><br />
+                <!-- {{ etitle }} -->
+                <!-- 辊框号：{{ agvrollerList[0].boxId }}<br /><br /> -->
+                任务类型： <el-radio-group @change="selectEnd" v-model="radio" class="ml-4">
+                    <el-radio style="color: black" label="工作辊缓存区">半自动</el-radio>
+                    <el-radio style="color: black" label="交接工位">全自动</el-radio><br /><br />
                 </el-radio-group>
                 <br />
                 优先执行：
@@ -310,10 +332,12 @@
             </el-card>
             <br /><br />
             <el-table :data="agvrollerList">
-                <el-table-column prop="" label="辊框号">
-                    <template #default="scope">
-                        {{ scope.row.agv_main.boxId }}
-                    </template>
+                <el-table-column prop="boxId" label="辊框号">
+                    <!-- <template #default="scope">
+                        <span v-if="scope.row.agv_main">
+                            {{ scope.row.agv_main.boxId }}
+                        </span>
+                    </template> -->
                 </el-table-column>
                 <el-table-column prop="rollerName" label="轧辊号" />
                 <el-table-column prop="remarks" label="备注" />
@@ -355,7 +379,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { getFrameChild, getGrindAllAndData, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, updateFrameChild, updateAGVChild } from '@/api';
+import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList } from '@/api';
 import { Alex } from '@/types';
 import { ElMessage } from 'element-plus';
 import { title } from 'process';
@@ -365,21 +389,32 @@ const dialogVisible = ref(false);
 const dialogVisible3 = ref(false);
 
 const title = ref('');
-const agvrollerList = ref([]);
+const agvrollerList: any = ref([]);
 const stitle: any = ref('')
 const etitle: any = ref('')
-const radio = ref();
+const radio = ref('工作辊缓存区');
+const rollerType = ref('工作辊 ');
+const rollerTypeList = ref([
+    {
+        rollerType: '工作辊'
+    },
+    {
+        rollerType: '一中间辊'
+    }
+]);
 const sTable = ref('');
 const eTable = ref('');
 const value = ref('');
 const formData: any = ref({})
 const rollerList = ref([]);
+const endList: any = ref([])
 const step = ref({
     step1: false,
     step2: false,
     step3: false,
     step4: false
 });
+const fname = ref('')
 const data: any = reactive({
     dataA: [
         {
@@ -394,16 +429,118 @@ const data: any = reactive({
     ],
     grindListAll2: []
 })
+const echange = (i: any) => {
+    console.log(i);
+    let alex = new Alex();
+    alex.parameter = {
+        flag: i
+    }
+    selectAgvFramePositionInfo(alex).then((res: any) => {
+        fname.value = res.result.agv_frame.fname
+    })
+}
 const createTask = () => {
+    switch (radio.value) {
+        case '工作辊缓存区':
+            console.log('是半自动');
+            if (etitle.value) {
+                let alex = new Alex();
+                alex.parameter = {
+                    flag: stitle.value
+                }
+                selectAgvFramePositionInfo(alex).then((res: any) => {
+                    console.log(res.result.agv_frame);
+                    alex.parameter = {
+                        rollerType: rollerType.value,
+                        insertRollerList: agvrollerList.value,
+                        agv_Carry: {
+                            boxId: agvrollerList.value[0].boxId,
+                            start: stitle.value,
+                            startName: res.result.agv_frame.fname,
+                            end: etitle.value,
+                            fname: fname.value,
+                            ename: "背驼",
+                            priority: 10
+                        }
+                    }
+                    selectAgv_CarryInfo(alex).then((res: any) => {
+                        ElMessage({
+                            message: res.message.msg,
+                            type: 'success',
+                        })
+                        dialogVisible3.value = false;
+                    })
+                })
+            } else {
+                ElMessage({
+                    message: '请选择终点位置！',
+                    type: 'warning',
+                })
+            }
+            break;
+        case '交接工位':
+            console.log('是全自动');
+
+            if (etitle.value) {
+                let alex = new Alex();
+                alex.parameter = {
+                    flag: stitle.value
+                }
+                selectAgvFramePositionInfo(alex).then((res: any) => {
+                    console.log(res.result.agv_frame);
+                    alex.parameter = {
+                        ename: "背驼",
+                        start: stitle.value,
+                        startName: res.result.agv_frame.fname,
+                        outMain: {
+                            priority: 10,
+                            boxType: rollerType.value,
+                            boxId: agvrollerList.value[0].boxId,
+                            formulate_End: etitle.value,
+                            formulate_EndName: fname.value
+                        },
+                        insertAgvRollerList: agvrollerList.value
+                    }
+                    insertOutMainList(alex).then((res: any) => {
+                        ElMessage({
+                            message: res.message.msg,
+                            type: 'success',
+                        })
+                        dialogVisible3.value = false;
+                    })
+                })
+            } else {
+                ElMessage({
+                    message: '请选择终点位置！',
+                    type: 'warning',
+                })
+            }
+            break;
+    }
+
+
 
 }
+const selectEnd = () => {
+    etitle.value = null;
+    let alex = new Alex();
+    alex.parameter = {
+        flag: radio.value
+    }
+
+    selectAgvFrameAppointInfo(alex).then((res: any) => {
+        endList.value = res.result.agv_frameList;
+    })
+}
+
 const chang = (row: any) => {
+    selectEnd();
     stitle.value = row[0];
     dialogVisible3.value = true
 
     console.log(row);
-
     let alex = new Alex();
+
     alex.parameter = {
         flag: row
     }
