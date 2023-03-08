@@ -45,7 +45,7 @@
                         <i class="iconfont icon-caidan"></i>&nbsp;
                         <span>机器人半自动任务查询</span>
                     </el-menu-item>
-                    <el-menu-item index="/GrindAutoInfo">
+                    <el-menu-item index="/outScheduling">
                         <i class="iconfont icon-caidan"></i>&nbsp;
                         <span>出库排程</span>
                     </el-menu-item>

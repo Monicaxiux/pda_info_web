@@ -237,9 +237,9 @@
                                     <el-button v-if="scope.row.handStatus != 3" size="small" @click="chang3(scope.row)">
                                         确认
                                     </el-button>
-                                    <el-button v-if="scope.row.handStatus != 3" size="small" @click="chang3(scope.row)">
+                                    <!-- <el-button v-if="scope.row.handStatus != 3" size="small" @click="chang3(scope.row)">
                                         删除
-                                    </el-button>
+                                    </el-button> -->
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -247,41 +247,41 @@
                 </dv-border-box-13>
             </dv-decoration-11>
         </div>
-        <el-dialog v-model="dialogVisible2" title="主任务详情" width="80%" :before-close="handleClose">
+        <el-dialog draggable v-model="dialogVisible2" title="主任务详情" width="80%" :before-close="handleClose">
             <el-descriptions title="" :column="3" border>
                 <el-descriptions-item
                     label="主任务编号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
                     {{ from.grindId }}
                 </el-descriptions-item>
                 <el-descriptions-item
                     label="主任务订单号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center">
                     {{ from.grindNo }}
                 </el-descriptions-item>
                 <el-descriptions-item
                     label="磨床编号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center">
                     {{ from.grinderNumber }}
                 </el-descriptions-item>
                 <el-descriptions-item
                     label="辊轴位置
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center">
                     {{ from.position }}
                 </el-descriptions-item>
                 <el-descriptions-item
                     label="磨床摆渡区-磨床待磨区
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center">
                     {{ from.step_01_Hand }}
                 </el-descriptions-item>
                 <el-descriptions-item
                     label="磨床待磨区-磨床
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center">
                     {{ from.step_02_Machine }}
                 </el-descriptions-item>
@@ -290,14 +290,14 @@
                 </el-descriptions-item>
                 <el-descriptions-item
                     label="磨床磨削
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center">
                     {{ from.step_04_CaptainId }}
                 </el-descriptions-item>
                 <el-descriptions-item
                     label="磨床-人工检测平台
         
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center">
                     {{ from.step_05_PlatformId }}
                 </el-descriptions-item>
@@ -306,10 +306,10 @@
                 </el-descriptions-item>
             </el-descriptions>
         </el-dialog>
-        <el-dialog v-model="dialogVisible" title="拖拽详情" width="80%" :before-close="handleClose">
+        <el-dialog v-model="dialogVisible" draggable title="拖拽详情" width="80%" :before-close="handleClose">
             {{ title }}
         </el-dialog>
-        <el-dialog v-model="dialogVisible3" title="详情" width="60%" :before-close="handleClose">
+        <el-dialog v-model="dialogVisible3" title="详情" draggable width="60%" :before-close="handleClose">
             <!-- <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button> -->
             <el-card class="box-card" shadow="hover">
                 起始位置：{{ stitle }}<br /><br />
@@ -331,7 +331,8 @@
                 <el-switch v-model="value" active-text="是" inactive-text="否" />
             </el-card>
             <br /><br />
-            <el-table :data="agvrollerList">
+            <el-table :data="agvrollerList" @selection-change="handleSelectionChange">
+                <el-table-column v-if="stitlestatus" type="selection" width="55" />
                 <el-table-column prop="boxId" label="辊框号">
                     <!-- <template #default="scope">
                         <span v-if="scope.row.agv_main">
@@ -372,14 +373,18 @@
             <template #footer>
                 <span class="dialog-footer">
                     <el-button @click="dialogVisible3 = false">取消</el-button>
+                    <el-button v-if="stitlestatus" type="primary" @click="create(1)">拆装</el-button>
+                    <el-button v-if="stitle == 'C02'" type="primary" @click="create(2)">出库</el-button>
                     <el-button type="primary" @click="createTask">确定</el-button>
                 </span>
             </template>
         </el-dialog>
+        <el-dialog v-model="dialogVisible4" title="详情" draggable width="60%" :before-close="handleClose">
+        </el-dialog>
     </div>
 </template>
 <script setup lang="ts">
-import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList } from '@/api';
+import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList, updateAgvRollerParameterKey } from '@/api';
 import { Alex } from '@/types';
 import { ElMessage } from 'element-plus';
 import { title } from 'process';
@@ -387,13 +392,19 @@ import { onMounted, onUnmounted, reactive, ref } from 'vue';
 const key = ref(0);
 const dialogVisible = ref(false);
 const dialogVisible3 = ref(false);
-
+const dialogVisible4 = ref(false);
+const stitlestatus = ref(false);
 const title = ref('');
 const agvrollerList: any = ref([]);
 const stitle: any = ref('')
 const etitle: any = ref('')
 const radio = ref('工作辊缓存区');
 const rollerType = ref('工作辊 ');
+const multipleSelection = ref();
+const handleSelectionChange = (val: any) => {
+    multipleSelection.value = val
+    console.log(val);
+}
 const rollerTypeList = ref([
     {
         rollerType: '工作辊'
@@ -438,6 +449,31 @@ const echange = (i: any) => {
     selectAgvFramePositionInfo(alex).then((res: any) => {
         fname.value = res.result.agv_frame.fname
     })
+}
+const create = (i: any) => {
+    switch (i) {
+        case 1:
+            for (let i = 0; i < multipleSelection.value.length; i++) {
+                delete multipleSelection.value[i].agv_main
+            }
+            let alex = new Alex();
+            alex.parameter = {
+                agvRollerList: multipleSelection.value
+            }
+
+            updateAgvRollerParameterKey(alex).then((res: any) => {
+                dialogVisible3.value = false;
+                ElMessage({
+                    message: res.message.msg,
+                    type: 'success',
+                })
+            })
+            break;
+        case 2:
+
+            break;
+    }
+
 }
 const createTask = () => {
     switch (radio.value) {
@@ -536,6 +572,11 @@ const selectEnd = () => {
 const chang = (row: any) => {
     selectEnd();
     stitle.value = row[0];
+    if (stitle.value == 'F15' || stitle.value == 'F16' || stitle.value == 'F17' || stitle.value == 'F18') {
+        stitlestatus.value = true;
+    } else {
+        stitlestatus.value = false;
+    }
     dialogVisible3.value = true
 
     console.log(row);

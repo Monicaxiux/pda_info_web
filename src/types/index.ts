@@ -8,4 +8,6 @@ export class Alex {
 export class LoginUser {
     loginName: string = 'Admin0'
     password: string = '0'
+    userName:string=''
+    phoneNumber:string=''
 }

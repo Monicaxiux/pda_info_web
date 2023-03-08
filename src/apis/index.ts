@@ -1,5 +1,6 @@
 import request from "@/utils/requests";
 
+
 //用户登陆
 export const login = ((eilnfoData: any) => {
     return request({
@@ -209,6 +210,69 @@ export const selectGrindParameterTry = ((AlexData: any) => {
 export const selectProduceAll = ((AlexData: any) => {
     return request({
         url: '/Produce/selectProduceAll',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//根据具体位置查询区域
+export const selectAgvFramePositionInfo = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/selectAgvFramePositionInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//添加agv的半自动出库
+export const insertOutMainList = ((AlexData: any) => {
+    return request({
+        url: '/OutMain/insertOutMainList',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询所有的出库主任务数据
+export const getOutMainListAll = ((AlexData: any) => {
+    return request({
+        url: '/OutMain/getOutMainListAll',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//根据主任务号查询所有的出库子任务的数据
+export const getOutBoxListChild = ((AlexData: any) => {
+    return request({
+        url: '/OutBox/getOutBoxListChild',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//添加半自动的单步任务数据信息
+export const insertGrind_Carry = ((AlexData: any) => {
+    return request({
+        url: '/Grind_Carry/insertGrind_Carry',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询指定区域辊架的数据信息
+export const selectFrameByType = ((AlexData: any) => {
+    return request({
+        url: '/frame/selectFrameByType',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//根据具体位置查询区域数据信息
+export const selectFrameRegionAndType = ((AlexData: any) => {
+    return request({
+        url: '/frame/selectFrameRegionAndType',
         method: 'post',
         data: AlexData
     }) as any

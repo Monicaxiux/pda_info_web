@@ -48,6 +48,11 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'grinderz',
                 component: () => import('../views/grinderz.vue'),
             },
+            {
+                path: '/outScheduling',
+                name: 'outScheduling',
+                component: () => import('../views/outScheduling.vue'),
+            },
             // {
             //     path: '/test',
             //     name: 'test',
