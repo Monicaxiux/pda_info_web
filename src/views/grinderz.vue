@@ -488,31 +488,31 @@
             </el-descriptions-item>
             <el-descriptions-item
                 label="主任务订单号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                 label-align="right" align="center">
                 {{ from.grindNo }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床编号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                 label-align="right" align="center">
                 {{ from.grinderNumber }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="辊轴位置
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                 label-align="right" align="center">
                 {{ from.position }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床摆渡区-磨床待磨区
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                 label-align="right" align="center">
                 {{ from.step_01_Hand }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床待磨区-磨床
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                 label-align="right" align="center">
                 {{ from.step_02_Machine }}
             </el-descriptions-item>
@@ -521,14 +521,14 @@
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床磨削
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                 label-align="right" align="center">
                 {{ from.step_04_CaptainId }}
             </el-descriptions-item>
             <el-descriptions-item
                 label="磨床-三号人工检测平台
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                 label-align="right" align="center">
                 {{ from.step_05_PlatformId }}
             </el-descriptions-item>
@@ -726,16 +726,20 @@
         </template>
     </el-dialog>
     <el-dialog draggable v-model="dialogVisible7" title="1号U型辊架状态" width="50%">
-        <div style="height: 500px;overflow-y: auto;">
-            <el-table :row-style="tableRowClassName" :key="dialogVisible7" :cell-style="{ padding: '10px' }"
+        <div style="height: 600px;overflow-y: auto;">
+            <el-table :row-style="tableRowClassName" :key="dialogVisible7" :cell-style="{ padding: '1px' }"
                 ref="multipleTableRef" @selection-change="handleSelectionChange" :data="UData" row-key="id" border>
-                <el-table-column prop="slotPosition" label="槽号"></el-table-column>
-                <el-table-column label="轧辊号 ">
+                <el-table-column label="槽号">
                     <template #default="scope">
-                        <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
+                        <span style="color:blue">{{ scope.row.slotPosition }}</span>
                     </template>
                 </el-table-column>
-
+                <el-table-column label="轧辊号 ">
+                    <template #default="scope">
+                        <span style="color:black;font-weight: bold;" v-if="scope.row.agv_roller">{{
+                            scope.row.agv_roller.rollerName }}</span>
+                    </template>
+                </el-table-column>
                 <el-table-column v-if="istatus == 1">
                     <el-table-column label="重磨/报废">
                         <template #default="scope">
@@ -1030,8 +1034,10 @@ const insertP = (i: any) => {
                             delete multipleSelection.value[i].rollId
                             if (radio2.value == 'C08') {
                                 multipleSelection.value[i].work = 'C08'
-                            } else {
+                            } else if (radio2.value == 'C09') {
                                 multipleSelection.value[i].work = 'C09'
+                            } else if (radio2.value == 'C10') {
+                                multipleSelection.value[i].work = 'C10'
                             }
                             multipleSelection.value[i].region = 'A区'
                         }
@@ -1045,6 +1051,7 @@ const insertP = (i: any) => {
                                 type: 'success',
                             })
                             dialogVisible7.value = false;
+                            getData();
                         })
 
                     }
@@ -1101,6 +1108,7 @@ const insertP = (i: any) => {
                                 type: 'success',
                             })
                             dialogVisible7.value = false;
+                            getData();
                         })
                     }
                     break;
@@ -1130,12 +1138,56 @@ const exceptionList = ref([
 ])
 const dremarksList = ref([
     {
-        label: '轧辊破裂 ',
+        label: '辊印 ',
         value: '1'
     },
     {
-        label: '轧辊直径错误',
+        label: '刀花',
         value: '2'
+    },
+    {
+        label: '振痕',
+        value: '3'
+    },
+    {
+        label: '托瓦印',
+        value: '4'
+    },
+    {
+        label: '斜条纹',
+        value: '5'
+    },
+    {
+        label: '裂纹',
+        value: '6'
+    },
+    {
+        label: '擦伤',
+        value: '7'
+    },
+    {
+        label: '砂轮印',
+        value: '8'
+    },
+    {
+        label: '啃刀印',
+        value: '9'
+    },
+    {
+        label: '无辊头',
+        value: '10'
+    },
+    {
+        label: '绞入粘钢',
+        value: '11'
+    },
+    {
+        label: '电击伤痕',
+        value: '12'
+    },
+    {
+        label: '辊头磨损',
+        value: '13'
     },
 ])
 const testResultList = ref([
@@ -1447,8 +1499,8 @@ const getDcadx = (id: any) => {
         // detectionListIsNotNull.value = res.result.detectionListIsNotNull
         // detectionListIsNull.value = res.result.detectionListIsNull
         if (res.result.detectionOne) {
-
             form.value = JSON.parse(JSON.stringify(res.result.detectionOne))
+            form.value.rollerId = data.tableData3[0].agv_roller.rollerName
         }
     })
 }
@@ -1479,12 +1531,15 @@ const selectU = (i: any) => {
     switch (i) {
         case 1:
             for (let i = 0; i < UData.value.length; i++) {
+                if (data.tableData4[i].last_RollTypeCode && !UData.value[i].rollType) {
+                    UData.value[i].rollType = data.tableData4[i].last_RollTypeCode;
+                }
                 if (!UData.value[i].turnstNum) {
                     UData.value[i].turnstNum = 1
                 }
-                if (!UData.value[i].rollType) {
-                    UData.value[i].rollType = 'H'
-                }
+                // if (!UData.value[i].rollType) {
+                //     UData.value[i].rollType = 'H'
+                // }
             }
             break;
         case 2:

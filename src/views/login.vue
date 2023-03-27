@@ -132,7 +132,7 @@ const logins = () => {
             //         store.userInfo = res.userInfo,
             setTimeout(() => {
                 loadingInstance.close()
-                //登陆成功跳转至我的考试界面
+                //登陆成功跳转
                 router.replace({ path: "/grinder" })
             }, 1300)
 

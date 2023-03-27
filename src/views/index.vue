@@ -49,6 +49,18 @@
                         <i class="iconfont icon-caidan"></i>&nbsp;
                         <span>出库排程</span>
                     </el-menu-item>
+                    <el-menu-item index="/StereoLibrary">
+                        <i class="iconfont icon-caidan"></i>&nbsp;
+                        <span>立体库</span>
+                    </el-menu-item>
+                    <el-menu-item index="">
+                        <i class="iconfont icon-caidan"></i>&nbsp;
+                        <span>AGV库位管理</span>
+                    </el-menu-item>
+                    <el-menu-item index="">
+                        <i class="iconfont icon-caidan"></i>&nbsp;
+                        <span>机器人库位管理</span>
+                    </el-menu-item>
                 </el-menu>
             </el-aside>
             <el-container>

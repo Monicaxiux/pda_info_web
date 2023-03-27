@@ -277,3 +277,12 @@ export const selectFrameRegionAndType = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+
+//人工确认出库状态的修改
+export const updateAgvMainParameterKey = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/updateAgvMainParameterKey',
+        method: 'post',
+        data: AlexData
+    }) as any
+})

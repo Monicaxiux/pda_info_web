@@ -61,7 +61,9 @@
         <el-table :data="agvrollerList">
             <el-table-column prop="" label="辊框号">
                 <template #default="scope">
-                    {{ scope.row.agv_main.boxId }}
+                    <span v-if="scope.row.agv_main">
+                        {{ scope.row.agv_main.boxId }}
+                    </span>
                 </template>
             </el-table-column>
             <el-table-column prop="rollerName" label="轧辊号" />
@@ -165,8 +167,15 @@ const select = (row: any) => {
     stitle.value = row[0];
     console.log(row);
     let alex = new Alex();
+    let region = ''
+    if (row[0] == 'A10' || row[0] == 'A1' || row[0] == 'A2' || row[0] == 'A13' || row[0] == 'A14' || row[0] == 'A15') {
+        region = '工作辊货架'
+    } else {
+        region = '中间辊货架'
+    }
     alex.parameter = {
-        flag: row
+        flag: row,
+        region: region
     }
     selectAgvFrameRegionMany(alex).then((res: any) => {
         dialogVisible3.value = true

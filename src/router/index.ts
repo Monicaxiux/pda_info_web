@@ -53,6 +53,11 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'outScheduling',
                 component: () => import('../views/outScheduling.vue'),
             },
+             {
+                path: '/StereoLibrary',
+                name: 'StereoLibrary',
+                component: () => import('../views/StereoLibrary.vue'),
+            },
             // {
             //     path: '/test',
             //     name: 'test',

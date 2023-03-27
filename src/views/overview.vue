@@ -2,168 +2,53 @@
     <div class="bodyBox">
         <div class="left">
             <div class="box" id="ARegion">
-                <div class="droptarget" id="A01" @click="chang(['A0101', 'A0102'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
+                <div v-for="item, index in List4" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
+                    class="droptarget" :id="item.position"
+                    @click="chang(['A0' + (index + 1) + '01', 'A0' + (index + 1) + '02'])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
                     <!-- <div class="Q">·</div> -->
-                </div>
-                <div class="droptarget" id="A02" @click="chang(['A0201', 'A0202'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="A03" @click="chang(['A0301', 'A0302'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="A05" @click="chang(['A0501', 'A0502'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="A04" @click="chang(['A0401', 'A0402'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="A06" @click="chang(['A0601', 'A0602'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
+                    {{ 'A0' + (index + 1) }}
                 </div>
             </div>
             <div class="box" id="BRegion">
-                <div class="droptarget" @click="chang(['C04'])" id="C04" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" @click="chang(['C03'])" id="C03" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="C02" @click="chang(['C02'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="C01" @click="chang(['C01'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
+                <div v-for="item in List6" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
+                    class="droptarget" @click="chang([item.position])" :id="item.position" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+                    {{ item.position }}
                 </div>
             </div>
             <div class="box" id="CRegion">
-                <div class="droptarget" id="F22" @click="chang(['F22'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F21" @click="chang(['F21'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F20" @click="chang(['F20'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F19" @click="chang(['F19'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F08" @click="chang(['F08'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F07" @click="chang(['F07'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F06" @click="chang(['F06'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F05" @click="chang(['F05'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F04" @click="chang(['F04'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F03" @click="chang(['F03'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F02" @click="chang(['F02'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-                </div>
-                <div class="droptarget" id="F01" @click="chang(['F01'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
+                <div class="droptarget" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
+                    v-for="item in List5" :id="item.position" @click="chang([item.position])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+                    {{ item.position }}
                 </div>
             </div>
             <div class="box" id="DRegion">
-                <div class="droptarget" id="F16" @click="chang(['F16'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F15" @click="chang(['F15'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F17" @click="chang(['F17'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F18" @click="chang(['F18'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="B03" @click="chang(['B03'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="B01" @click="chang(['B01'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="B02" @click="chang(['B02'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
+                <div v-for="item in List3" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
+                    class="droptarget" :id="item.position" @click="chang([item.position])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+                    {{ item.position }}
                 </div>
             </div>
             <div class="box" id="ERegion">
-                <div class="droptarget" id="C07" @click="chang(['C07'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="C06" @click="chang(['C06'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="C05" @click="chang(['C05'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F14" @click="chang(['F14'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F13" @click="chang(['F13'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F12" @click="chang(['F12'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F11" @click="chang(['F11'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F10" @click="chang(['F10'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="F09" @click="chang(['F09'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
+                <div v-for="item in List2" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
+                    class="droptarget" :id="item.position" @click="chang([item.position])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+                    {{ item.position }}
                 </div>
             </div>
             <div class="box" id="FRegion">
-                <div class="droptarget" id="C11" @click="chang(['C11'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="C09" @click="chang(['C09'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
-                </div>
-                <div class="droptarget" id="C08" @click="chang(['C08'])" :ondrop="drop" :ondragenter="dragEnter"
-                    :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart" draggable="true">
-
+                <div v-for="item in List1" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
+                    class="droptarget" :id="item.position" @click="chang([item.position])" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
+                    {{ item.position }}
                 </div>
             </div>
         </div>
@@ -183,7 +68,7 @@
                     </div>
                     <div class="tableData8">
 
-                        <el-table name="A03" class="t8" @row-click="updRow" @row-dblclick="chang2" ref="dragTable"
+                        <el-table name="A0301" class="t8" @row-click="updRow" @row-dblclick="chang2" ref="dragTable"
                             :data="data.grindListAll" row-key="id" :key="key" border>
                             <el-table-column>
                                 <template #header>
@@ -205,7 +90,7 @@
                         </el-table>
                     </div>
                     <div class="tableData9">
-                        <el-table name="A03" class="t9" ref="dragTable" :data="data.grindListAll2" row-key="id" border
+                        <el-table name="A0301" class="t9" ref="dragTable" :data="data.grindListAll2" row-key="id" border
                             :key="key">
                             <el-table-column prop="currentStep" label="步骤" width="60"></el-table-column>
                             <el-table-column prop="boxId" label="辊框号" width="100"></el-table-column>
@@ -250,38 +135,32 @@
         <el-dialog draggable v-model="dialogVisible2" title="主任务详情" width="80%" :before-close="handleClose">
             <el-descriptions title="" :column="3" border>
                 <el-descriptions-item
-                    label="主任务编号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                    label="主任务编号                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
                     {{ from.grindId }}
                 </el-descriptions-item>
                 <el-descriptions-item
-                    label="主任务订单号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                    label="主任务订单号                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "
                     label-align="right" align="center">
                     {{ from.grindNo }}
                 </el-descriptions-item>
                 <el-descriptions-item
-                    label="磨床编号
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                    label="磨床编号                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               "
                     label-align="right" align="center">
                     {{ from.grinderNumber }}
                 </el-descriptions-item>
                 <el-descriptions-item
-                    label="辊轴位置
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                    label="辊轴位置                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              "
                     label-align="right" align="center">
                     {{ from.position }}
                 </el-descriptions-item>
                 <el-descriptions-item
-                    label="磨床摆渡区-磨床待磨区
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                    label="磨床摆渡区-磨床待磨区                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
                     label-align="right" align="center">
                     {{ from.step_01_Hand }}
                 </el-descriptions-item>
                 <el-descriptions-item
-                    label="磨床待磨区-磨床
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                    label="磨床待磨区-磨床                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     "
                     label-align="right" align="center">
                     {{ from.step_02_Machine }}
                 </el-descriptions-item>
@@ -289,15 +168,12 @@
                     {{ from.step_03_Peel }}
                 </el-descriptions-item>
                 <el-descriptions-item
-                    label="磨床磨削
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                    label="磨床磨削                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        "
                     label-align="right" align="center">
                     {{ from.step_04_CaptainId }}
                 </el-descriptions-item>
                 <el-descriptions-item
-                    label="磨床-人工检测平台
-        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
+                    label="磨床-人工检测平台                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "
                     label-align="right" align="center">
                     {{ from.step_05_PlatformId }}
                 </el-descriptions-item>
@@ -327,7 +203,7 @@
                     <el-radio style="color: black" label="交接工位">全自动</el-radio><br /><br />
                 </el-radio-group>
                 <br />
-                优先执行：
+                出库：
                 <el-switch v-model="value" active-text="是" inactive-text="否" />
             </el-card>
             <br /><br />
@@ -374,7 +250,7 @@
                 <span class="dialog-footer">
                     <el-button @click="dialogVisible3 = false">取消</el-button>
                     <el-button v-if="stitlestatus" type="primary" @click="create(1)">拆装</el-button>
-                    <el-button v-if="stitle == 'C02'" type="primary" @click="create(2)">出库</el-button>
+                    <!-- <el-button v-if="stitle == 'C02'" type="primary" @click="create(2)">出库</el-button> -->
                     <el-button type="primary" @click="createTask">确定</el-button>
                 </span>
             </template>
@@ -384,12 +260,18 @@
     </div>
 </template>
 <script setup lang="ts">
-import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList, updateAgvRollerParameterKey } from '@/api';
+import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList, updateAgvRollerParameterKey, updateAgvMainParameterKey, selectFrameByType, getAgvFrame } from '@/api';
 import { Alex } from '@/types';
 import { ElMessage } from 'element-plus';
 import { title } from 'process';
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
 const key = ref(0);
+const List1: any = ref([]);
+const List2: any = ref([]);
+const List3: any = ref([]);
+const List4: any = ref([]);
+const List5: any = ref([]);
+const List6: any = ref([]);
 const dialogVisible = ref(false);
 const dialogVisible3 = ref(false);
 const dialogVisible4 = ref(false);
@@ -397,8 +279,8 @@ const stitlestatus = ref(false);
 const title = ref('');
 const agvrollerList: any = ref([]);
 const stitle: any = ref('')
-const etitle: any = ref('')
-const radio = ref('工作辊缓存区');
+const etitle: any = ref('B03')
+const radio = ref('交接工位');
 const rollerType = ref('工作辊 ');
 const multipleSelection = ref();
 const handleSelectionChange = (val: any) => {
@@ -415,7 +297,7 @@ const rollerTypeList = ref([
 ]);
 const sTable = ref('');
 const eTable = ref('');
-const value = ref('');
+const value = ref('否');
 const formData: any = ref({})
 const rollerList = ref([]);
 const endList: any = ref([])
@@ -451,16 +333,16 @@ const echange = (i: any) => {
     })
 }
 const create = (i: any) => {
+    let alex = new Alex();
+
     switch (i) {
         case 1:
             for (let i = 0; i < multipleSelection.value.length; i++) {
                 delete multipleSelection.value[i].agv_main
             }
-            let alex = new Alex();
             alex.parameter = {
                 agvRollerList: multipleSelection.value
             }
-
             updateAgvRollerParameterKey(alex).then((res: any) => {
                 dialogVisible3.value = false;
                 ElMessage({
@@ -470,10 +352,34 @@ const create = (i: any) => {
             })
             break;
         case 2:
-
+            alex.parameter = {
+                id: agvrollerList.value[0].rimNum
+            }
+            updateAgvMainParameterKey(alex).then((res: any) => {
+                dialogVisible3.value = false;
+                ElMessage({
+                    message: res.message.msg,
+                    type: 'success',
+                })
+            })
             break;
     }
 
+}
+const itemColor = (pstatus: any, emptyStatus: any, existStatus: any) => {
+    if (pstatus == 1) {
+        return 'Green'
+    } else if (emptyStatus == 1) {
+        return 'Blue'
+    } else if (existStatus == 1) {
+        return 'Orangered'
+    } else if (pstatus == 1 && emptyStatus == 1) {
+        return 'Red'
+    } else if (pstatus == 1 && existStatus == 1) {
+        return 'Red'
+    } else if (emptyStatus == 1 && existStatus == 1) {
+        return 'Red'
+    }
 }
 const createTask = () => {
     switch (radio.value) {
@@ -496,8 +402,11 @@ const createTask = () => {
                             end: etitle.value,
                             fname: fname.value,
                             ename: "背驼",
-                            priority: 10
-                        }
+                            priority: 10,
+                            confirm: 1,
+                            out_Status: value.value == '是' ? 1 : 0
+                        },
+
                     }
                     selectAgv_CarryInfo(alex).then((res: any) => {
                         ElMessage({
@@ -516,7 +425,9 @@ const createTask = () => {
             break;
         case '交接工位':
             console.log('是全自动');
-
+            for (let i = 0; i < agvrollerList.value.length; i++) {
+                delete agvrollerList.value[i].agv_main
+            }
             if (etitle.value) {
                 let alex = new Alex();
                 alex.parameter = {
@@ -528,6 +439,7 @@ const createTask = () => {
                         ename: "背驼",
                         start: stitle.value,
                         startName: res.result.agv_frame.fname,
+                        rid: agvrollerList.value[0].rimNum,
                         outMain: {
                             priority: 10,
                             boxType: rollerType.value,
@@ -572,6 +484,13 @@ const selectEnd = () => {
 const chang = (row: any) => {
     selectEnd();
     stitle.value = row[0];
+    if (row[0] == 'A0501') {
+        row[0] = 'A05'
+        row[1] = 'A05'
+    } else if (row[0] == 'A0601') {
+        row[0] = 'A06'
+        row[1] = 'A06'
+    }
     if (stitle.value == 'F15' || stitle.value == 'F16' || stitle.value == 'F17' || stitle.value == 'F18') {
         stitlestatus.value = true;
     } else {
@@ -698,9 +617,154 @@ const drop = (event: any) => {
     dialogVisible.value = true;
     console.log("到了", event.path[1].id, '的', event.path[0].id);
 }
-
+const getData = () => {
+    let list: any = []
+    getAgvFrame().then((res: any) => {
+        list = res.result.selectAgvFrameList;
+        for (let i = 0; i < list.length; i++) {
+            switch (list[i].position) {
+                // List1
+                case 'C11':
+                    List1.value.push(list[i]);
+                    break;
+                case 'C09':
+                    List1.value.push(list[i]);
+                    break;
+                case 'C08':
+                    List1.value.push(list[i]);
+                    break;
+                // List2
+                case 'C07':
+                    List2.value.push(list[i]);
+                    break;
+                case 'C06':
+                    List2.value.push(list[i]);
+                    break;
+                case 'C05':
+                    List2.value.push(list[i]);
+                    break;
+                case 'F14':
+                    List2.value.push(list[i]);
+                    break;
+                case 'F12':
+                    List2.value.push(list[i]);
+                    break;
+                case 'F10':
+                    List2.value.push(list[i]);
+                    break;
+                case 'F13':
+                    List2.value.push(list[i]);
+                    break;
+                case 'F11':
+                    List2.value.push(list[i]);
+                    break;
+                case 'F09':
+                    List2.value.push(list[i]);
+                    break;
+                // List3
+                case 'F15':
+                    List3.value.push(list[i]);
+                    break;
+                case 'F16':
+                    List3.value.push(list[i]);
+                    break;
+                case 'F17':
+                    List3.value.push(list[i]);
+                    break;
+                case 'F18':
+                    List3.value.push(list[i]);
+                    break;
+                case 'B03':
+                    List3.value.push(list[i]);
+                    break;
+                case 'B01':
+                    List3.value.push(list[i]);
+                    break;
+                case 'B02':
+                    List3.value.push(list[i]);
+                    break;
+                // List4
+                case 'A0101':
+                    List4.value.push(list[i]);
+                    break;
+                case 'A0201':
+                    List4.value.push(list[i]);
+                    break;
+                case 'A0301':
+                    List4.value.push(list[i]);
+                    break;
+                case 'A0401':
+                    List4.value.push(list[i]);
+                    break;
+                case 'A05':
+                    List4.value.push(list[i]);
+                    break;
+                case 'A06':
+                    List4.value.push(list[i]);
+                    break;
+                // List5
+                case 'F22':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F21':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F20':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F19':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F08':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F07':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F06':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F05':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F04':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F03':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F02':
+                    List5.value.push(list[i]);
+                    break;
+                case 'F01':
+                    List5.value.push(list[i]);
+                    break;
+                // List6
+                case 'C04':
+                    List6.value.push(list[i]);
+                    break;
+                case 'C03':
+                    List6.value.push(list[i]);
+                    break;
+                case 'C02':
+                    List6.value.push(list[i]);
+                    break;
+                case 'C01':
+                    List6.value.push(list[i]);
+                    break;
+            }
+        }
+        console.log(List1.value, '我是List1');
+        console.log(List2.value, '我是List2');
+        console.log(List3.value, '我是List3');
+        console.log(List4.value, '我是List4');
+        console.log(List5.value, '我是List5');
+        console.log(List6.value, '我是List6');
+    })
+}
 const id: any = ref()
 onMounted(() => {
+    getData();
     getGrindData();
     id.value = setInterval(async () => {
         await getGrindData();
@@ -712,28 +776,44 @@ onUnmounted(() => {
 })
 </script>
 <style lang="less" scoped>
+.Green {
+    background-color: Green;
+}
+
+.Blue {
+    background-color: blue;
+}
+
+.Red {
+    background-color: red;
+}
+
+.Orangered {
+    background-color: orangered
+}
+
 #ARegion {
     left: 650px;
     top: 500px;
 
-    #A01 {
+    #A0101 {
         left: 14px;
         bottom: 14px;
     }
 
-    #A02 {
+    #A0201 {
         left: 80px;
         bottom: 14px;
 
     }
 
-    #A03 {
+    #A0301 {
         left: 145px;
         bottom: 14px;
 
     }
 
-    #A04 {
+    #A0401 {
         right: 38px;
         transform: rotateZ(-90deg);
         top: 212px;

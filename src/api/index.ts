@@ -262,9 +262,17 @@ export const insertGrind_Carry = ((AlexData: any) => {
 //查询指定区域辊架的数据信息
 export const selectFrameByType = ((AlexData: any) => {
     return request({
-        url: '/frame/selectFrameByType',
+        url: '/frame/selectFrameLiTiKuType',
         method: 'post',
         data: AlexData
+    }) as any
+})
+
+//查询所有的辊架的信息
+export const getAgvFrame = (() => {
+    return request({
+        url: '/AgvMain/getAgvFrame',
+        method: 'post'
     }) as any
 })
 
@@ -281,6 +289,15 @@ export const selectFrameRegionAndType = ((AlexData: any) => {
 export const updateAgvRollerParameterKey = ((AlexData: any) => {
     return request({
         url: '/AgvRoller/updateAgvRollerParameterKey',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//人工确认出库状态的修改
+export const updateAgvMainParameterKey = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/updateAgvMainParameterKey',
         method: 'post',
         data: AlexData
     }) as any
