@@ -189,10 +189,13 @@
             <!-- <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button> -->
             <el-card class="box-card" shadow="hover">
                 起始位置：{{ stitle }}<br /><br />
-                终点位置： <el-select v-model="etitle" @change="echange" class="m-2" placeholder="请选择终点位置">
-                    <el-option v-for="item in endList" :key="item.position" :label="item.position" :value="item.position" />
-                </el-select><br /><br />
-                辊种类型： <el-select v-model="rollerType" class="m-2" placeholder="请选择终点位置">
+                <div v-if="stitle != 'C09'">
+                    终点位置： <el-select v-model="etitle" @change="echange" class="m-2" placeholder="请选择终点位置">
+                        <el-option v-for="item in endList" :key="item.position" :label="item.position"
+                            :value="item.position" />
+                    </el-select>
+                </div><br />
+                辊种类型： <el-select v-model="rollerType" class="m-2" placeholder="请选择辊种类型">
                     <el-option v-for="item in rollerTypeList" :key="item.rollerType" :label="item.rollerType"
                         :value="item.rollerType" />
                 </el-select><br /><br />
@@ -385,7 +388,7 @@ const createTask = () => {
     switch (radio.value) {
         case '工作辊缓存区':
             console.log('是半自动');
-            if (etitle.value) {
+            if (etitle.value || stitle.value == 'C09') {
                 let alex = new Alex();
                 alex.parameter = {
                     flag: stitle.value
@@ -399,11 +402,11 @@ const createTask = () => {
                             boxId: agvrollerList.value[0].boxId,
                             start: stitle.value,
                             startName: res.result.agv_frame.fname,
-                            end: etitle.value,
+                            end: stitle.value == 'C09' ? '拆装区' : etitle.value,
                             fname: fname.value,
                             ename: "背驼",
                             priority: 10,
-                            confirm: 1,
+                            confirm: true,
                             out_Status: value.value == '是' ? 1 : 0
                         },
 
@@ -475,7 +478,9 @@ const selectEnd = () => {
     alex.parameter = {
         flag: radio.value
     }
-
+    if (radio.value == '交接工位') {
+        etitle.value = 'B03'
+    }
     selectAgvFrameAppointInfo(alex).then((res: any) => {
         endList.value = res.result.agv_frameList;
     })
@@ -490,6 +495,11 @@ const chang = (row: any) => {
     } else if (row[0] == 'A0601') {
         row[0] = 'A06'
         row[1] = 'A06'
+    }
+    if (row[0] == 'C09') {
+        radio.value = '工作辊缓存区'
+    } else {
+        radio.value = '交接工位'
     }
     if (stitle.value == 'F15' || stitle.value == 'F16' || stitle.value == 'F17' || stitle.value == 'F18') {
         stitlestatus.value = true;

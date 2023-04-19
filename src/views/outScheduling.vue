@@ -41,8 +41,8 @@
                         <el-table-column>
                             <template #header>
                                 <el-radio-group @change="getGrindData" v-model="finishStatus">
-                                    <el-radio label="1" border>已完成</el-radio>
-                                    <el-radio label="3" border>未完成</el-radio>
+                                    <el-radio label="1" border>未完成</el-radio>
+                                    <el-radio label="3" border>已完成</el-radio>
                                     <el-radio label="50" border>已终止</el-radio>
                                     <el-button @click="getGrindData">刷新
                                     </el-button>

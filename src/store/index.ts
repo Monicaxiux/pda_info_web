@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 export const piniaData = defineStore("piniaData", {
     state: () => {
         return {
-            status: <string>'测试',
-            userInfo: <any>{}
+            userInfo: <any>{},
+            active:''
         };
     },
     getters: {},

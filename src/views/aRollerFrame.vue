@@ -61,16 +61,16 @@
         <el-table :data="agvrollerList">
             <el-table-column prop="" label="辊框号">
                 <template #default="scope">
-                    <span v-if="scope.row.agv_main">
-                        {{ scope.row.agv_main.boxId }}
+                    <span>
+                        {{ boxId }}
                     </span>
                 </template>
             </el-table-column>
             <el-table-column prop="rollerName" label="轧辊号" />
-            <el-table-column prop="remarks" label="备注" />
+            <!-- <el-table-column prop="remarks" label="备注" /> -->
             <el-table-column prop="slotName" label="卡槽位置" />
             <el-table-column prop="rollType" label="轧辊类型" />
-            <el-table-column prop="accident" label="轧辊事故类型" />
+            <!-- <el-table-column prop="accident" label="轧辊事故类型" /> -->
         </el-table>
         <template #footer>
             <span class="dialog-footer">
@@ -183,7 +183,10 @@ const select = (row: any) => {
         if (res.result) {
             agvrollerList.value = res.result.agv_rollerList;
             if (agvrollerList.value) {
-                boxId.value = agvrollerList.value[0].agv_main.boxId
+
+
+                boxId.value = agvrollerList.value[0].agv_main ? agvrollerList.value[0].agv_main.boxId : agvrollerList.value[0].agv_carry.boxId
+                console.log(boxId.value, '来了');
             } else {
                 boxId.value = ''
             }
@@ -201,10 +204,10 @@ const createTask = () => {
         }
         let alex = new Alex();
         alex.parameter = {
-            rollerType: agvrollerList.value[0].agv_main.rollType,
+            rollerType: agvrollerList.value[0].agv_main ? agvrollerList.value[0].agv_main.rollType : agvrollerList.value[0].rollType,
             agv_Carry: {
                 workId: agvrollerList.value[0].rimNum,
-                boxId: agvrollerList.value[0].agv_main.boxId,
+                boxId: agvrollerList.value[0].agv_main ? agvrollerList.value[0].agv_main.boxId : agvrollerList.value[0].agv_carry.boxId,
                 start: stitle.value,
                 startName: sn,
                 end: position.value,
@@ -218,6 +221,9 @@ const createTask = () => {
                 message: res.message.msg,
                 type: 'success',
             })
+            selectList(1);
+            selectList(2);
+            selectList(3);
             dialogVisible3.value = false;
         })
     } else {

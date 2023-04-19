@@ -4,10 +4,8 @@ export class Alex {
     result: any = {}
     message: any = {}
 }
-//登陆参数
+//登录参数
 export class LoginUser {
-    loginName: string = 'Admin0'
-    password: string = '0'
-    userName:string=''
-    phoneNumber:string=''
+    username: string = '001'
+    password: string = '123456'
 }

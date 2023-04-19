@@ -4,8 +4,8 @@
             <h1>宁波宝兴5号磨辊间智能化调度系统</h1><br>
             <!-- 登录表单 -->
             <el-form ref="ruleFormRef" :rules="rules" :model="data" status-icon class="demo-ruleForm">
-                <el-form-item label="" prop="loginName">
-                    <el-input v-model="data.loginName" clearable placeholder="请输入IC工号" />
+                <el-form-item label="" prop="username">
+                    <el-input v-model="data.username" clearable placeholder="请输入IC工号" />
                 </el-form-item>
                 <el-form-item label="" prop="password">
                     <el-input v-model="data.password" type="password" show-password clearable @keyup.enter="logins"
@@ -16,7 +16,7 @@
             <el-button type="primary" :loading="loding" class="button" @click="logins">登录</el-button>
             <br />
             <br />
-            <span @click="chack(1)" v-if="!lstatus">去注册</span>
+            <!-- <span @click="chack(1)" v-if="!lstatus">去注册</span> -->
         </el-card>
         <el-card v-if="lstatus" class="box-card box_l">
             <h1>宁波宝兴5号磨辊间智能化调度系统</h1><br>
@@ -33,13 +33,13 @@
                 <br />
                 <br />
                 <el-form-item label="" prop="userName">
-                    <el-input v-model="data.userName" clearable placeholder="请输入姓名" />
+                    <el-input v-model="data.username" clearable placeholder="请输入姓名" />
                 </el-form-item>
                 <el-form-item label="" prop="phoneNumber">
-                    <el-input v-model="data.phoneNumber" clearable placeholder="请输入手机号" />
+                    <el-input v-model="data.username" clearable placeholder="请输入手机号" />
                 </el-form-item>
-                <el-form-item label="" prop="loginName">
-                    <el-input v-model="data.loginName" clearable placeholder="请输入IC工号" />
+                <el-form-item label="" prop="username">
+                    <el-input v-model="data.username" clearable placeholder="请输入IC工号" />
                 </el-form-item>
                 <el-form-item label="" prop="password">
                     <el-input v-model="data.password" type="password" show-password clearable @keyup.enter="logins"
@@ -60,9 +60,10 @@
 import { ref, onMounted, reactive, toRefs } from 'vue'//引入vue中各种方法
 import { LoginUser, Alex } from '@/types'//引入参数规范类型
 import { login } from '@/api';//引入api方法
+import axios from 'axios'
 import { useRouter } from "vue-router";//引入路由
 import { piniaData } from '@/store';//引入pinia状态管理
-import { ElLoading } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 import { validateUser, validatePassWord } from '@/utils/regexp';//引入验规则证
 //pinia状态管理
 const store = piniaData();
@@ -94,7 +95,7 @@ const alex = reactive(new Alex);
 const ruleFormRef = ref();
 //登陆表单验证
 const rules = reactive({
-    loginName: [{ validator: validateUser, trigger: 'blur' }],
+    username: [{ validator: validateUser, trigger: 'blur' }],
     password: [{ validator: validatePassWord, trigger: 'blur' }],
 });
 const chack = (i: any) => {
@@ -123,26 +124,34 @@ const logins = () => {
             loadingInstance = ElLoading.service({
                 background: 'rgba(0, 0, 0, 0.7)'
             }),
+            // 调用登陆方法传入eilnfo对象
+            // axios.get(`http://192.168.0.128:8065/api/web/UserLogin?username=${data.username}&password=${data.password}`).then((res: any) => {
+            axios.get(`http://192.2.25.61/api/web/UserLogin?username=${data.username}&password=${data.password}`).then((res: any) => {
+                const loadingInstance = ElLoading.service()
+                var reg1 = new RegExp("/");
+                var a1 = res.data.replace(reg1, "");
+                let data = JSON.parse(a1)
+                console.log(data);
 
-            // // 调用登陆方法传入eilnfo对象
-            // login(alex).then((res: any) => {
-            //     const loadingInstance = ElLoading.service()
-            //     res.sys.status != -1 ? (
-            //         //把userinfo存入pinia
-            //         store.userInfo = res.userInfo,
-            setTimeout(() => {
-                loadingInstance.close()
-                //登陆成功跳转
-                router.replace({ path: "/grinder" })
-            }, 1300)
-
-            //     ) : (
-            //         //登陆失败后重置表单
-            //         ruleFormRef.value?.resetFields()
-            //     )
-            //     //关闭按钮加载动画
-            //     loding.value = false;
-            // })
+                data.Code == 200 ? (
+                    // 把userinfo存入pinia
+                    store.userInfo = data.data,
+                    ElMessage({
+                        message: data.Message,
+                        type: 'success',
+                    }),
+                    loadingInstance.close(),
+                    //登陆成功跳转
+                    router.replace({ path: "/grinder" })
+                ) : (
+                    ElMessage.error(data.Message),
+                    loadingInstance.close(),
+                    //登陆失败后重置表单
+                    ruleFormRef.value?.resetFields()
+                )
+                //关闭按钮加载动画
+                loding.value = false;
+            })
         ) : (
             //表单验证未通过
             false

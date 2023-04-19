@@ -302,3 +302,57 @@ export const updateAgvMainParameterKey = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+
+//查询立体库的分页数据信息
+export const selectFramePageSize = ((AlexData: any) => {
+    return request({
+        url: '/frame/selectFramePageSize',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//添加立体库出库的数据信息
+export const insertOutCarryInto = ((AlexData: any) => {
+    return request({
+        url: '/Grind_Carry/insertOutCarryInto',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询立体库所有的分页数据信息
+export const selectFramePageFrameAll = ((AlexData: any) => {
+    return request({
+        url: '/frame/selectFramePageFrameAll',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//查询AGV所有的分页数据信息
+export const selectAgvFramePageAll = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/selectAgvFramePageAll',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//修改辊架的数据信息
+export const updateFrameByIdStatus = ((AlexData: any) => {
+    return request({
+        url: '/frame/updateFrameData',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//释放工位和占用工位的方法
+export const updateAgvFrameList = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/updateAgvFrameList',
+        method: 'post',
+        data: AlexData
+    }) as any
+})

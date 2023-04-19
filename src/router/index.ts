@@ -58,6 +58,16 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'StereoLibrary',
                 component: () => import('../views/StereoLibrary.vue'),
             },
+            {
+                path: '/RobotDepotManagement',
+                name: 'RobotDepotManagement',
+                component: () => import('../views/RobotDepotManagement.vue'),
+            },
+             {
+                path: '/AGVDepotManagement',
+                name: 'AGVDepotManagement',
+                component: () => import('../views/AGVDepotManagement.vue'),
+            },
             // {
             //     path: '/test',
             //     name: 'test',
@@ -79,22 +89,22 @@ const router = createRouter({
 })
 
 // // 路由全局守卫：登录拦截 本地没有用户信息, 请重新登录
-// router.beforeEach((to, from, next) => {
-//     const store = piniaData()
-//     // 判断有没有登录
-//     if (!store.userInfo.id) {
-//         if (to.name == "login") {
-//             next();
-//         } else {
-//             ElNotification({
-//                 message: '请先登录！',
-//                 type: 'error',
-//             })
-//             router.push('/')
-//         }
-//     } else {
-//         next();
-//     }
-// });
+router.beforeEach((to, from, next) => {
+    const store = piniaData()
+    // 判断有没有登录
+    if (!store.userInfo) {
+        if (to.name == "login") {
+            next();
+        } else {
+            ElNotification({
+                message: '请先登录！',
+                type: 'error',
+            })
+            router.push('/')
+        }
+    } else {
+        next();
+    }
+});
 
 export default router
