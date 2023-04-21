@@ -356,3 +356,12 @@ export const updateAgvFrameList = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+
+//强行完成设备的任务信息
+export const updateAgvEquipmentAndData = ((AlexData: any) => {
+    return request({
+        url: '/AgvEquipment/updateAgvEquipmentAndData',
+        method: 'post',
+        data: AlexData
+    }) as any
+})

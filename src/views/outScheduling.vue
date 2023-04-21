@@ -1,5 +1,5 @@
 <template>
-    <dv-border-box11 title="AGV半自动任务" class="box">
+    <dv-border-box11 title="出库排程" class="box">
         <el-table :data="tableData" border class="table">
             <el-table-column prop="ename" label="设备名称"></el-table-column>
             <el-table-column prop="startName" label="起点区域"></el-table-column>
@@ -109,10 +109,10 @@
 import { Alex } from '@/types';
 import { ElMessage } from 'element-plus';
 import { onMounted, reactive, ref } from 'vue';
-import { getOutBoxListChild, getOutMainListAll, updateAGVChild } from '@/api'
+import { getOutBoxListChild, getOutMainListAll, updateAgvEquipmentAndData } from '@/api'
 const bMove = ref(true)
 const row: any = ref()
-const finishStatus = ref('3')
+const finishStatus = ref('1')
 const search = ref('step1')
 let data: any = reactive({
     grindListAll: [],
@@ -194,9 +194,9 @@ const chang5 = (row: any, status: string) => {
 const chang3 = (row: any) => {
     let alex = new Alex
     alex.parameter = {
-        rimNum: row.rimNum
+        updateOutBox: row
     }
-    updateAGVChild(alex).then((res: any) => {
+    updateAgvEquipmentAndData(alex).then((res: any) => {
         setTimeout(() => {
             getChild();
             ElMessage({
