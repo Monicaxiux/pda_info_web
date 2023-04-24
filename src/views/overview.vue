@@ -52,7 +52,33 @@
                 </div>
             </div>
         </div>
+        <div class="msgbox">
+            <span style="font-size: 23px;font-weight: bold;">提示</span>
+            <div style="display: flex;margin-top: 20px;">
+                <div class="droptarget Green">
 
+                </div>
+                <span>有轧辊</span>
+            </div>
+            <!-- <div style="display: flex;margin-top: 5px;">
+                <div class="droptarget Blue">
+
+                </div>
+                <span></span>
+            </div>
+            <div style="display: flex;margin-top: 5px;">
+                <div class="droptarget Red">
+
+                </div>
+                <span></span>
+            </div> -->
+            <div style="display: flex;margin-top: 5px;">
+                <div class="droptarget Orangered">
+
+                </div>
+                <span>有辊架</span>
+            </div>
+        </div>
         <div class="rightHome">
             <dv-decoration-11 :class="bMove ? 'rightButton' : 'rightButton_move'">
                 <div @click="b1Click"
@@ -78,6 +104,7 @@
                                     </el-radio-group>
                                 </template>
                                 <el-table-column prop="mid" label="主任务号" width="180"></el-table-column>
+                                <el-table-column prop="grinderNo" label="磨床号" width="100"></el-table-column>
                                 <el-table-column prop="boxId" label="辊框号" width="180"></el-table-column>
                                 <el-table-column prop="currentStep" label="当前步骤号"></el-table-column>
                                 <!-- <el-table-column label="操作" width="140"> -->
@@ -219,11 +246,22 @@
                         </span>
                     </template> -->
                 </el-table-column>
+                <el-table-column prop="" label="磨床号">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_carry">
+                            {{ scope.row.agv_carry.grinderNo }}
+                        </span>
+                        <span v-if="scope.row.agv_main">
+                            {{ scope.row.agv_main.grinderNo }}
+                        </span>
+                    </template>
+
+                </el-table-column>
                 <el-table-column prop="rollerName" label="轧辊号" />
                 <el-table-column prop="remarks" label="备注" />
                 <el-table-column prop="slotName" label="卡槽位置" />
                 <el-table-column prop="rollType" label="轧辊类型" />
-                <el-table-column prop="accident" label="轧辊事故类型" />
+                <!-- <el-table-column prop="accident" label="轧辊事故类型" /> -->
                 <!-- <el-table-column prop="rollStatus" label="轧辊是否拆装" />
                 <el-table-column prop="rootHead" label="轧辊方向" />
                 <el-table-column prop="outRoller" label="出辊状态" />
@@ -238,11 +276,22 @@
                         {{ scope.row.agv_main.boxId }}
                     </template>
                 </el-table-column>
+                <el-table-column prop="" label="磨床号">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_carry">
+                            {{ scope.row.agv_carry.grinderNo }}
+                        </span>
+                        <span v-if="scope.row.agv_main">
+                            {{ scope.row.agv_main.grinderNo }}
+                        </span>
+                    </template>
+
+                </el-table-column>
                 <el-table-column prop="rollerName" label="轧辊号" />
                 <el-table-column prop="remarks" label="备注" />
                 <el-table-column prop="slotName" label="卡槽位置" />
                 <el-table-column prop="rollType" label="轧辊类型" />
-                <el-table-column prop="accident" label="轧辊事故类型" />
+                <!-- <el-table-column prop="accident" label="轧辊事故类型" /> -->
                 <!-- <el-table-column prop="rollStatus" label="轧辊是否拆装" />
                 <el-table-column prop="rootHead" label="轧辊方向" />
                 <el-table-column prop="outRoller" label="出辊状态" />
@@ -254,7 +303,7 @@
                     <el-button @click="dialogVisible3 = false">取消</el-button>
                     <el-button v-if="stitlestatus" type="primary" @click="create(1)">拆装</el-button>
                     <!-- <el-button v-if="stitle == 'C02'" type="primary" @click="create(2)">出库</el-button> -->
-                    <el-button type="primary" @click="createTask">确定</el-button>
+                    <el-button type="primary" :loading="loding" @click="createTask">确定</el-button>
                 </span>
             </template>
         </el-dialog>
@@ -273,6 +322,8 @@ const List1: any = ref([]);
 const List2: any = ref([]);
 const List3: any = ref([]);
 const List4: any = ref([]);
+//按钮加载效果
+const loding = ref(false);
 const List5: any = ref([]);
 const List6: any = ref([]);
 const dialogVisible = ref(false);
@@ -388,84 +439,107 @@ const createTask = () => {
     switch (radio.value) {
         case '工作辊缓存区':
             console.log('是半自动');
-            if (etitle.value || stitle.value == 'C09') {
-                let alex = new Alex();
-                alex.parameter = {
-                    flag: stitle.value
-                }
-                selectAgvFramePositionInfo(alex).then((res: any) => {
-                    console.log(res.result.agv_frame);
-                    alex.parameter = {
-                        rollerType: rollerType.value,
-                        insertRollerList: agvrollerList.value,
-                        agv_Carry: {
-                            boxId: agvrollerList.value[0].boxId,
-                            start: stitle.value,
-                            startName: res.result.agv_frame.fname,
-                            end: stitle.value == 'C09' ? '拆装区' : etitle.value,
-                            fname: fname.value,
-                            ename: "背驼",
-                            priority: 10,
-                            confirm: true,
-                            out_Status: value.value == '是' ? 1 : 0
-                        },
+            if (agvrollerList.value != undefined) {
+                if (etitle.value || stitle.value == 'C09') {
+                    loding.value = true;
 
+                    let alex = new Alex();
+                    alex.parameter = {
+                        flag: stitle.value
                     }
-                    selectAgv_CarryInfo(alex).then((res: any) => {
-                        ElMessage({
-                            message: res.message.msg,
-                            type: 'success',
+                    selectAgvFramePositionInfo(alex).then((res: any) => {
+                        console.log(res.result.agv_frame);
+                        alex.parameter = {
+                            rollerType: rollerType.value,
+                            insertRollerList: agvrollerList.value,
+                            agv_Carry: {
+                                boxId: agvrollerList.value[0].boxId,
+                                start: stitle.value,
+                                startName: res.result.agv_frame.fname,
+                                end: stitle.value == 'C09' ? '拆装区' : etitle.value,
+                                fname: fname.value,
+                                ename: "背驼",
+                                priority: 10,
+                                confirm: true,
+                                out_Status: value.value == '是' ? 1 : 0
+                            },
+
+                        }
+                        selectAgv_CarryInfo(alex).then((res: any) => {
+                            ElMessage({
+                                message: res.message.msg,
+                                type: 'success',
+                            })
+                            loding.value = false;
+                            dialogVisible3.value = false;
                         })
-                        dialogVisible3.value = false;
                     })
-                })
+                } else {
+                    ElMessage({
+                        message: '请选择终点位置！',
+                        type: 'warning',
+                    })
+                }
             } else {
                 ElMessage({
-                    message: '请选择终点位置！',
+                    message: '没有轧辊数据！',
                     type: 'warning',
                 })
             }
             break;
         case '交接工位':
-            console.log('是全自动');
-            for (let i = 0; i < agvrollerList.value.length; i++) {
-                delete agvrollerList.value[i].agv_main
-            }
-            if (etitle.value) {
-                let alex = new Alex();
-                alex.parameter = {
-                    flag: stitle.value
+            console.log(agvrollerList.value);
+            if (agvrollerList.value != undefined) {
+
+                for (let i = 0; i < agvrollerList.value.length; i++) {
+                    delete agvrollerList.value[i].agv_main
                 }
-                selectAgvFramePositionInfo(alex).then((res: any) => {
-                    console.log(res.result.agv_frame);
+                if (etitle.value) {
+                    loding.value = true;
+                    let alex = new Alex();
                     alex.parameter = {
-                        ename: "背驼",
-                        start: stitle.value,
-                        startName: res.result.agv_frame.fname,
-                        rid: agvrollerList.value[0].rimNum,
-                        outMain: {
-                            priority: 10,
-                            boxType: rollerType.value,
-                            boxId: agvrollerList.value[0].boxId,
-                            formulate_End: etitle.value,
-                            formulate_EndName: fname.value
-                        },
-                        insertAgvRollerList: agvrollerList.value
+                        flag: stitle.value
                     }
-                    insertOutMainList(alex).then((res: any) => {
-                        ElMessage({
-                            message: res.message.msg,
-                            type: 'success',
+                    selectAgvFramePositionInfo(alex).then((res: any) => {
+                        console.log(res.result.agv_frame);
+                        alex.parameter = {
+                            ename: "背驼",
+                            start: stitle.value,
+                            startName: res.result.agv_frame.fname,
+                            rid: agvrollerList.value[0].rimNum,
+                            outMain: {
+                                priority: 10,
+                                boxType: rollerType.value,
+                                boxId: agvrollerList.value[0].boxId,
+                                formulate_End: etitle.value,
+                                formulate_EndName: fname.value
+                            },
+                            insertAgvRollerList: agvrollerList.value
+                        }
+                        insertOutMainList(alex).then((res: any) => {
+                            ElMessage({
+                                message: res.message.msg,
+                                type: 'success',
+                            })
+                            loding.value = false;
+
+                            dialogVisible3.value = false;
                         })
-                        dialogVisible3.value = false;
                     })
-                })
+                } else {
+                    ElMessage({
+                        message: '请选择终点位置！',
+                        type: 'warning',
+                    })
+                }
             } else {
                 ElMessage({
-                    message: '请选择终点位置！',
+                    message: '没有轧辊数据！',
                     type: 'warning',
                 })
             }
+
+
             break;
     }
 
@@ -786,6 +860,21 @@ onUnmounted(() => {
 })
 </script>
 <style lang="less" scoped>
+.msgbox {
+    width: 300px;
+    height: 200px;
+    position: fixed;
+    bottom: 200px;
+    padding: 15px;
+    text-align: center;
+    background-color: #dcdcdc;
+
+    span {
+        color: black;
+        margin: 0 5px;
+    }
+}
+
 .Green {
     background-color: Green;
 }

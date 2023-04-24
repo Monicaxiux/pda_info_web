@@ -66,6 +66,17 @@
                     </span>
                 </template>
             </el-table-column>
+            <el-table-column prop="" label="磨床号">
+                <template #default="scope">
+                    <span v-if="scope.row.agv_carry">
+                        {{ scope.row.agv_carry.grinderNo }}
+                    </span>
+                    <span v-if="scope.row.agv_main">
+                        {{ scope.row.agv_main.grinderNo }}
+                    </span>
+                </template>
+
+            </el-table-column>
             <el-table-column prop="rollerName" label="轧辊号" />
             <!-- <el-table-column prop="remarks" label="备注" /> -->
             <el-table-column prop="slotName" label="卡槽位置" />

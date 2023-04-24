@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
 import { devUrl, proUrl } from './url'
 const request = axios.create({
-  baseURL: devUrl,//devUrl 本地请求路径，proUrl 在线请求路径
+  baseURL: proUrl,//devUrl 本地请求路径，proUrl 在线请求路径
   // timeout: 15000,//请求超时时常
 })
 //请求拦截器

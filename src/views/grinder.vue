@@ -738,7 +738,10 @@
                 ref="multipleTableRef" @selection-change="handleSelectionChange" :data="UData" row-key="id" border>
                 <el-table-column label="槽号">
                     <template #default="scope">
-                        <span style="color:#dd4d85">{{ scope.row.slotPosition }}</span>
+                        <span
+                            v-if="scope.row.slotPosition == 'DC07' || scope.row.slotPosition == 'DC08' || scope.row.slotPosition == 'DC09' || scope.row.slotPosition == 'DC10'"
+                            style="color:green">{{ scope.row.slotPosition }}</span>
+                        <span v-else style="color:#dd4d85">{{ scope.row.slotPosition }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="磨床号">
@@ -776,7 +779,7 @@
                     <el-table-column prop="" label="当前辊种">
                         <template #default="scope">
                             <el-select v-model="scope.row.rollType" class="m-2" placeholder="选择辊种" size="small">
-                                <el-option v-for="item in rollTypeList2" :key="item.value" :label="item.label"
+                                <el-option v-for="  item   in   rollTypeList2  " :key="item.value" :label="item.label"
                                     :value="item.value" />
                             </el-select>
                         </template>
@@ -784,7 +787,7 @@
                     <el-table-column prop="" label="轧机号 ">
                         <template #default="scope">
                             <el-select v-model="scope.row.turnstNum" class="m-2" placeholder="选择闸机号" size="small">
-                                <el-option v-for="item in turnstNumList" :key="item.value" :label="item.label"
+                                <el-option v-for="  item   in   turnstNumList  " :key="item.value" :label="item.label"
                                     :value="item.value" />
                             </el-select>
                         </template>
@@ -795,7 +798,7 @@
                         <template #default="scope">
                             <el-select @change="endChange(scope.$index)" v-model="scope.row.endName" class="m-2"
                                 placeholder="选择终点区域" size="small">
-                                <el-option v-for="item in endNameList" :key="item.value" :label="item.label"
+                                <el-option v-for="  item   in   endNameList  " :key="item.value" :label="item.label"
                                     :value="item.value" />
                             </el-select>
                         </template>
@@ -803,7 +806,7 @@
                     <el-table-column prop="" label="终点位置">
                         <template #default="scope">
                             <el-select v-model="scope.row.end" class="m-2" placeholder="选择终点位置" size="small">
-                                <el-option v-for="item in scope.row.endList" :key="item.slotPosition"
+                                <el-option v-for="  item   in   scope.row.endList  " :key="item.slotPosition"
                                     :label="item.slotPosition" :value="item.slotPosition" />
                             </el-select>
                         </template>

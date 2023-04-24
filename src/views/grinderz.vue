@@ -739,7 +739,10 @@
                 ref="multipleTableRef" @selection-change="handleSelectionChange" :data="UData" row-key="id" border>
                 <el-table-column label="槽号">
                     <template #default="scope">
-                        <span style="color:blue">{{ scope.row.slotPosition }}</span>
+                        <span
+                            v-if="scope.row.slotPosition == 'DC07' || scope.row.slotPosition == 'DC08' || scope.row.slotPosition == 'DC09' || scope.row.slotPosition == 'DC10'"
+                            style="color:green">{{ scope.row.slotPosition }}</span>
+                        <span v-else style="color:#dd4d85">{{ scope.row.slotPosition }}</span>
                     </template>
                 </el-table-column>
                 <el-table-column label="磨床号">
