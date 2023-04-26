@@ -1055,7 +1055,7 @@ const insertP = (i: any) => {
                             } else if (radio2.value == 'C10') {
                                 multipleSelection.value[i].work = 'C10'
                             }
-                            multipleSelection.value[i].region = 'A区'
+                            multipleSelection.value[i].region = 'C区'
                         }
                         let alex = new Alex
                         alex.parameter = {
@@ -1108,7 +1108,7 @@ const insertP = (i: any) => {
                                     startName: res.result.getFrameOne.difference,
                                     end: multipleSelection.value[i].end,
                                     endName: multipleSelection.value[i].endName,
-                                    region: 'A区'
+                                    region: 'C区'
                                 })
                             })
                         }
@@ -1619,7 +1619,6 @@ const save = () => {
             getChild();
             init();
         }, 1000)
-
     })
     dialogVisible.value = false
 }

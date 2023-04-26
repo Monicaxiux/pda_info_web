@@ -1,7 +1,6 @@
 <template>
     <div id="box">
         <div class="home">
-
             <dv-border-box-13 title="13#磨床" class="box11">
                 <span id="ftext">13#磨床</span>
                 <div class="tableData">

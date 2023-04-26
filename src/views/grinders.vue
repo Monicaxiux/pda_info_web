@@ -1053,7 +1053,7 @@ const insertP = (i: any) => {
                             } else {
                                 multipleSelection.value[i].work = 'C07'
                             }
-                            multipleSelection.value[i].region = 'A区'
+                            multipleSelection.value[i].region = 'B区'
                         }
                         let alex = new Alex
                         alex.parameter = {
@@ -1106,7 +1106,7 @@ const insertP = (i: any) => {
                                     startName: res.result.getFrameOne.difference,
                                     end: multipleSelection.value[i].end,
                                     endName: multipleSelection.value[i].endName,
-                                    region: 'A区'
+                                    region: 'B区'
                                 })
                             })
                         }
