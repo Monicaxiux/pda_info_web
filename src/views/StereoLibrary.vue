@@ -14,18 +14,33 @@
                 <el-table-column prop="slotPosition" label="库位号"></el-table-column>
                 <el-table-column label="直径">
                     <template #default="scope">
-                        <span v-if="scope.agv_roller">
-                            {{ scope.agv_roller.last_Diameter }}
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.last_Diameter }}
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="维度">
+                <!-- <el-table-column label="维度">
                     <template #default="scope">
-                        <span v-if="scope.agv_roller">
-                            {{ scope.agv_roller.roller_Dimension }}
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.roller_Dimension }}
+                        </span>
+                    </template>
+                </el-table-column> -->
+                <el-table-column label="当前直径">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.current_Diameter }}
                         </span>
                     </template>
                 </el-table-column>
+                <el-table-column label="锥头">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.center_Impact }}
+                        </span>
+                    </template>
+                </el-table-column>
+
             </el-table>
         </dv-border-box11>
         <dv-border-box11 title="立体库数据" class="box">
@@ -43,13 +58,28 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="维度">
+                <!-- <el-table-column label="维度">
                     <template #default="scope">
                         <span v-if="scope.agv_roller">
                             {{ scope.agv_roller.roller_Dimension }}
                         </span>
                     </template>
+                </el-table-column> -->
+                <el-table-column label="当前直径">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.current_Diameter }}
+                        </span>
+                    </template>
                 </el-table-column>
+                <el-table-column label="锥头">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.center_Impact }}
+                        </span>
+                    </template>
+                </el-table-column>
+
             </el-table>
         </dv-border-box11>
         <dv-border-box11 title="立体库数据" class="box">
@@ -67,13 +97,28 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="维度">
+                <!-- <el-table-column label="维度">
                     <template #default="scope">
                         <span v-if="scope.agv_roller">
                             {{ scope.agv_roller.roller_Dimension }}
                         </span>
                     </template>
+                </el-table-column> -->
+                <el-table-column label="当前直径">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.current_Diameter }}
+                        </span>
+                    </template>
                 </el-table-column>
+                <el-table-column label="锥头">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.center_Impact }}
+                        </span>
+                    </template>
+                </el-table-column>
+
             </el-table>
         </dv-border-box11>
         <dv-border-box11 title="立体库数据" class="box">
@@ -91,13 +136,28 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="维度">
+                <!-- <el-table-column label="维度">
                     <template #default="scope">
                         <span v-if="scope.agv_roller">
                             {{ scope.agv_roller.roller_Dimension }}
                         </span>
                     </template>
+                </el-table-column> -->
+                <el-table-column label="当前直径">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.current_Diameter }}
+                        </span>
+                    </template>
                 </el-table-column>
+                <el-table-column label="锥头">
+                    <template #default="scope">
+                        <span v-if="scope.row.agv_roller">
+                            {{ scope.row.agv_roller.center_Impact }}
+                        </span>
+                    </template>
+                </el-table-column>
+
             </el-table>
         </dv-border-box11>
     </div>
@@ -120,18 +180,33 @@
             <el-table-column prop="slotPosition" label="库位号"></el-table-column>
             <el-table-column label="直径">
                 <template #default="scope">
-                    <span v-if="scope.agv_roller">
-                        {{ scope.agv_roller.last_Diameter }}
+                    <span v-if="scope.row.agv_roller">
+                        {{ scope.row.agv_roller.last_Diameter }}
                     </span>
                 </template>
             </el-table-column>
-            <el-table-column label="维度">
+            <!-- <el-table-column label="维度">
                 <template #default="scope">
-                    <span v-if="scope.agv_roller">
-                        {{ scope.agv_roller.roller_Dimension }}
+                    <span v-if="scope.row.agv_roller">
+                        {{ scope.row.agv_roller.roller_Dimension }}
+                    </span>
+                </template>
+            </el-table-column> -->
+            <el-table-column label="当前直径">
+                <template #default="scope">
+                    <span v-if="scope.row.agv_roller">
+                        {{ scope.row.agv_roller.current_Diameter }}
                     </span>
                 </template>
             </el-table-column>
+            <el-table-column label="锥头">
+                <template #default="scope">
+                    <span v-if="scope.row.agv_roller">
+                        {{ scope.row.agv_roller.center_Impact }}
+                    </span>
+                </template>
+            </el-table-column>
+
         </el-table>
         <br />
         <el-pagination :page-size="50" @current-change="handlePageChange" background layout="prev, pager, next"
