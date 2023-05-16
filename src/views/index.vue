@@ -61,6 +61,14 @@
                         <i class="iconfont icon-caidan"></i>&nbsp;
                         <span>机器人库位管理</span>
                     </el-menu-item>
+                    <el-menu-item @click="store.active = '/IntermediateRoller'" index="/IntermediateRoller">
+                        <i class="iconfont icon-caidan"></i>&nbsp;
+                        <span>中间辊备辊</span>
+                    </el-menu-item>
+                    <el-menu-item @click="store.active = '/DeviceInformation'" index="/DeviceInformation">
+                        <i class="iconfont icon-caidan"></i>&nbsp;
+                        <span>设备信息</span>
+                    </el-menu-item>
                 </el-menu>
             </el-aside>
             <el-container>

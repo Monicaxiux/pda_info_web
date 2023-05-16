@@ -45,33 +45,33 @@
             </div>
             <div class="box" id="FRegion">
                 <div v-for="item in List1" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
-                    class="droptarget" :id="item.position" @click="chang([item.position])" :ondrop="drop"
-                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
-                    draggable="true">
+                    class="droptarget" :id="item.position" @click="chang([item.position == 'C11' ? item : item.position])"
+                    :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop"
+                    :ondragstart="dragStart" draggable="true">
                     {{ item.position }}
                 </div>
             </div>
         </div>
         <div class="msgbox">
-            <span style="font-size: 23px;font-weight: bold;">提示</span>
+            <!-- <span style="font-size: 23px;font-weight: bold;">提示</span> -->
             <div style="display: flex;margin-top: 20px;">
                 <div class="droptarget Green">
 
                 </div>
                 <span>有轧辊</span>
             </div>
-            <!-- <div style="display: flex;margin-top: 5px;">
+            <div style="display: flex;margin-top: 5px;">
                 <div class="droptarget Blue">
 
                 </div>
-                <span></span>
+                <span>工作辊工位空闲</span>
             </div>
             <div style="display: flex;margin-top: 5px;">
                 <div class="droptarget Red">
 
                 </div>
-                <span></span>
-            </div> -->
+                <span>一中间辊工位空闲</span>
+            </div>
             <div style="display: flex;margin-top: 5px;">
                 <div class="droptarget Orangered">
 
@@ -216,7 +216,7 @@
             <!-- <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button> -->
             <el-card class="box-card" shadow="hover">
                 起始位置：{{ stitle }}<br /><br />
-                <div v-if="stitle != 'C09'">
+                <div v-if="stitle != 'C11'">
                     终点位置： <el-select v-model="etitle" @change="echange" class="m-2" placeholder="请选择终点位置">
                         <el-option v-for="item in endList" :key="item.position" :label="item.position"
                             :value="item.position" />
@@ -228,13 +228,18 @@
                 </el-select><br /><br />
                 <!-- {{ etitle }} -->
                 <!-- 辊框号：{{ agvrollerList[0].boxId }}<br /><br /> -->
-                任务类型： <el-radio-group @change="selectEnd" v-model="radio" class="ml-4">
-                    <el-radio style="color: black" label="工作辊缓存区">半自动</el-radio>
-                    <el-radio style="color: black" label="交接工位">全自动</el-radio><br /><br />
-                </el-radio-group>
+                <div v-if="stitle != 'C11'">
+                    任务类型： <el-radio-group @change="selectEnd" v-model="radio" class="ml-4">
+                        <el-radio style="color: black" label="工作辊缓存区">半自动</el-radio>
+                        <el-radio style="color: black" label="交接工位">全自动</el-radio><br /><br />
+                    </el-radio-group>
+                </div>
                 <br />
-                出库：
-                <el-switch v-model="value" active-text="是" inactive-text="否" />
+                <div v-if="stitle != 'C11'">
+                    出库：
+                    <el-switch v-model="value" active-text="是" inactive-text="否" />
+                </div>
+
             </el-card>
             <br /><br />
             <el-table :data="agvrollerList" @selection-change="handleSelectionChange">
@@ -255,7 +260,6 @@
                             {{ scope.row.agv_main.grinderNo }}
                         </span>
                     </template>
-
                 </el-table-column>
                 <el-table-column prop="rollerName" label="轧辊号" />
                 <el-table-column prop="remarks" label="备注" />
@@ -312,9 +316,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList, updateAgvRollerParameterKey, updateAgvMainParameterKey, selectFrameByType, getAgvFrame } from '@/api';
+import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, insertCenter_rollerInfo, insertAgvFrameC11Work, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList, updateAgvRollerParameterKey, updateAgvMainParameterKey, selectFrameByType, getAgvFrame } from '@/api';
 import { Alex } from '@/types';
-import { ElMessage } from 'element-plus';
+import { ElMessage, uploadListEmits } from 'element-plus';
 import { title } from 'process';
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
 const key = ref(0);
@@ -339,6 +343,7 @@ const rollerType = ref('工作辊 ');
 const multipleSelection = ref();
 const handleSelectionChange = (val: any) => {
     multipleSelection.value = val
+
     console.log(val);
 }
 const rollerTypeList = ref([
@@ -440,40 +445,81 @@ const createTask = () => {
         case '工作辊缓存区':
             console.log('是半自动');
             if (agvrollerList.value != undefined) {
-                if (etitle.value || stitle.value == 'C09') {
-                    loding.value = true;
-
-                    let alex = new Alex();
-                    alex.parameter = {
-                        flag: stitle.value
-                    }
-                    selectAgvFramePositionInfo(alex).then((res: any) => {
-                        console.log(res.result.agv_frame);
+                if (etitle.value || stitle.value == 'C11') {
+                    if (stitle.value == 'C11') {
+                        loding.value = true;
+                        let alex = new Alex();
                         alex.parameter = {
-                            rollerType: rollerType.value,
-                            insertRollerList: agvrollerList.value,
-                            agv_Carry: {
-                                boxId: agvrollerList.value[0].boxId,
-                                start: stitle.value,
-                                startName: res.result.agv_frame.fname,
-                                end: stitle.value == 'C09' ? '拆装区' : etitle.value,
-                                fname: fname.value,
-                                ename: "背驼",
-                                priority: 10,
-                                confirm: true,
-                                out_Status: value.value == '是' ? 1 : 0
-                            },
-
+                            flag: stitle.value
                         }
-                        selectAgv_CarryInfo(alex).then((res: any) => {
-                            ElMessage({
-                                message: res.message.msg,
-                                type: 'success',
+                        selectAgvFramePositionInfo(alex).then((res: any) => {
+                            console.log(res.result.agv_frame);
+                            alex.parameter = {
+                                rollerType: rollerType.value,
+                                agv_frame: lisxa.value,
+                            }
+                            console.log(alex.parameter);
+
+                            insertAgvFrameC11Work(alex).then((res: any) => {
+                                ElMessage({
+                                    message: res.message.msg,
+                                    type: 'success',
+                                })
+                                loding.value = false;
+                                dialogVisible3.value = false;
                             })
-                            loding.value = false;
-                            dialogVisible3.value = false;
                         })
-                    })
+                    } else {
+                        loding.value = true;
+                        let alex = new Alex();
+                        alex.parameter = {
+                            flag: stitle.value
+                        }
+                        selectAgvFramePositionInfo(alex).then((res: any) => {
+                            console.log(res.result.agv_frame);
+                            alex.parameter = {
+                                rollerType: rollerType.value,
+                                insertRollerList: agvrollerList.value,
+                                agv_Carry: {
+                                    boxId: agvrollerList.value[0].boxId,
+                                    start: stitle.value,
+                                    startName: res.result.agv_frame.fname,
+                                    end: etitle.value,
+                                    fname: fname.value,
+                                    ename: "背驼",
+                                    priority: 10,
+                                    confirm: true,
+                                    out_Status: value.value == '是' ? 1 : 0
+                                },
+
+                            }
+                            selectAgv_CarryInfo(alex).then((res: any) => {
+                                ElMessage({
+                                    message: res.message.msg,
+                                    type: 'success',
+                                })
+
+                                if (stitle.value == 'C09' && agvrollerList.value[0].rimNum) {
+                                    alex.parameter = {
+                                        caseId: agvrollerList.value[0].rimNum
+                                    }
+                                    insertCenter_rollerInfo(alex).then((res: any) => {
+                                        ElMessage({
+                                            message: res.message.msg,
+                                            type: 'success',
+                                        })
+                                        loding.value = false;
+                                        dialogVisible3.value = false;
+                                    })
+                                } else {
+                                    loding.value = false;
+                                    dialogVisible3.value = false;
+                                }
+                            })
+
+                        })
+                    }
+
                 } else {
                     ElMessage({
                         message: '请选择终点位置！',
@@ -490,7 +536,6 @@ const createTask = () => {
         case '交接工位':
             console.log(agvrollerList.value);
             if (agvrollerList.value != undefined) {
-
                 for (let i = 0; i < agvrollerList.value.length; i++) {
                     delete agvrollerList.value[i].agv_main
                 }
@@ -548,54 +593,87 @@ const createTask = () => {
 }
 const selectEnd = () => {
     etitle.value = null;
+    endList.value = [];
     let alex = new Alex();
-    alex.parameter = {
-        flag: radio.value
+    console.log(stitle.value);
+
+    if (stitle.value == 'C09') {
+        alex.parameter = {
+            flag: '拆装区 '
+        }
+    } else {
+        alex.parameter = {
+            flag: radio.value
+        }
+        if (radio.value == '交接工位') {
+            etitle.value = 'B03'
+        }
     }
-    if (radio.value == '交接工位') {
-        etitle.value = 'B03'
-    }
+
+
     selectAgvFrameAppointInfo(alex).then((res: any) => {
         endList.value = res.result.agv_frameList;
     })
 }
-
+const lisxa = ref()
 const chang = (row: any) => {
-    selectEnd();
-    stitle.value = row[0];
-    if (row[0] == 'A0501') {
-        row[0] = 'A05'
-        row[1] = 'A05'
-    } else if (row[0] == 'A0601') {
-        row[0] = 'A06'
-        row[1] = 'A06'
-    }
-    if (row[0] == 'C09') {
+    console.log(row, 'ssssssss');
+    lisxa.value = row[0];
+    if (row[0].position) {
+        rollerType.value = '一中间辊'
         radio.value = '工作辊缓存区'
-    } else {
-        radio.value = '交接工位'
-    }
-    if (stitle.value == 'F15' || stitle.value == 'F16' || stitle.value == 'F17' || stitle.value == 'F18') {
-        stitlestatus.value = true;
-    } else {
-        stitlestatus.value = false;
-    }
-    dialogVisible3.value = true
-
-    console.log(row);
-    let alex = new Alex();
-
-    alex.parameter = {
-        flag: row
-    }
-    selectAgvFrameRegionMany(alex).then((res: any) => {
+        stitle.value = row[0].position;
+        selectEnd();
         dialogVisible3.value = true
-        console.log(res);
-        if (res.result) {
-            agvrollerList.value = res.result.agv_rollerList;
-            rollerList.value = res.result.rollerList;
+        let alex = new Alex();
+        alex.parameter = {
+            flag: [row[0].position]
         }
-    })
+        selectAgvFrameRegionMany(alex).then((res: any) => {
+            dialogVisible3.value = true
+            if (res.result) {
+                agvrollerList.value = res.result.agv_rollerList;
+                rollerList.value = res.result.rollerList;
+            }
+        })
+    } else {
+        stitle.value = row[0];
+        if (row[0] == 'A0501') {
+            row[0] = 'A05'
+            row[1] = 'A05'
+        } else if (row[0] == 'A0601') {
+            row[0] = 'A06'
+            row[1] = 'A06'
+        }
+        if (row[0] == 'C09') {
+            radio.value = '工作辊缓存区'
+        } else {
+            radio.value = '交接工位'
+        }
+        selectEnd();
+
+        if (stitle.value == 'F15' || stitle.value == 'F16' || stitle.value == 'F17' || stitle.value == 'F18') {
+            stitlestatus.value = true;
+        } else {
+            stitlestatus.value = false;
+        }
+        dialogVisible3.value = true
+        console.log(row);
+        let alex = new Alex();
+
+        alex.parameter = {
+            flag: row
+        }
+        selectAgvFrameRegionMany(alex).then((res: any) => {
+            dialogVisible3.value = true
+            console.log(res);
+            if (res.result) {
+                agvrollerList.value = res.result.agv_rollerList;
+                rollerList.value = res.result.rollerList;
+            }
+        })
+    }
+
 }
 
 const handleClose = (done: () => void) => {
@@ -867,10 +945,10 @@ onUnmounted(() => {
     bottom: 200px;
     padding: 15px;
     text-align: center;
-    background-color: #dcdcdc;
+    // background-color: #dcdcdc;
 
     span {
-        color: black;
+        color: white;
         margin: 0 5px;
     }
 }
@@ -884,7 +962,7 @@ onUnmounted(() => {
 }
 
 .Red {
-    background-color: red;
+    background-color: #e29dd7;
 }
 
 .Orangered {

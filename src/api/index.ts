@@ -365,3 +365,81 @@ export const updateAgvEquipmentAndData = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+
+//添加C11工位出库的数据信息
+export const insertAgvFrameC11Work = ((AlexData: any) => {
+    return request({
+        url: '/Agv_Carry/insertAgv_FrameC11Work',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//添加立体库出库上磨床的数据信息
+export const insertGrindCarryCrush = ((AlexData: any) => {
+    return request({
+        url: '/Grind_Carry/insertGrindCarryCrush',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+//删除制定计划数据
+export const deleteProduceList = ((AlexData: any) => {
+    return request({
+        url: '/Produce/deleteProduceList',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//U性辊架盘库出库的数据信息
+export const insertOutGrindCarryMake = ((AlexData: any) => {
+    return request({
+        url: '/Grind_Carry/insertOutGrindCarryMake',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//添加已经磨削好的数据信息
+export const insertCenter_rollerInfo = ((AlexData: any) => {
+    return request({
+        url: '/Center_Roller/insertCenter_rollerInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+//查询所有已经磨削好的一中间辊的数据信息
+export const selectCenterRollerList = ((AlexData: any) => {
+    return request({
+        url: '/Center_Roller/selectCenterRollerList',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//根据组号查询相对应的中间辊数据信息
+export const getAgvRollerListGrop = ((AlexData: any) => {
+    return request({
+        url: '/AgvRoller/getAgvRollerListGrop',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+
+//修改立体库中间辊的数据信息
+export const updateAgvRollerStereoscopicLibrary = ((AlexData: any) => {
+    return request({
+        url: '/AgvRoller/updateAgvRollerStereoscopicLibrary',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+//查询所有的设备信息
+export const getAgvEquipment = ((AlexData: any) => {
+    return request({
+        url: '/AgvEquipment/getAgvEquipment',
+        method: 'post',
+        data: AlexData
+    }) as any
+})

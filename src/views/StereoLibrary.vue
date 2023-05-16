@@ -11,21 +11,6 @@
                         <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="slotPosition" label="库位号"></el-table-column>
-                <el-table-column label="直径">
-                    <template #default="scope">
-                        <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.last_Diameter }}
-                        </span>
-                    </template>
-                </el-table-column>
-                <!-- <el-table-column label="维度">
-                    <template #default="scope">
-                        <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.roller_Dimension }}
-                        </span>
-                    </template>
-                </el-table-column> -->
                 <el-table-column label="当前直径">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
@@ -33,14 +18,14 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="锥头">
+                <el-table-column prop="slotPosition" label="库位号"></el-table-column>
+                <el-table-column label="状态">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.center_Impact }}
+                            {{ scope.row.agv_roller.white_Roll_Status }}
                         </span>
                     </template>
                 </el-table-column>
-
             </el-table>
         </dv-border-box11>
         <dv-border-box11 title="立体库数据" class="box">
@@ -50,21 +35,6 @@
                         <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="slotPosition" label="库位号"></el-table-column>
-                <el-table-column label="直径">
-                    <template #default="scope">
-                        <span v-if="scope.agv_roller">
-                            {{ scope.agv_roller.last_Diameter }}
-                        </span>
-                    </template>
-                </el-table-column>
-                <!-- <el-table-column label="维度">
-                    <template #default="scope">
-                        <span v-if="scope.agv_roller">
-                            {{ scope.agv_roller.roller_Dimension }}
-                        </span>
-                    </template>
-                </el-table-column> -->
                 <el-table-column label="当前直径">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
@@ -72,14 +42,14 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="锥头">
+                <el-table-column prop="slotPosition" label="库位号"></el-table-column>
+                <el-table-column label="状态">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.center_Impact }}
+                            {{ scope.row.agv_roller.white_Roll_Status }}
                         </span>
                     </template>
                 </el-table-column>
-
             </el-table>
         </dv-border-box11>
         <dv-border-box11 title="立体库数据" class="box">
@@ -89,21 +59,6 @@
                         <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="slotPosition" label="库位号"></el-table-column>
-                <el-table-column label="直径">
-                    <template #default="scope">
-                        <span v-if="scope.agv_roller">
-                            {{ scope.agv_roller.last_Diameter }}
-                        </span>
-                    </template>
-                </el-table-column>
-                <!-- <el-table-column label="维度">
-                    <template #default="scope">
-                        <span v-if="scope.agv_roller">
-                            {{ scope.agv_roller.roller_Dimension }}
-                        </span>
-                    </template>
-                </el-table-column> -->
                 <el-table-column label="当前直径">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
@@ -111,14 +66,14 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="锥头">
+                <el-table-column prop="slotPosition" label="库位号"></el-table-column>
+                <el-table-column label="状态">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.center_Impact }}
+                            {{ scope.row.agv_roller.white_Roll_Status }}
                         </span>
                     </template>
                 </el-table-column>
-
             </el-table>
         </dv-border-box11>
         <dv-border-box11 title="立体库数据" class="box">
@@ -128,21 +83,6 @@
                         <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="slotPosition" label="库位号"></el-table-column>
-                <el-table-column label="直径">
-                    <template #default="scope">
-                        <span v-if="scope.agv_roller">
-                            {{ scope.agv_roller.last_Diameter }}
-                        </span>
-                    </template>
-                </el-table-column>
-                <!-- <el-table-column label="维度">
-                    <template #default="scope">
-                        <span v-if="scope.agv_roller">
-                            {{ scope.agv_roller.roller_Dimension }}
-                        </span>
-                    </template>
-                </el-table-column> -->
                 <el-table-column label="当前直径">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
@@ -150,14 +90,14 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column label="锥头">
+                <el-table-column prop="slotPosition" label="库位号"></el-table-column>
+                <el-table-column label="状态">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.center_Impact }}
+                            {{ scope.row.agv_roller.white_Roll_Status }}
                         </span>
                     </template>
                 </el-table-column>
-
             </el-table>
         </dv-border-box11>
     </div>
@@ -170,28 +110,14 @@
         <el-button type="primary" class="button" @click="getData()">查询</el-button>
         <br />
         <br />
-        <el-table style="max-height: 450px;overflow: auto;" :data="ltable" @selection-change="handleSelectionChange" border>
+        <el-table style="max-height: 450px;overflow: auto;" :data="ltable" @row-dblclick="dbSelected"
+            @selection-change="handleSelectionChange" border>
             <el-table-column type="selection" width="55" />
             <el-table-column label="轧辊号">
                 <template #default="scope">
                     <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="slotPosition" label="库位号"></el-table-column>
-            <el-table-column label="直径">
-                <template #default="scope">
-                    <span v-if="scope.row.agv_roller">
-                        {{ scope.row.agv_roller.last_Diameter }}
-                    </span>
-                </template>
-            </el-table-column>
-            <!-- <el-table-column label="维度">
-                <template #default="scope">
-                    <span v-if="scope.row.agv_roller">
-                        {{ scope.row.agv_roller.roller_Dimension }}
-                    </span>
-                </template>
-            </el-table-column> -->
             <el-table-column label="当前直径">
                 <template #default="scope">
                     <span v-if="scope.row.agv_roller">
@@ -199,14 +125,28 @@
                     </span>
                 </template>
             </el-table-column>
-            <el-table-column label="锥头">
+            <el-table-column label="锥度">
                 <template #default="scope">
                     <span v-if="scope.row.agv_roller">
-                        {{ scope.row.agv_roller.center_Impact }}
+                        {{ scope.row.agv_roller.roller_Dimension }}
                     </span>
                 </template>
             </el-table-column>
-
+            <el-table-column label="锥头">
+                <template #default="scope">
+                    <span v-if="scope.row.agv_roller">
+                        {{ scope.row.agv_roller.center_Conule }}
+                    </span>
+                </template>
+            </el-table-column>
+            <el-table-column prop="slotPosition" label="库位号"></el-table-column>
+            <el-table-column label="组号">
+                <template #default="scope">
+                    <span v-if="scope.row.agv_roller">
+                        {{ scope.row.agv_roller.group }}
+                    </span>
+                </template>
+            </el-table-column>
         </el-table>
         <br />
         <el-pagination :page-size="50" @current-change="handlePageChange" background layout="prev, pager, next"
@@ -215,14 +155,61 @@
             <span class="dialog-footer">
                 <div class="btfont">配辊出库时C11工位必须要有辊架和空辊框</div>
                 <el-button @click="dialogVisible = false">取消</el-button>
-                <el-button type="primary" @click="save">确定</el-button>
+                <el-button type="primary" @click="save(2)">磨削</el-button>
+                <el-button type="primary" @click="save(1)">确定</el-button>
+            </span>
+        </template>
+    </el-dialog>
+    <el-dialog v-model="dialogVisible2" title="详情" width="50%">
+        <el-table style="max-height: 450px;overflow: auto;" :data="tableData5" @selection-change="handleSelectionChange"
+            border>
+            <el-table-column type="selection" width="55" />
+            <el-table-column prop="rollerName" label="轧辊号">
+            </el-table-column>
+            <el-table-column prop="current_Diameter" label="当前直径">
+                <template #default="scope">
+                    <el-input v-model="scope.row.current_Diameter" placeholder="请输入直径" />
+                </template>
+            </el-table-column>
+            <el-table-column prop="roller_Dimension" label="锥度">
+                <template #default="scope">
+                    <el-select v-model="scope.row.roller_Dimension" class="m-2" placeholder="请选择">
+                        <el-option v-for="item in roller_DimensionList" :key="item.value" :label="item.value"
+                            :value="item.value" />
+                    </el-select>
+                </template>
+            </el-table-column>
+            <el-table-column prop="center_Conule" label="锥头">
+                <template #default="scope">
+                    <el-select v-model="scope.row.center_Conule" class="m-2" placeholder="请选择">
+                        <el-option v-for="item in center_ConuleList" :key="item.value" :label="item.value"
+                            :value="item.value" />
+                    </el-select>
+                </template>
+            </el-table-column>
+
+            <el-table-column label="辊头">
+                <template #default="scope">
+                    <el-select v-model="scope.row.rootHead" class="m-2" placeholder="请选择">
+                        <el-option v-for="item in rootHeadList" :key="item.value" :label="item.value" :value="item.value" />
+                    </el-select>
+                </template>
+            </el-table-column>
+            <el-table-column prop="group" label="组号">
+            </el-table-column>
+        </el-table>
+        <br />
+        <template #footer>
+            <span class="dialog-footer">
+                <el-button @click="dialogVisible2 = false, multipleSelection.value = []">取消</el-button>
+                <el-button type="primary" @click="save(3)">确定</el-button>
             </span>
         </template>
     </el-dialog>
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { selectFrameByType, selectFramePageSize, insertOutCarryInto } from '@/api'
+import { selectFrameByType, selectFramePageSize, insertGrindCarryCrush, updateAgvRollerStereoscopicLibrary, getAgvRollerListGrop, insertOutCarryInto } from '@/api'
 import { Alex } from '@/types';
 import { ElMessage } from 'element-plus';
 const tableData = ref([]);
@@ -230,34 +217,88 @@ const tableData1 = ref([]);
 const tableData2 = ref([]);
 const tableData3 = ref([]);
 const tableData4 = ref([]);
+const tableData5 = ref([]);
 const dialogVisible = ref(false)
+const dialogVisible2 = ref(false)
+const center_ConuleList = ref([
+    {
+        value: '上'
+    },
+    {
+        value: '下'
+    },
+])
+const rootHeadList = ref([
+    {
+        value: '左'
+    },
+    {
+        value: '右'
+    },
+])
+const roller_DimensionList = ref([
+    {
+        value: '22'
+    },
+    {
+        value: '23'
+    },
+    {
+        value: '0'
+    },
+    {
+        value: '20'
+    },
+    {
+        value: '32'
+    },
+    {
+        value: '18'
+    },
+])
 const ltable = ref([])
 const page = ref(1)
 const count = ref(0)
+const dbSelected = (row: any) => {
+    let alex = new Alex
+    alex.parameter = {
+        agvRoller: row.agv_roller
+    }
+    delete alex.parameter.agvRoller.agv_carry
+    delete alex.parameter.agvRoller.register
+    delete alex.parameter.agvRoller.agv_main
+    getAgvRollerListGrop(alex).then((res: any) => {
+        console.log(res.result.selectAgv_RollerList);
+        tableData5.value = res.result.selectAgv_RollerList;
+        dialogVisible2.value = true
+    })
+    console.log(row)
+}
 const options = [
     {
-        value: '22#',
+        value: '22',
     },
     {
-        value: '23#',
+        value: '23',
     },
     {
-        value: '0#',
+        value: '0',
     },
     {
-        value: '20#',
+        value: '20',
     },
     {
-        value: '32#',
+        value: '32',
     },
     {
-        value: '18#',
+        value: '18',
     }]
 const form = ref({
     name: '',
-    diameter: ''
+    diameter: null
 });
-const multipleSelection = ref([])
+
+const multipleSelection: any = ref([])
 const handleSelectionChange = (val: any) => {
     multipleSelection.value = val
 }
@@ -276,31 +317,95 @@ const handleSizeChange = (val: any) => {
     page.value = val;
     getData();
 }
-const save = () => {
-    if (multipleSelection.value.length > 4) {
-        ElMessage({
-            message: '不能超过4个！',
-            type: 'warning',
-        })
-    } else if (multipleSelection.value.length == 0) {
-        ElMessage({
-            message: '请选择！',
-            type: 'warning',
-        })
-    } else {
-        let alex = new Alex
-        alex.parameter = {
-            frameList: multipleSelection.value
-        }
-        insertOutCarryInto(alex).then((res: any) => {
-            ElMessage({
-                message: '添加成功！',
-                type: 'success',
+const save = (i: any) => {
+    switch (i) {
+        case 1:
+            if (multipleSelection.value.length > 4) {
+                ElMessage({
+                    message: '不能超过4个！',
+                    type: 'warning',
+                })
+            } else if (multipleSelection.value.length == 0) {
+                ElMessage({
+                    message: '请选择！',
+                    type: 'warning',
+                })
+            } else {
+                let alex = new Alex
+                for (let i = 0; i < multipleSelection.value.length; i++) {
+                    delete multipleSelection.value[i].detection
+                    delete multipleSelection.value[i].electronic
+                    delete multipleSelection.value[i].grind
+                    delete multipleSelection.value[i].produce
+                    delete multipleSelection.value[i].register
+                    delete multipleSelection.value[i].agv_roller
+                }
+                alex.parameter = {
+                    frameList: multipleSelection.value
+                }
+                insertOutCarryInto(alex).then((res: any) => {
+                    ElMessage({
+                        message: '添加成功！',
+                        type: 'success',
+                    })
+                    dialogVisible.value = false;
+                    selectDtat();
+                })
+            }
+            break;
+        case 2:
+            if (multipleSelection.value.length > 1) {
+                ElMessage({
+                    message: '不能超过1个！',
+                    type: 'warning',
+                })
+            } else if (multipleSelection.value.length == 0) {
+                ElMessage({
+                    message: '请选择！',
+                    type: 'warning',
+                })
+            } else {
+                let alex = new Alex
+                // for (let i = 0; i < multipleSelection.value.length; i++) {
+                //     delete multipleSelection.value[i].detection
+                //     delete multipleSelection.value[i].electronic
+                //     delete multipleSelection.value[i].grind
+                //     delete multipleSelection.value[i].produce
+                //     delete multipleSelection.value[i].register
+                //     delete multipleSelection.value[i].agv_roller
+                // }
+                alex.parameter = {
+                    frameOne: multipleSelection.value[0]
+                }
+                insertGrindCarryCrush(alex).then((res: any) => {
+                    ElMessage({
+                        message: '添加成功！',
+                        type: 'success',
+                    })
+                    dialogVisible.value = false;
+                    selectDtat();
+                })
+            }
+
+            break;
+        case 3:
+            let alex = new Alex
+            alex.parameter = {
+                agvRollerList: multipleSelection.value
+            }
+            updateAgvRollerStereoscopicLibrary(alex).then((res: any) => {
+                ElMessage({
+                    message: '修改成功！',
+                    type: 'success',
+                })
+                multipleSelection.value = []
+                dialogVisible2.value = false;
+                getData();
+                selectDtat();
             })
-            dialogVisible.value = false;
-            selectDtat();
-        })
+            break;
     }
+
 
 }
 const selectDtat = () => {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-card v-if="!lstatus" class="box-card box_l">
-            <h1>宁波宝兴5号磨辊间智能化调度系统</h1><br>
+            <h1>宁波宝新5号磨辊间智能化调度系统</h1><br>
             <!-- 登录表单 -->
             <el-form ref="ruleFormRef" :rules="rules" :model="data" status-icon class="demo-ruleForm">
                 <el-form-item label="" prop="username">
@@ -19,7 +19,7 @@
             <!-- <span @click="chack(1)" v-if="!lstatus">去注册</span> -->
         </el-card>
         <el-card v-if="lstatus" class="box-card box_l">
-            <h1>宁波宝兴5号磨辊间智能化调度系统</h1><br>
+            <h1>宁波宝新5号磨辊间智能化调度系统</h1><br>
             <!-- 注册表单 -->
             <el-form ref="ruleFormRef" :rules="rules" :model="data" status-icon class="demo-ruleForm">
                 <el-select style="width: 100%;" v-model="department" class="m-2" placeholder="请选择部门">

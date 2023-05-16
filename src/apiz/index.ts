@@ -43,7 +43,14 @@ export const updateFrameChild = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
-
+//U性辊架盘库出库的数据信息
+export const insertOutGrindCarryMake = ((AlexData: any) => {
+    return request({
+        url: '/Grind_Carry/insertOutGrindCarryMake',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
 //修改机器人状态
 export const updateElectronic = ((AlexData: any) => {
     return request({

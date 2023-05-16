@@ -68,6 +68,16 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'AGVDepotManagement',
                 component: () => import('../views/AGVDepotManagement.vue'),
             },
+              {
+                path: '/IntermediateRoller',
+                name: 'IntermediateRoller',
+                component: () => import('../views/IntermediateRoller.vue'),
+            },
+              {
+                path: '/DeviceInformation',
+                name: 'DeviceInformation',
+                component: () => import('../views/DeviceInformation.vue'),
+            },
             // {
             //     path: '/test',
             //     name: 'test',

@@ -385,7 +385,7 @@
                                     <el-table-column prop="grindId" label="主任务号" width="180"></el-table-column>
                                     <el-table-column label="轧辊号" width="180">
                                         <template #default="scope">
-                                            {{ scope.row.agv_roller.rollerName }}
+                                            <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
                                         </template>
                                     </el-table-column>
                                     <el-table-column prop="current" label="当前步骤号"></el-table-column>
@@ -394,9 +394,9 @@
                                         <template #default="scope">
                                             <el-button size="small" @click="chang5(scope.row, '优先')">优先
                                             </el-button>
-                                            <el-button size="small" @click="chang5(scope.row, '终止')">终止任务
+                                            <el-button size="small" style="background-color: red;"
+                                                @click="chang5(scope.row, '终止')">终止任务
                                             </el-button>
-
                                         </template>
                                     </el-table-column>
                                 </el-table-column>
@@ -408,7 +408,7 @@
                                 <el-table-column prop="num" label="步骤" width="60"></el-table-column>
                                 <el-table-column prop="rimNum" label="轧辊号" width="100">
                                     <template #default="scope">
-                                        {{ scope.row.agv_roller.rollerName }}
+                                        <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
                                     </template>
                                 </el-table-column>
                                 <el-table-column label="任务状态">
@@ -732,7 +732,8 @@
         </template>
     </el-dialog>
     <el-dialog draggable v-model="dialogVisible7" title="1号U型辊架状态" width="50%">
-        <div style="height: 600px;overflow-y: auto;">
+        <el-button @click="getData()">刷新</el-button><br /><br />
+        <div style="height: 550px;overflow-y: auto;">
             <el-table :row-style="tableRowClassName" :key="dialogVisible7" :cell-style="{ padding: '1px' }"
                 ref="multipleTableRef" @selection-change="handleSelectionChange" :data="UData" row-key="id" border>
                 <el-table-column label="槽号">
@@ -785,7 +786,7 @@
                     </el-table-column>
                     <el-table-column prop="" label="轧机号 ">
                         <template #default="scope">
-                            <el-select v-model="scope.row.turnstNum" class="m-2" placeholder="选择闸机号" size="small">
+                            <el-select v-model="scope.row.turnstNum" class="m-2" placeholder="选择轧机号" size="small">
                                 <el-option v-for="  item   in   turnstNumList  " :key="item.value" :label="item.label"
                                     :value="item.value" />
                             </el-select>
@@ -817,6 +818,12 @@
                     </template>
                 </el-table-column> -->
                 <el-table-column :selectable="selectable" width="100" type="selection" />
+                <el-table-column v-if="istatus != 3" prop="" label="重新制定">
+                    <template #default="scope">
+                        <el-button style="margin-left: 10px;" @click="reInds(scope.row)" size="small"
+                            type="primary">重新制定</el-button>
+                    </template>
+                </el-table-column>
             </el-table>
         </div>
 
@@ -843,7 +850,7 @@
 import Sortable from "sortablejs";
 import { onMounted, reactive, ref, onBeforeUnmount, toRefs, getCurrentInstance, onUnmounted } from "vue";
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { updateFrame, getFrameChild, insertProduce, selectProduceAll, selectFrameByType, getGrindAllAndData, getFrame, selectGrindParameterTry, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo, insertGrind_Carry, selectFrameRegionAndType } from '@/api'
+import { updateFrame, getFrameChild, insertProduce, selectProduceAll, selectFrameByType, getGrindAllAndData, getFrame, selectGrindParameterTry, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo, insertOutGrindCarryMake, selectFrameRegionAndType, deleteProduceList } from '@/api'
 import { Alex } from '@/types'//引入参数规范类型
 import axios from 'axios'//引入参数规范类型
 let data: any = reactive({
@@ -876,6 +883,27 @@ const endChange = (i: any) => {
     selectFrameByType(alex).then((res: any) => {
         UData.value[i].endList = res.result.getFrameTypeAll
         console.log(UData.value[i].endList);
+    })
+}
+const reInds = (row: any) => {
+    let alex = new Alex
+    alex.parameter = {
+        frameOne: row
+    }
+    delete alex.parameter.frameOne.agv_roller
+    delete alex.parameter.frameOne.grind
+    delete alex.parameter.frameOne.turnstNum
+    delete alex.parameter.frameOne.produce
+    delete alex.parameter.frameOne.detection
+    delete alex.parameter.frameOne.electronic
+    deleteProduceList(alex).then((res: any) => {
+        console.log(res);
+        ElMessage({
+            message: res.message.msg,
+            type: 'success',
+        })
+        getData();
+        dialogVisible7.value = false
     })
 }
 const multipleSelection: any = ref([])
@@ -1081,16 +1109,21 @@ const insertP = (i: any) => {
                             type: 'warning',
                         })
                     } else {
+                        console.log('来了');
+
                         let alex = new Alex
-                        let rollIdList = [];
-                        for (let i = 0; i < multipleSelection.value.length; i++) {
-                            if (multipleSelection.value[i].rollId) {
-                                rollIdList.push({
-                                    slotName: '01',
-                                    rollerName: multipleSelection.value[i].grind.agv_roller.rollerName
-                                })
-                            }
-                        }
+                        // let rollIdList = [];
+                        // console.log(multipleSelection.value);
+                        // for (let i = 0; i < multipleSelection.value.length; i++) {
+                        //     console.log(multipleSelection.value[i]);
+                        //     if (multipleSelection.value[i].rollId) {
+                        //         rollIdList.push({
+                        //             slotName: '01',
+                        //             rollerName: multipleSelection.value[i].agv_roller.rollerName
+                        //         })
+                        //     }
+                        // }
+
                         let grindCarryList: any = []
                         for (let i = 0; i < multipleSelection.value.length; i++) {
                             alex.parameter = {
@@ -1098,7 +1131,7 @@ const insertP = (i: any) => {
                             }
                             await selectFrameRegionAndType(alex).then((res: any) => {
                                 grindCarryList.push({
-                                    rollerName: multipleSelection.value[i].grind.agv_roller.rollerName,
+                                    rollerName: multipleSelection.value[i].grind.rollId,
                                     ename: "一号机器人",
                                     start: multipleSelection.value[i].slotPosition,
                                     startName: res.result.getFrameOne.difference,
@@ -1109,12 +1142,12 @@ const insertP = (i: any) => {
                             })
                         }
                         alex.parameter = {
-                            agvRoller: rollIdList,
+                            // agvRoller: rollIdList,
                             grindCarryList: grindCarryList
                         }
                         console.log(alex.parameter);
 
-                        insertGrind_Carry(alex).then((res: any) => {
+                        insertOutGrindCarryMake(alex).then((res: any) => {
                             ElMessage({
                                 message: res.message.msg,
                                 type: 'success',
@@ -2020,6 +2053,7 @@ onUnmounted(() => {
     top: 20px;
     left: 25px;
 }
+
 
 .fstatus {
     position: absolute;

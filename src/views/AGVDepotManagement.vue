@@ -4,10 +4,10 @@
         <el-button type="primary" size="large" class="button" @click="selectDtat();">查询</el-button>
     </div>
     <div style="width:100%;display:flex">
-        <dv-border-box11 title="立体库数据" class="box">
+        <dv-border-box11 title="" class="box">
             <el-table :data="tableData" border class="table">
                 <el-table-column prop="position" label="位置"></el-table-column>
-                <el-table-column label="位置辊架的状态">
+                <el-table-column label="辊框状态">
                     <template #default="scope">
                         <el-tag class="ml-2" v-if="scope.row.emptyStatus == 0" type="warning">未占用</el-tag>
                         <el-tag class="ml-2" v-if="scope.row.emptyStatus == 1" type="success">已占用</el-tag>
@@ -19,7 +19,7 @@
         1 ? '释放' : '占用' }}</el-button>
                     </template>
                 </el-table-column>
-                <el-table-column label="是否辊架">
+                <el-table-column label="蓝色托架状态">
                     <template #default="scope">
                         <el-tag class="ml-2" v-if="scope.row.existStatus == 0" type="warning">未占用</el-tag>
                         <el-tag class="ml-2" v-if="scope.row.existStatus == 1" type="success">已占用</el-tag>

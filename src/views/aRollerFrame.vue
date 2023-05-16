@@ -307,7 +307,7 @@ const createTask = () => {
     flex-wrap: wrap;
     background-image: url(../assets/background.png);
     color: white;
-    background-color: white;
+    /* background-color: white; */
 }
 
 .box {

@@ -81,7 +81,14 @@ export const getDcad = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
-
+//删除制定计划数据
+export const deleteProduceList = ((AlexData: any) => {
+    return request({
+        url: '/Produce/deleteProduceList',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
 //修改人工检测数据
 export const updateDcad = ((AlexData: any) => {
     return request({
@@ -90,7 +97,14 @@ export const updateDcad = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
-
+//U性辊架盘库出库的数据信息
+export const insertOutGrindCarryMake = ((AlexData: any) => {
+    return request({
+        url: '/Grind_Carry/insertOutGrindCarryMake',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
 //查询磨床的基本信息
 export const getFrameInfo = ((AlexData: any) => {
     return request({
