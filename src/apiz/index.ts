@@ -302,3 +302,11 @@ export const updateAgvMainParameterKey = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+//修改一中间辊备辊的数据信息
+export const updatePeelCenterRoller = ((AlexData: any) => {
+    return request({
+        url: '/peel/updatePeelCenterRoller',
+        method: 'post',
+        data: AlexData
+    }) as any
+})

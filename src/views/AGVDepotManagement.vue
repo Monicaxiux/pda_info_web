@@ -9,8 +9,17 @@
                 <el-table-column prop="position" label="位置"></el-table-column>
                 <el-table-column label="辊框状态">
                     <template #default="scope">
-                        <el-tag class="ml-2" v-if="scope.row.emptyStatus == 0" type="warning">未占用</el-tag>
-                        <el-tag class="ml-2" v-if="scope.row.emptyStatus == 1" type="success">已占用</el-tag>
+                        <a v-if="scope.row.position == 'B01'">
+                            <el-tag class="ml-2" v-if="scope.row.emptyStatus == 0" type="warning">未占用</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.emptyStatus == 1" type="success">已占用</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.emptyStatus == 2" type="success">已占用</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.emptyStatus == 3" type="success">已占用</el-tag>
+                        </a>
+                        <a v-else>
+                            <el-tag class="ml-2" v-if="scope.row.emptyStatus == 0" type="warning">未占用</el-tag>
+                            <el-tag class="ml-2" v-if="scope.row.emptyStatus == 1" type="success">已占用</el-tag>
+                        </a>
+
                         &nbsp;
                         &nbsp;
                         &nbsp;

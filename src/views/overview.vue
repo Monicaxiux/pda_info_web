@@ -216,7 +216,7 @@
             <!-- <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button> -->
             <el-card class="box-card" shadow="hover">
                 起始位置：{{ stitle }}<br /><br />
-                <div v-if="stitle != 'C11'">
+                <div>
                     终点位置： <el-select v-model="etitle" @change="echange" class="m-2" placeholder="请选择终点位置">
                         <el-option v-for="item in endList" :key="item.position" :label="item.position"
                             :value="item.position" />
@@ -446,79 +446,81 @@ const createTask = () => {
             console.log('是半自动');
             if (agvrollerList.value != undefined) {
                 if (etitle.value || stitle.value == 'C11') {
-                    if (stitle.value == 'C11') {
-                        loding.value = true;
-                        let alex = new Alex();
-                        alex.parameter = {
-                            flag: stitle.value
-                        }
-                        selectAgvFramePositionInfo(alex).then((res: any) => {
-                            console.log(res.result.agv_frame);
-                            alex.parameter = {
-                                rollerType: rollerType.value,
-                                agv_frame: lisxa.value,
-                            }
-                            console.log(alex.parameter);
+                    // if (stitle.value == 'C11') {
+                    //     loding.value = true;
+                    //     let alex = new Alex();
+                    //     alex.parameter = {
+                    //         flag: stitle.value
+                    //     }
+                    //     selectAgvFramePositionInfo(alex).then((res: any) => {
+                    //         console.log(res.result.agv_frame);
+                    //         alex.parameter = {
+                    //             rollerType: rollerType.value,
+                    //             agv_frame: lisxa.value,
+                    //         }
+                    //         console.log(alex.parameter);
 
-                            insertAgvFrameC11Work(alex).then((res: any) => {
-                                ElMessage({
-                                    message: res.message.msg,
-                                    type: 'success',
-                                })
+                    //         insertAgvFrameC11Work(alex).then((res: any) => {
+                    //             ElMessage({
+                    //                 message: res.message.msg,
+                    //                 type: 'success',
+                    //             })
+                    //             loding.value = false;
+                    //             dialogVisible3.value = false;
+                    //         })
+                    //     })
+                    // } else {
+                    loding.value = true;
+                    let alex = new Alex();
+                    alex.parameter = {
+                        flag: stitle.value
+                    }
+                    selectAgvFramePositionInfo(alex).then((res: any) => {
+                        console.log(res.result.agv_frame);
+                        alex.parameter = {
+                            rollerType: rollerType.value,
+                            insertRollerList: agvrollerList.value,
+                            agv_Carry: {
+                                boxId: agvrollerList.value[0].boxId,
+                                start: stitle.value,
+                                startName: res.result.agv_frame.fname,
+                                end: etitle.value,
+                                fname: fname.value,
+                                ename: "背驼",
+                                priority: 10,
+                                confirm: true,
+                                out_Status: value.value == '是' ? 1 : 0
+                            },
+
+                        }
+                        selectAgv_CarryInfo(alex).then((res: any) => {
+                            ElMessage({
+                                message: res.message.msg,
+                                type: 'success',
+                            })
+
+                            if (stitle.value == 'C09' && agvrollerList.value[0].rimNum) {
+                                // alex.parameter = {
+                                //     caseId: agvrollerList.value[0].rimNum
+                                // }
+                                // insertCenter_rollerInfo(alex).then((res: any) => {
+                                //     ElMessage({
+                                //         message: res.message.msg,
+                                //         type: 'success',
+                                //     })
+                                //     loding.value = false;
+                                //     dialogVisible3.value = false;
+                                // })
                                 loding.value = false;
                                 dialogVisible3.value = false;
-                            })
-                        })
-                    } else {
-                        loding.value = true;
-                        let alex = new Alex();
-                        alex.parameter = {
-                            flag: stitle.value
-                        }
-                        selectAgvFramePositionInfo(alex).then((res: any) => {
-                            console.log(res.result.agv_frame);
-                            alex.parameter = {
-                                rollerType: rollerType.value,
-                                insertRollerList: agvrollerList.value,
-                                agv_Carry: {
-                                    boxId: agvrollerList.value[0].boxId,
-                                    start: stitle.value,
-                                    startName: res.result.agv_frame.fname,
-                                    end: etitle.value,
-                                    fname: fname.value,
-                                    ename: "背驼",
-                                    priority: 10,
-                                    confirm: true,
-                                    out_Status: value.value == '是' ? 1 : 0
-                                },
-
+                            } else {
+                                loding.value = false;
+                                dialogVisible3.value = false;
                             }
-                            selectAgv_CarryInfo(alex).then((res: any) => {
-                                ElMessage({
-                                    message: res.message.msg,
-                                    type: 'success',
-                                })
-
-                                if (stitle.value == 'C09' && agvrollerList.value[0].rimNum) {
-                                    alex.parameter = {
-                                        caseId: agvrollerList.value[0].rimNum
-                                    }
-                                    insertCenter_rollerInfo(alex).then((res: any) => {
-                                        ElMessage({
-                                            message: res.message.msg,
-                                            type: 'success',
-                                        })
-                                        loding.value = false;
-                                        dialogVisible3.value = false;
-                                    })
-                                } else {
-                                    loding.value = false;
-                                    dialogVisible3.value = false;
-                                }
-                            })
-
                         })
-                    }
+
+                    })
+                    // }
 
                 } else {
                     ElMessage({
@@ -597,7 +599,7 @@ const selectEnd = () => {
     let alex = new Alex();
     console.log(stitle.value);
 
-    if (stitle.value == 'C09') {
+    if (stitle.value == 'C09' || stitle.value == 'C11') {
         alex.parameter = {
             flag: '拆装区 '
         }
@@ -958,7 +960,7 @@ onUnmounted(() => {
 }
 
 .Blue {
-    background-color: blue;
+    background-color: #8187fe;
 }
 
 .Red {

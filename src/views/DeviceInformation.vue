@@ -7,7 +7,7 @@
                 <el-table-column prop="start" label="起点位置"></el-table-column>
                 <el-table-column prop="endName" label="终点区域"></el-table-column>
                 <el-table-column prop="end" label="终点位置"></el-table-column>
-                <el-table-column label="设备状态">
+                <!-- <el-table-column label="设备状态">
                     <template #default="scope">
                         <div v-if="scope.row">
                             <el-tag class="ml-2" v-if="scope.row.estatus == '2'" type="warning">工作中
@@ -20,13 +20,13 @@
                             </el-tag>
                         </div>
                     </template>
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column label="任务状态">
                     <template #default="scope">
                         <div v-if="scope.row">
                             <el-tag class="ml-2" v-if="scope.row.taskStatus == '0'" type="warning">空闲
                             </el-tag>
-                            <el-tag class="ml-2" v-if="scope.row.taskStatus == '1'" type="warning">占用
+                            <el-tag class="ml-2" v-if="scope.row.taskStatus == '1'" type="warning">执行中
                             </el-tag>
                             <el-tag class="ml-2" v-if="scope.row.taskStatus == '2'" type="success">完成
                             </el-tag>
@@ -70,7 +70,6 @@
                     </template>
                 </el-table-column>
             </el-table>
-
         </dv-border-box11>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <div class="bodyBox">
+    <!-- <div class="bodyBox">
         <div class="box_x">
             <div v-for="item in List" class="conent">
                 <el-button @click="select([item.position],)">出库配辊</el-button>
@@ -27,23 +27,64 @@
                 <el-button>终点位置</el-button>
             </div>
         </div>
+    </div> -->
+    <div style="width:100%;display:flex">
+        <dv-border-box11 title="工作辊货架" class="box">
+            <el-table :data="List" border class="table">
+                <el-table-column prop="position" label="位置"></el-table-column>
+                <el-table-column label="出库配辊">
+                    <template #default="scope">
+                        <el-button @click="select([scope.row.position])">出库配辊</el-button>
+                    </template>
+                </el-table-column>
+                <el-table-column label="状态">
+                    <template #default="scope">
+                        <el-tag class="m-2" v-if="scope.row.pstatus == 0" size="large" type="warning">未占用</el-tag>
+                        <el-tag class="m-2" v-if="scope.row.pstatus == 1" size="large" type="success">已占用
+                        </el-tag>
+                    </template>
+                </el-table-column>
+                <!-- <el-table-column prop="position" label="终点位置"></el-table-column> -->
+            </el-table>
+        </dv-border-box11>
+        <dv-border-box11 title="工作辊货架" class="box">
+            <el-table :data="List2" border class="table">
+                <el-table-column prop="position" label="位置"></el-table-column>
+                <el-table-column label="出库配辊">
+                    <template #default="scope">
+                        <el-button @click="select([scope.row.position])">出库配辊</el-button>
+                    </template>
+                </el-table-column>
+                <el-table-column label="状态">
+                    <template #default="scope">
+                        <el-tag class="m-2" v-if="scope.row.pstatus == 0" size="large" type="warning">未占用</el-tag>
+                        <el-tag class="m-2" v-if="scope.row.pstatus == 1" size="large" type="success">已占用
+                        </el-tag>
+                    </template>
+                </el-table-column>
+                <!-- <el-table-column prop="position" label="终点位置"></el-table-column> -->
+            </el-table>
+        </dv-border-box11>
+        <dv-border-box11 title="中间辊货架" class="box">
+            <el-table :data="List3" border class="table">
+                <el-table-column prop="position" label="位置"></el-table-column>
+                <el-table-column label="出库配辊">
+                    <template #default="scope">
+                        <el-button @click="select([scope.row.position])">出库配辊</el-button>
+                    </template>
+                </el-table-column>
+                <el-table-column label="状态">
+                    <template #default="scope">
+                        <el-tag class="m-2" v-if="scope.row.pstatus == 0" size="large" type="warning">未占用</el-tag>
+                        <el-tag class="m-2" v-if="scope.row.pstatus == 1" size="large" type="success">已占用
+                        </el-tag>
+                    </template>
+                </el-table-column>
+                <!-- <el-table-column prop="position" label="终点位置"></el-table-column> -->
+            </el-table>
+        </dv-border-box11>
     </div>
-    <!-- <dv-border-box11 title="A区辊架" class="box">
-        <el-table :data="tableData" border class="table">
-            <el-table-column prop="location" label="辊框位置"></el-table-column>
-            <el-table-column prop="rollId1" label="1号辊槽"></el-table-column>
-            <el-table-column prop="rollId2" label="2号辊槽"></el-table-column>
-            <el-table-column prop="rollId3" label="3号辊槽"></el-table-column>
-            <el-table-column prop="rollId4" label="4号辊槽"></el-table-column>
-            <el-table-column prop="rollId5" label="5号辊槽"></el-table-column>
-            <el-table-column prop="rollId6" label="6号辊槽"></el-table-column>
-            <el-table-column prop="type" label="类型"></el-table-column>
-            <el-table-column label="操作">
-                <el-button size="small" @click="dialogVisible = true">查看详情</el-button>
-            </el-table-column>
-        </el-table>
-    </dv-border-box11>
-    <el-dialog v-model="dialogVisible" title="详情信息" width="30%" :before-close="handleClose">
+    <!-- <el-dialog v-model="dialogVisible" title="详情信息" width="30%" :before-close="handleClose">
 
     </el-dialog> -->
     <el-dialog v-model="dialogVisible3" title="详情" width="60%" :before-close="handleClose">
@@ -155,18 +196,6 @@ const selectList = (i: any) => {
             })
 
             console.log(List3.value);
-
-
-            // while (true) {
-            //     let Person: any = new Object()
-            //     Person.name = '陈需要'
-            //     Person.sex = '女'
-            //     Person.age = 18
-            //     console.log(Person);
-            // }
-
-
-
             break;
     }
 }

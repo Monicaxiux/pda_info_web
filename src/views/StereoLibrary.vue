@@ -22,7 +22,11 @@
                 <el-table-column label="状态">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.white_Roll_Status }}
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 0">未知</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 1">黑辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 2">白辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 3">新辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 4">报废辊</span>
                         </span>
                     </template>
                 </el-table-column>
@@ -46,7 +50,11 @@
                 <el-table-column label="状态">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.white_Roll_Status }}
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 0">未知</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 1">黑辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 2">白辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 3">新辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 4">报废辊</span>
                         </span>
                     </template>
                 </el-table-column>
@@ -70,7 +78,11 @@
                 <el-table-column label="状态">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.white_Roll_Status }}
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 0">未知</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 1">黑辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 2">白辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 3">新辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 4">报废辊</span>
                         </span>
                     </template>
                 </el-table-column>
@@ -94,7 +106,11 @@
                 <el-table-column label="状态">
                     <template #default="scope">
                         <span v-if="scope.row.agv_roller">
-                            {{ scope.row.agv_roller.white_Roll_Status }}
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 0">未知</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 1">黑辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 2">白辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 3">新辊</span>
+                            <span v-if="scope.row.agv_roller.white_Roll_Status == 4">报废辊</span>
                         </span>
                     </template>
                 </el-table-column>
@@ -102,6 +118,7 @@
         </dv-border-box11>
     </div>
     <el-dialog v-model="dialogVisible" title="详情" width="50%">
+        <el-input style="width: 200px;margin-right: 10px;" v-model="form.rollerName" clearable placeholder="请输入轧辊号" />
         <el-input style="width: 200px;margin-right: 10px;" v-model="form.name" clearable placeholder="请输入直径" />
         <el-select v-model="form.diameter" class="m-2" placeholder="请选择维度">
             <el-option v-for="item in options" :key="item.value" :label="item.value" :value="item.value" />
@@ -110,7 +127,7 @@
         <el-button type="primary" class="button" @click="getData()">查询</el-button>
         <br />
         <br />
-        <el-table style="max-height: 450px;overflow: auto;" :data="ltable" @row-dblclick="dbSelected"
+        <el-table style="max-height: 450px;overflow: auto;" :data="ltable" :row-style="styleBack" @row-dblclick="dbSelected"
             @selection-change="handleSelectionChange" border>
             <el-table-column type="selection" width="55" />
             <el-table-column label="轧辊号">
@@ -195,6 +212,15 @@
                     </el-select>
                 </template>
             </el-table-column>
+            <el-table-column label="轧辊状态 ">
+                <template #default="scope">
+                    <span v-if="scope.row.white_Roll_Status == 0">未知</span>
+                    <span v-if="scope.row.white_Roll_Status == 1">黑辊</span>
+                    <span v-if="scope.row.white_Roll_Status == 2">白辊</span>
+                    <span v-if="scope.row.white_Roll_Status == 3">新辊</span>
+                    <span v-if="scope.row.white_Roll_Status == 4">报废辊</span>
+                </template>
+            </el-table-column>
             <el-table-column prop="group" label="组号">
             </el-table-column>
         </el-table>
@@ -220,6 +246,17 @@ const tableData4 = ref([]);
 const tableData5 = ref([]);
 const dialogVisible = ref(false)
 const dialogVisible2 = ref(false)
+const styleBack = (row: any) => {
+    switch (row.row.agv_roller.center_Conule) {
+        case '上':
+            return { backgroundColor: '#04c15f' }
+            break;
+        case '下':
+            return { backgroundColor: 'yellow' }
+            break;
+
+    }
+}
 const center_ConuleList = ref([
     {
         value: '上'
@@ -295,6 +332,7 @@ const options = [
     }]
 const form = ref({
     name: '',
+    rollerName: '',
     diameter: null
 });
 
@@ -434,6 +472,7 @@ const getData = () => {
     alex.parameter = {
         page: page.value,
         name: form.value.name,
+        rollerName: form.value.rollerName,
         diameter: form.value.diameter
     }
     selectFramePageSize(alex).then((res: any) => {

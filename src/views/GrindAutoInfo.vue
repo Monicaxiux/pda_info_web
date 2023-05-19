@@ -1,9 +1,13 @@
 <template>
     <dv-border-box11 title="机器人半自动任务" class="box">
         <el-table :data="tableData" border class="table">
-            <el-table-column prop="rollNo" label="轧辊号"></el-table-column>
+            <el-table-column label="轧辊号">
+                <template #default="scope">
+                    <span v-if="scope.row.agv_roller">{{ scope.row.agv_roller.rollerName }}</span>
+                </template>
+            </el-table-column>
             <el-table-column prop="ename" label="设备名称"></el-table-column>
-            <el-table-column prop="rootHead" label="辊头方向"></el-table-column>
+            <!-- <el-table-column prop="rootHead" label="辊头方向"></el-table-column> -->
             <el-table-column prop="startName" label="起点区域"></el-table-column>
             <el-table-column prop="start" label="起点位置"></el-table-column>
             <el-table-column prop="endName" label="终点区域"></el-table-column>
@@ -12,8 +16,8 @@
                 <template #default="scope">
                     <el-tag class="ml-2" type="success">{{ scope.row.level }}
                     </el-tag>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <el-button>编辑</el-button>
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                    <!-- <el-button>编辑</el-button> -->
                 </template>
             </el-table-column>
             <el-table-column label="任务状态">

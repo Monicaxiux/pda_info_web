@@ -391,7 +391,7 @@
                                         </template>
                                     </el-table-column>
                                     <el-table-column prop="current" label="当前步骤号"></el-table-column>
-                                    <el-table-column prop="level" label="优先级别"></el-table-column>
+                                    <!-- <el-table-column prop="level" label="优先级别"></el-table-column> -->
                                     <el-table-column label="操作" width="190">
                                         <template #default="scope">
                                             <el-button size="small" @click="chang5(scope.row, '优先')">优先

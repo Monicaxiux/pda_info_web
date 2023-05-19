@@ -391,7 +391,7 @@
                                         </template>
                                     </el-table-column>
                                     <el-table-column prop="current" label="当前步骤号"></el-table-column>
-                                    <el-table-column prop="level" label="优先级别"></el-table-column>
+                                    <!-- <el-table-column prop="level" label="优先级别"></el-table-column> -->
                                     <el-table-column label="操作" width="190">
                                         <template #default="scope">
                                             <el-button size="small" @click="chang5(scope.row, '优先')">优先
@@ -859,7 +859,7 @@
 import Sortable from "sortablejs";
 import { onMounted, reactive, ref, onBeforeUnmount, toRefs, getCurrentInstance, onUnmounted } from "vue";
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { updateFrame, getFrameChild, insertProduce, selectProduceAll, selectFrameByType, getGrindAllAndData, getFrame, selectGrindParameterTry, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo, insertOutGrindCarryMake, selectFrameRegionAndType } from '@/apiz'
+import { updateFrame, getFrameChild, insertProduce, updatePeelCenterRoller, selectProduceAll, selectFrameByType, getGrindAllAndData, getFrame, selectGrindParameterTry, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo, insertOutGrindCarryMake, selectFrameRegionAndType } from '@/apiz'
 import { Alex } from '@/types'//引入参数规范类型
 let data: any = reactive({
     tableData: [],
@@ -1535,10 +1535,17 @@ const slot = (row: any, i: any) => {
                 updateDetectionList: [row]
             }
             updateDcad(alex).then((res: any) => {
-                dialogVisible6.value = false;
-                ElMessage({
-                    message: '操作成功！',
-                    type: 'success',
+                alex.parameter = {
+                    taper: form.value.taper,
+                    control_Number: form.value.control_Number,
+                    roTTId: roollerIda.value
+                }
+                updatePeelCenterRoller(alex).then((res: any) => {
+                    dialogVisible6.value = false;
+                    ElMessage({
+                        message: '操作成功！',
+                        type: 'success',
+                    })
                 })
             })
             break;
@@ -1546,12 +1553,14 @@ const slot = (row: any, i: any) => {
             break;
         case 4:
             console.log(row.rollId);
+            roollerIda.value = row.rollId
             // form.value = JSON.parse(JSON.stringify(row.detection))
             getDcadx(row.rollId);
             break;
     }
     // dialogVisible3.value = true
 }
+const roollerIda = ref('')
 const rollerIdx = ref('')
 
 const getDcadx = (id: any) => {
