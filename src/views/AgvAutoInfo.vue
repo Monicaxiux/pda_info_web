@@ -6,6 +6,8 @@
             <el-table-column prop="start" label="起点位置"></el-table-column>
             <el-table-column prop="ename" label="终点区域"></el-table-column>
             <el-table-column prop="end" label="终点位置"></el-table-column>
+            <el-table-column prop="createTime" label="创建时间"></el-table-column>
+            <el-table-column prop="okTime" label="完成时间"></el-table-column>
             <el-table-column label="任务状态">
                 <template #default="scope">
                     <el-tag class="ml-2" v-if="scope.row.status == 0" type="warning">待发送

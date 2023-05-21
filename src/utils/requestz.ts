@@ -5,7 +5,7 @@ const request = axios.create({
   // timeout: 15000,//请求超时时常
 })
 //请求拦截器
-request.interceptors.request.use((config: AxiosRequestConfig) => {
+request.interceptors.request.use((config: any) => {
   // if (config.headers) {
   //   config.headers.token = sessionStorage.getItem('token') || ''
   // }

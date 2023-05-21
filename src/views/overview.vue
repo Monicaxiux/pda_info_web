@@ -4,7 +4,7 @@
             <div class="box" id="ARegion">
                 <div v-for="item, index in List4" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
                     class="droptarget" :id="item.position"
-                    @click="chang(['A0' + (index + 1) + '01', 'A0' + (index + 1) + '02'])" :ondrop="drop"
+                    @click="chang(['A0' + (index + 1) + '01', 'A0' + (index + 1) + '02'], item)" :ondrop="drop"
                     :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
                     draggable="true">
                     <!-- <div class="Q">·</div> -->
@@ -13,7 +13,7 @@
             </div>
             <div class="box" id="BRegion">
                 <div v-for="item in List6" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
-                    class="droptarget" @click="chang([item.position])" :id="item.position" :ondrop="drop"
+                    class="droptarget" @click="chang([item.position], item)" :id="item.position" :ondrop="drop"
                     :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
                     draggable="true">
                     {{ item.position }}
@@ -21,7 +21,7 @@
             </div>
             <div class="box" id="CRegion">
                 <div class="droptarget" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
-                    v-for="item in List5" :id="item.position" @click="chang([item.position])" :ondrop="drop"
+                    v-for="item in List5" :id="item.position" @click="chang([item.position], item)" :ondrop="drop"
                     :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
                     draggable="true">
                     {{ item.position }}
@@ -29,7 +29,7 @@
             </div>
             <div class="box" id="DRegion">
                 <div v-for="item in List3" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
-                    class="droptarget" :id="item.position" @click="chang([item.position])" :ondrop="drop"
+                    class="droptarget" :id="item.position" @click="chang([item.position], item)" :ondrop="drop"
                     :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
                     draggable="true">
                     {{ item.position }}
@@ -37,7 +37,7 @@
             </div>
             <div class="box" id="ERegion">
                 <div v-for="item in List2" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
-                    class="droptarget" :id="item.position" @click="chang([item.position])" :ondrop="drop"
+                    class="droptarget" :id="item.position" @click="chang([item.position], item)" :ondrop="drop"
                     :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
                     draggable="true">
                     {{ item.position }}
@@ -45,9 +45,10 @@
             </div>
             <div class="box" id="FRegion">
                 <div v-for="item in List1" :class="itemColor(item.pstatus, item.emptyStatus, item.existStatus)"
-                    class="droptarget" :id="item.position" @click="chang([item.position == 'C11' ? item : item.position])"
-                    :ondrop="drop" :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop"
-                    :ondragstart="dragStart" draggable="true">
+                    class="droptarget" :id="item.position"
+                    @click="chang([item.position == 'C11' ? item : item.position], item)" :ondrop="drop"
+                    :ondragenter="dragEnter" :ondragleave="dragLeave" :ondragover="allowDrop" :ondragstart="dragStart"
+                    draggable="true">
                     {{ item.position }}
                 </div>
             </div>
@@ -107,12 +108,12 @@
                                 <el-table-column prop="grinderNo" label="磨床号" width="100"></el-table-column>
                                 <el-table-column prop="boxId" label="辊框号" width="180"></el-table-column>
                                 <el-table-column prop="currentStep" label="当前步骤号"></el-table-column>
-                                <!-- <el-table-column label="操作" width="140"> -->
-                                <!-- <template #default="scope"> -->
-                                <!-- <el-button size="small" @click="chang5(scope.row)">删除 -->
-                                <!-- </el-button> -->
-                                <!-- </template> -->
-                                <!-- </el-table-column> -->
+                                <el-table-column label="操作" width="140">
+                                    <template #default="scope">
+                                        <el-button size="small" @click="chang5(scope.row)">终止任务
+                                        </el-button>
+                                    </template>
+                                </el-table-column>
                             </el-table-column>
                         </el-table>
                     </div>
@@ -163,7 +164,8 @@
             <el-descriptions title="" :column="3" border>
                 <el-descriptions-item
                     label="主任务编号                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
-                    label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
+                    label-align="right" align="center" label-class-name="my-label" class-name="my-content"
+                    width="150px">
                     {{ from.grindId }}
                 </el-descriptions-item>
                 <el-descriptions-item
@@ -214,33 +216,90 @@
         </el-dialog>
         <el-dialog v-model="dialogVisible3" title="详情" draggable width="60%" :before-close="handleClose">
             <!-- <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button> -->
-            <el-card class="box-card" shadow="hover">
-                起始位置：{{ stitle }}<br /><br />
-                <div>
-                    终点位置： <el-select v-model="etitle" @change="echange" class="m-2" placeholder="请选择终点位置">
-                        <el-option v-for="item in endList" :key="item.position" :label="item.position"
-                            :value="item.position" />
-                    </el-select>
-                </div><br />
-                辊种类型： <el-select v-model="rollerType" class="m-2" placeholder="请选择辊种类型">
-                    <el-option v-for="item in rollerTypeList" :key="item.rollerType" :label="item.rollerType"
-                        :value="item.rollerType" />
-                </el-select><br /><br />
-                <!-- {{ etitle }} -->
-                <!-- 辊框号：{{ agvrollerList[0].boxId }}<br /><br /> -->
-                <div v-if="stitle != 'C11'">
-                    任务类型： <el-radio-group @change="selectEnd" v-model="radio" class="ml-4">
-                        <el-radio style="color: black" label="工作辊缓存区">半自动</el-radio>
-                        <el-radio style="color: black" label="交接工位">全自动</el-radio><br /><br />
-                    </el-radio-group>
-                </div>
-                <br />
-                <div v-if="stitle != 'C11'">
-                    出库：
-                    <el-switch v-model="value" active-text="是" inactive-text="否" />
-                </div>
+            <div style="display: flex;">
+                <el-card style="width: 40%;margin-right:10px" class="box-card" shadow="hover">
+                    起始位置：{{ stitle }}<br /><br />
+                    <div>
+                        终点位置： <el-select v-model="etitle" @change="echange" class="m-2" placeholder="请选择终点位置">
+                            <el-option v-for="item in endList" :key="item.position" :label="item.position"
+                                :value="item.position" />
+                        </el-select>
+                    </div><br />
+                    辊种类型： <el-select v-model="rollerType" class="m-2" placeholder="请选择辊种类型">
+                        <el-option v-for="item in rollerTypeList" :key="item.rollerType" :label="item.rollerType"
+                            :value="item.rollerType" />
+                    </el-select><br /><br />
+                    <!-- {{ etitle }} -->
+                    <!-- 辊框号：{{ agvrollerList[0].boxId }}<br /><br /> -->
+                    <div v-if="stitle != 'C11'">
+                        任务类型： <el-radio-group @change="selectEnd" v-model="radio" class="ml-4">
+                            <el-radio style="color: black" label="工作辊缓存区">半自动</el-radio>
+                            <el-radio style="color: black" label="交接工位">全自动</el-radio><br /><br />
+                        </el-radio-group>
+                    </div>
+                    <br />
+                    <div v-if="stitle != 'C11'">
+                        出库：
+                        <el-switch v-model="value" active-text="是" inactive-text="否" />
+                    </div>
+                </el-card>
+                <el-card style="width: 80%;" class=" box-card" shadow="hover">
 
-            </el-card>
+                    起点区域：<span v-if="listText">{{ listText.startName }}</span><br /><br />
+                    起点位置：<span v-if="listText">{{ listText.start }}</span><br /><br />
+                    终点区域：<span v-if="listText">{{ listText.fname }}</span><br /><br />
+                    终点位置：<span v-if="listText">{{ listText.end }}</span><br /><br />
+                    创建时间：<span v-if="listText">{{ listText.createTime }}</span><br /><br />
+                    执行时间：<span v-if="listText">{{ listText.okTime }}</span><br /><br />
+                    状态：<span v-if="listText">{{ listText.status }}</span><br /><br />
+
+                    AGV任务终止:
+                    <el-button type="danger" size="small" @click="upDataList(null, 0, 0)">
+                        终止
+                    </el-button>
+                    <br />
+                    <br />
+                    辊框状态:
+                    <a v-if="listText2.position == 'B01'">
+                        <el-tag class="ml-2" v-if="listText2.emptyStatus == 0" type="warning">未占用</el-tag>
+                        <el-tag class="ml-2" v-if="listText2.emptyStatus == 1" type="success">已占用</el-tag>
+                        <el-tag class="ml-2" v-if="listText2.emptyStatus == 2" type="success">已占用</el-tag>
+                        <el-tag class="ml-2" v-if="listText2.emptyStatus == 3" type="success">已占用</el-tag>
+                    </a>
+                    <a v-else>
+                        <el-tag class="ml-2" v-if="listText2.emptyStatus == 0" type="warning">未占用</el-tag>
+                        <el-tag class="ml-2" v-if="listText2.emptyStatus == 1" type="success">已占用</el-tag>
+                    </a>
+                    &nbsp;
+                    <el-button type="primary" size="small" @click="upDataList(listText2, listText2.emptyStatus ==
+                    1 ? 2 : 1, 1)">
+                        {{ listText2.emptyStatus ==
+                                1 ? '释放' : '占用'
+                        }}
+                    </el-button>
+                    蓝色托架状态:
+                    <el-tag class="ml-2" v-if="listText2.existStatus == 0" type="warning">未占用</el-tag>
+                    <el-tag class="ml-2" v-if="listText2.existStatus == 1" type="success">已占用</el-tag>
+                    &nbsp;
+                    <el-button type="primary" size="small" @click="upDataList(listText2, listText2.existStatus ==
+                    1 ? 2 : 1, 2)">
+                        {{ listText2.existStatus ==
+                                1 ? '释放' : '占用'
+                        }}
+                    </el-button>
+                    位置状态:
+                    <el-tag class="ml-2" v-if="listText2.pstatus == 0" type="warning">未占用</el-tag>
+                    <el-tag class="ml-2" v-if="listText2.pstatus == 1" type="success">已占用</el-tag>
+                    &nbsp;
+                    <el-button type="primary" size="small" @click="upDataList(listText2, listText2.pstatus ==
+                    1 ? 2 : 1, 3)">
+                        {{ listText2.pstatus ==
+                                1 ? '释放' : '占用'
+                        }}
+                    </el-button>
+                </el-card>
+            </div>
+
             <br /><br />
             <el-table :data="agvrollerList" @selection-change="handleSelectionChange">
                 <el-table-column v-if="stitlestatus" type="selection" width="55" />
@@ -262,9 +321,9 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="rollerName" label="轧辊号" />
-                <el-table-column prop="remarks" label="备注" />
                 <el-table-column prop="slotName" label="卡槽位置" />
                 <el-table-column prop="rollType" label="轧辊类型" />
+                <el-table-column prop="remarks" label="备注" />
                 <!-- <el-table-column prop="accident" label="轧辊事故类型" /> -->
                 <!-- <el-table-column prop="rollStatus" label="轧辊是否拆装" />
                 <el-table-column prop="rootHead" label="轧辊方向" />
@@ -292,9 +351,9 @@
 
                 </el-table-column>
                 <el-table-column prop="rollerName" label="轧辊号" />
-                <el-table-column prop="remarks" label="备注" />
                 <el-table-column prop="slotName" label="卡槽位置" />
                 <el-table-column prop="rollType" label="轧辊类型" />
+                <el-table-column prop="remarks" label="备注" />
                 <!-- <el-table-column prop="accident" label="轧辊事故类型" /> -->
                 <!-- <el-table-column prop="rollStatus" label="轧辊是否拆装" />
                 <el-table-column prop="rootHead" label="轧辊方向" />
@@ -316,7 +375,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, insertCenter_rollerInfo, insertAgvFrameC11Work, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList, updateAgvRollerParameterKey, updateAgvMainParameterKey, selectFrameByType, getAgvFrame } from '@/api';
+import { getFrameChild, getGrindAllAndData, selectAgvFramePositionInfo, updatePullThePlugTry, getAgvStepExecutingList, insertCenter_rollerInfo, insertAgvFrameC11Work, selectAgvFrameAppointInfo, getAGVOtherStepInfo, getAGVGrindAllAndData, selectAgvFrameRegionMany, selectAgv_CarryInfo, updateFrameChild, updateAGVChild, insertOutMainList, updateAgvRollerParameterKey, updateAgvMainParameterKey, selectFrameByType, getAgvFrame, updateAgvFrameList } from '@/api';
 import { Alex } from '@/types';
 import { ElMessage, uploadListEmits } from 'element-plus';
 import { title } from 'process';
@@ -341,6 +400,93 @@ const etitle: any = ref('B03')
 const radio = ref('交接工位');
 const rollerType = ref('工作辊 ');
 const multipleSelection = ref();
+const upDataList = (row: any, i: any, s: any) => {
+    let alex = new Alex
+    switch (i) {
+        case 1:
+            switch (s) {
+                case 1:
+                    row.emptyStatus = 1
+
+                    break;
+                case 2:
+
+                    row.existStatus = 1
+                    break;
+                case 3:
+                    row.pstatus = 1
+                    break;
+            }
+            alex.parameter = {
+                agvFrameList: [row]
+            }
+            updateAgvFrameList(alex).then((res: any) => {
+
+                ElMessage({
+                    message: '修改成功！',
+                    type: 'success',
+                });
+            })
+            break;
+        case 2:
+            switch (s) {
+                case 1:
+                    row.emptyStatus = 0
+                    break;
+                case 2:
+
+                    row.existStatus = 0
+                    break;
+                case 3:
+                    row.pstatus = 0
+
+                    break;
+            }
+            row.rimNum = ''
+            alex.parameter = {
+                agvFrameList: [row]
+            }
+            updateAgvFrameList(alex).then((res: any) => {
+
+                ElMessage({
+                    message: '修改成功！',
+                    type: 'success',
+                });
+            })
+            break;
+    }
+    if (s == 0) {
+        console.log(listText2.value);
+
+        alex.parameter = {
+            cid: listText2.value.rimNum
+        }
+        updatePullThePlugTry(alex).then((res: any) => {
+            ElMessage({
+                message: res.message.msg,
+                type: 'success',
+            })
+            dialogVisible3.value = false
+            getData();
+        })
+    }
+
+};
+const chang5 = (row: any) => {
+    console.log(row);
+
+    let alex = new Alex();
+    alex.parameter = {
+        cid: row.rimNum
+    }
+    updatePullThePlugTry(alex).then((res: any) => {
+        ElMessage({
+            message: res.message.msg,
+            type: 'success',
+        })
+        getData();
+    })
+}
 const handleSelectionChange = (val: any) => {
     multipleSelection.value = val
 
@@ -617,10 +763,13 @@ const selectEnd = () => {
         endList.value = res.result.agv_frameList;
     })
 }
+const listText: any = ref({})
+const listText2: any = ref({})
 const lisxa = ref()
-const chang = (row: any) => {
-    console.log(row, 'ssssssss');
+const chang = (row: any, roe: any) => {
+    console.log(roe, 'ssssssss');
     lisxa.value = row[0];
+    listText2.value = roe
     if (row[0].position) {
         rollerType.value = '一中间辊'
         radio.value = '工作辊缓存区'
@@ -638,7 +787,21 @@ const chang = (row: any) => {
                 rollerList.value = res.result.rollerList;
             }
         })
+        let alexx = new Alex();
+        alexx.parameter = {
+            start: row[0].position
+        }
+        getAgvStepExecutingList(alexx).then((res: any) => {
+            listText.value = res.result.agv_task_1;
+        })
     } else {
+        let alexx = new Alex();
+        alexx.parameter = {
+            start: row[0]
+        }
+        getAgvStepExecutingList(alexx).then((res: any) => {
+            listText.value = res.result.agv_task_1;
+        })
         stitle.value = row[0];
         if (row[0] == 'A0501') {
             row[0] = 'A05'
@@ -675,7 +838,6 @@ const chang = (row: any) => {
             }
         })
     }
-
 }
 
 const handleClose = (done: () => void) => {
@@ -1377,7 +1539,7 @@ h1 {
 }
 
 :deep(.el-table th.el-table__cell) {
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(2px);
     background-color: #111e7038;
     /* background-color: #ffffff5e; */
 }

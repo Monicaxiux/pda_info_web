@@ -44,7 +44,12 @@
                                     <el-radio label="1" border>未完成</el-radio>
                                     <el-radio label="3" border>已完成</el-radio>
                                     <el-radio label="50" border>已终止</el-radio>
-                                    <el-button @click="getGrindData">刷新
+                                    <!-- <el-button @click="getGrindData">刷新
+                                    </el-button> -->
+                                    <el-input style="width: 100px;margin-right: 20px;" v-model="name"
+                                        placeholder="框号" />
+
+                                    <el-button @click="getGrindData">查询
                                     </el-button>
                                 </el-radio-group>
                             </template>
@@ -53,14 +58,12 @@
                             </el-table-column>
                             <el-table-column prop="currentStep" label="当前步骤号"></el-table-column>
                             <el-table-column prop="priority" label="优先级别"></el-table-column>
-                            <!-- <el-table-column label="操作" width="190">
+                            <el-table-column label="操作" width="140">
                                 <template #default="scope">
-                                    <el-button size="small" @click="chang5(scope.row, '优先')">优先
-                                    </el-button>
-                                    <el-button size="small" @click="chang5(scope.row, '终止')">终止任务
+                                    <el-button size="small" @click="chang(scope.row)">终止任务
                                     </el-button>
                                 </template>
-                            </el-table-column> -->
+                            </el-table-column>
                         </el-table-column>
                     </el-table>
                 </div>
@@ -109,15 +112,31 @@
 import { Alex } from '@/types';
 import { ElMessage } from 'element-plus';
 import { onMounted, reactive, ref } from 'vue';
-import { getOutBoxListChild, getOutMainListAll, updateAgvEquipmentAndData } from '@/api'
+import { getOutBoxListChild, getOutMainListAll, updateAgvEquipmentAndData, updateOutBoxListChild, updatePullThePlugTry } from '@/api'
 const bMove = ref(true)
 const row: any = ref()
+const name: any = ref()
 const finishStatus = ref('1')
 const search = ref('step1')
 let data: any = reactive({
     grindListAll: [],
     grindListAll2: []
 })
+const chang = (row: any) => {
+    console.log(row);
+
+    let alex = new Alex();
+    alex.parameter = {
+        outMain: row
+    }
+    updateOutBoxListChild(alex).then((res: any) => {
+        ElMessage({
+            message: res.message.msg,
+            type: 'success',
+        })
+        getGrindData();
+    })
+}
 const b1Click = () => {
     data.grindListAll2 = []
     getGrindData();
@@ -142,6 +161,7 @@ const getGrindData = () => {
     data.grindListAll2 = []
     let alex = new Alex
     alex.parameter = {
+        name: name.value,
         number: parseInt(finishStatus.value)
     }
     getOutMainListAll(alex).then((res: any) => {

@@ -24,8 +24,9 @@
                         &nbsp;
                         &nbsp;
                         <el-button type="primary" class="button" @click="upd(scope.row, scope.row.emptyStatus ==
-                            1 ? 2 : 1, 1)">{{ scope.row.emptyStatus ==
-        1 ? '释放' : '占用' }}</el-button>
+                        1 ? 2 : 1, 1)">{{ scope.row.emptyStatus ==
+            1 ? '释放' : '占用'
+    }}</el-button>
                     </template>
                 </el-table-column>
                 <el-table-column label="蓝色托架状态">
@@ -36,8 +37,9 @@
                         &nbsp;
                         &nbsp;
                         <el-button type="primary" class="button" @click="upd(scope.row, scope.row.existStatus ==
-                            1 ? 2 : 1, 2)">{{ scope.row.existStatus ==
-        1 ? '释放' : '占用' }}</el-button>
+                        1 ? 2 : 1, 2)">{{ scope.row.existStatus ==
+            1 ? '释放' : '占用'
+    }}</el-button>
                     </template>
                 </el-table-column>
                 <el-table-column label="位置状态">
@@ -48,8 +50,9 @@
                         &nbsp;
                         &nbsp;
                         <el-button type="primary" class="button" @click="upd(scope.row, scope.row.pstatus ==
-                            1 ? 2 : 1, 3)">{{ scope.row.pstatus ==
-        1 ? '释放' : '占用' }}</el-button>
+                        1 ? 2 : 1, 3)">{{ scope.row.pstatus ==
+            1 ? '释放' : '占用'
+    }}</el-button>
                     </template>
                 </el-table-column>
                 <!-- <el-table-column label="操作">
@@ -157,7 +160,6 @@ const upd = (row: any, i: any, s: any) => {
         case 2:
             switch (s) {
                 case 1:
-
                     row.emptyStatus = 0
                     break;
                 case 2:
@@ -173,7 +175,6 @@ const upd = (row: any, i: any, s: any) => {
             alex.parameter = {
                 agvFrameList: [row]
             }
-
             break;
     }
     updateAgvFrameList(alex).then((res: any) => {

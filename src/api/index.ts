@@ -443,3 +443,43 @@ export const getAgvEquipment = ((AlexData: any) => {
         data: AlexData
     }) as any
 })
+//查询正在执行中的命令
+export const getAgvStepExecutingList = ((AlexData: any) => {
+    return request({
+        url: '/Agv_Task_1/getAgvStepExecutingList',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+//异常终止AGV入库的任务
+export const updatePullThePlugTry = ((AlexData: any) => {
+    return request({
+        url: '/AgvMain/updatePullThePlugTry',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+//修改出库异常的数据信息
+export const updateOutBoxListChild = ((AlexData: any) => {
+    return request({
+        url: '/OutBox/updateOutBoxListChild',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+//清空阻塞的AGV数据
+export const updateAgvEquipmentCleanInfo = ((AlexData: any) => {
+    return request({
+        url: '/AgvEquipment/updateAgvEquipmentCleanInfo',
+        method: 'post',
+        data: AlexData
+    }) as any
+})
+//清空阻塞的机器人人数据
+export const updateElectronicClean = ((AlexData: any) => {
+    return request({
+        url: '/electronic/updateElectronicClean',
+        method: 'post',
+        data: AlexData
+    }) as any
+})

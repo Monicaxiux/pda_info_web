@@ -267,9 +267,35 @@ const createTask = () => {
             dialogVisible3.value = false;
         })
     } else {
-        ElMessage({
-            message: '没有辊框号',
-            type: 'warning',
+        let sn = '';
+        if (stitle.value != 'A30' && stitle.value != 'A31' && stitle.value != 'A32' && stitle.value != 'A33' && stitle.value != 'A34' && stitle.value != 'A35') {
+            sn = '工作辊货架'
+        } else {
+            sn = '中间辊货架'
+        }
+        let alex = new Alex();
+        alex.parameter = {
+            rollerType: null,
+            agv_Carry: {
+                workId: null,
+                boxId: null,
+                start: stitle.value,
+                startName: sn,
+                end: position.value,
+                fname: '出入库区域',
+                ename: '叉车AGV',
+                priority: 5
+            }
+        }
+        selectAgv_CarryInfo(alex).then((res: any) => {
+            ElMessage({
+                message: res.message.msg,
+                type: 'success',
+            })
+            selectList(1);
+            selectList(2);
+            selectList(3);
+            dialogVisible3.value = false;
         })
     }
 

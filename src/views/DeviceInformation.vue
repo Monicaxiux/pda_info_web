@@ -7,6 +7,7 @@
                 <el-table-column prop="start" label="起点位置"></el-table-column>
                 <el-table-column prop="endName" label="终点区域"></el-table-column>
                 <el-table-column prop="end" label="终点位置"></el-table-column>
+                <el-table-column prop="rimNum" label="任务流水号"></el-table-column>
                 <!-- <el-table-column label="设备状态">
                     <template #default="scope">
                         <div v-if="scope.row">
@@ -33,6 +34,12 @@
                         </div>
                     </template>
                 </el-table-column>
+                <el-table-column label="操作">
+                    <template #default="scope">
+                        <el-button @click="clear(scope.row)">清空
+                        </el-button>
+                    </template>
+                </el-table-column>
             </el-table>
 
         </dv-border-box11>
@@ -43,6 +50,7 @@
                 <el-table-column prop="start" label="起点位置"></el-table-column>
                 <el-table-column prop="endName" label="终点区域"></el-table-column>
                 <el-table-column prop="end" label="终点位置"></el-table-column>
+                <el-table-column prop="jobId" label="任务流水号"></el-table-column>
                 <el-table-column label="设备状态">
                     <template #default="scope">
                         <div v-if="scope.row">
@@ -69,18 +77,50 @@
                         </div>
                     </template>
                 </el-table-column>
+                <el-table-column label="操作">
+                    <template #default="scope">
+                        <el-button @click="clear2(scope.row)">清空
+                        </el-button>
+                    </template>
+                </el-table-column>
             </el-table>
         </dv-border-box11>
     </div>
 </template>
 
 <script setup lang="ts">
-import { getAgvEquipment } from '@/api'
+import { getAgvEquipment, updateAgvEquipmentCleanInfo, updateElectronicClean } from '@/api'
 import { onMounted, ref } from 'vue'
 import { Alex } from '@/types'
+import { ElMessage } from 'element-plus';
 const tableData = ref([])
 const tableData2 = ref([])
-
+const clear = (row: any) => {
+    let alex = new Alex()
+    alex.parameter = {
+        agvEquipment: row
+    }
+    updateAgvEquipmentCleanInfo(alex).then((res: any) => {
+        ElMessage({
+            message: '修改成功！',
+            type: 'success',
+        });
+        getData()
+    })
+}
+const clear2 = (row: any) => {
+    let alex = new Alex()
+    alex.parameter = {
+        equipment: row
+    }
+    updateElectronicClean(alex).then((res: any) => {
+        ElMessage({
+            message: '修改成功！',
+            type: 'success',
+        });
+        getData()
+    })
+}
 const getData = () => {
     let alex = new Alex()
     getAgvEquipment(alex).then((res: any) => {
