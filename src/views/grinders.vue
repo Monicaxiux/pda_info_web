@@ -397,8 +397,7 @@
                                             <el-button size="small" @click="chang5(scope.row, '优先')">优先
                                             </el-button>
                                             <el-button size="small" @click="chang5(scope.row, '终止')">终止任务
-                                            </el-button>
-
+                                            </el-button> 
                                         </template>
                                     </el-table-column>
                                 </el-table-column>

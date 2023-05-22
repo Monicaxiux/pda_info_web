@@ -164,8 +164,7 @@
             <el-descriptions title="" :column="3" border>
                 <el-descriptions-item
                     label="主任务编号                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "
-                    label-align="right" align="center" label-class-name="my-label" class-name="my-content"
-                    width="150px">
+                    label-align="right" align="center" label-class-name="my-label" class-name="my-content" width="150px">
                     {{ from.grindId }}
                 </el-descriptions-item>
                 <el-descriptions-item
@@ -225,17 +224,22 @@
                                 :value="item.position" />
                         </el-select>
                     </div><br />
-                    辊种类型： <el-select v-model="rollerType" class="m-2" placeholder="请选择辊种类型">
+                    辊种类型： <el-select v-if="stitle != 'C09'" v-model="rollerType" class="m-2" placeholder="请选择辊种类型">
                         <el-option v-for="item in rollerTypeList" :key="item.rollerType" :label="item.rollerType"
                             :value="item.rollerType" />
-                    </el-select><br /><br />
+                    </el-select>
+                    <span v-else>{{ rollerType }}</span>
+                    <br /><br />
                     <!-- {{ etitle }} -->
                     <!-- 辊框号：{{ agvrollerList[0].boxId }}<br /><br /> -->
-                    <div v-if="stitle != 'C11'">
+                    <div v-if="stitle != 'C11' && stitle != 'C09'">
                         任务类型： <el-radio-group @change="selectEnd" v-model="radio" class="ml-4">
                             <el-radio style="color: black" label="工作辊缓存区">半自动</el-radio>
                             <el-radio style="color: black" label="交接工位">全自动</el-radio><br /><br />
                         </el-radio-group>
+                    </div>
+                    <div v-else>
+                        任务类型：半自动
                     </div>
                     <br />
                     <div v-if="stitle != 'C11'">
@@ -251,7 +255,11 @@
                     终点位置：<span v-if="listText">{{ listText.end }}</span><br /><br />
                     创建时间：<span v-if="listText">{{ listText.createTime }}</span><br /><br />
                     执行时间：<span v-if="listText">{{ listText.okTime }}</span><br /><br />
-                    状态：<span v-if="listText">{{ listText.status }}</span><br /><br />
+                    状态：<span v-if="listText">
+                        <span v-if="listText.status == 0">未发送</span>
+                        <span v-if="listText.status == 1">未发送</span>
+                        <span v-if="listText.status == 2">未发送</span>
+                    </span><br /><br />
 
                     AGV任务终止:
                     <el-button type="danger" size="small" @click="upDataList(null, 0, 0)">
@@ -272,9 +280,9 @@
                     </a>
                     &nbsp;
                     <el-button type="primary" size="small" @click="upDataList(listText2, listText2.emptyStatus ==
-                    1 ? 2 : 1, 1)">
+                        1 ? 2 : 1, 1)">
                         {{ listText2.emptyStatus ==
-                                1 ? '释放' : '占用'
+                            1 ? '释放' : '占用'
                         }}
                     </el-button>
                     蓝色托架状态:
@@ -282,9 +290,9 @@
                     <el-tag class="ml-2" v-if="listText2.existStatus == 1" type="success">已占用</el-tag>
                     &nbsp;
                     <el-button type="primary" size="small" @click="upDataList(listText2, listText2.existStatus ==
-                    1 ? 2 : 1, 2)">
+                        1 ? 2 : 1, 2)">
                         {{ listText2.existStatus ==
-                                1 ? '释放' : '占用'
+                            1 ? '释放' : '占用'
                         }}
                     </el-button>
                     位置状态:
@@ -292,9 +300,9 @@
                     <el-tag class="ml-2" v-if="listText2.pstatus == 1" type="success">已占用</el-tag>
                     &nbsp;
                     <el-button type="primary" size="small" @click="upDataList(listText2, listText2.pstatus ==
-                    1 ? 2 : 1, 3)">
+                        1 ? 2 : 1, 3)">
                         {{ listText2.pstatus ==
-                                1 ? '释放' : '占用'
+                            1 ? '释放' : '占用'
                         }}
                     </el-button>
                 </el-card>
@@ -590,7 +598,7 @@ const createTask = () => {
     switch (radio.value) {
         case '工作辊缓存区':
             console.log('是半自动');
-            if (agvrollerList.value != undefined) {
+            if (agvrollerList.value.length != 0 || stitle.value == 'C11') {
                 if (etitle.value || stitle.value == 'C11') {
                     // if (stitle.value == 'C11') {
                     //     loding.value = true;
@@ -625,9 +633,9 @@ const createTask = () => {
                         console.log(res.result.agv_frame);
                         alex.parameter = {
                             rollerType: rollerType.value,
-                            insertRollerList: agvrollerList.value,
+                            insertRollerList: agvrollerList.value.length != 0 ? agvrollerList.value : [],
                             agv_Carry: {
-                                boxId: agvrollerList.value[0].boxId,
+                                boxId: agvrollerList.value.length != 0 ? agvrollerList.value[0].boxId : '',
                                 start: stitle.value,
                                 startName: res.result.agv_frame.fname,
                                 end: etitle.value,
@@ -637,7 +645,6 @@ const createTask = () => {
                                 confirm: true,
                                 out_Status: value.value == '是' ? 1 : 0
                             },
-
                         }
                         selectAgv_CarryInfo(alex).then((res: any) => {
                             ElMessage({
@@ -767,6 +774,7 @@ const listText: any = ref({})
 const listText2: any = ref({})
 const lisxa = ref()
 const chang = (row: any, roe: any) => {
+
     console.log(roe, 'ssssssss');
     lisxa.value = row[0];
     listText2.value = roe
@@ -803,6 +811,9 @@ const chang = (row: any, roe: any) => {
             listText.value = res.result.agv_task_1;
         })
         stitle.value = row[0];
+        if (stitle.value == 'C09') {
+            rollerType.value = '一中间辊'
+        }
         if (row[0] == 'A0501') {
             row[0] = 'A05'
             row[1] = 'A05'
