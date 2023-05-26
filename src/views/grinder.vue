@@ -56,9 +56,19 @@
             <dv-border-box-13 title="一号机器人" class="box11">
                 <span id="ftext">一号机器人</span>
                 <div v-if="data.tableData5.length != 0">
-                    <el-tag class="ml-2" v-if="data.tableData5[0].succeeStatus == '4'" type="danger">异常</el-tag>
+                    <el-tag class="ml-2 fstatus" v-if="data.tableData5[0].succeeStatus == '4'" type="danger">异常</el-tag>
                     <el-tag v-else class="ml-2 fstatus" type="success">正常</el-tag>
                 </div>
+                <div v-if="data.tableData5.length != 0 && data.tableData5[0].information">
+                    <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '1'"
+                        type="danger">未发送</el-tag>
+                    <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '2'"
+                        type="danger">机器人已接收</el-tag>
+                    <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '3'"
+                        type="success">通讯发送成功</el-tag>
+                    <el-tag v-else class="ml-2 fstatus2" type="danger">等待获取任务</el-tag>
+                </div>
+
                 <div class="tableData3">
                     <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key" border>
                         <el-table-column prop="ename" label="设备名称" width="120"></el-table-column>
@@ -2062,6 +2072,14 @@ onUnmounted(() => {
     left: 125px;
 }
 
+.fstatus2 {
+    position: absolute;
+    /* font-weight: bold; */
+    font-size: 13px;
+    top: 20px;
+    left: 195px;
+}
+
 #fbutton {
     position: absolute;
     font-weight: bold;
@@ -2168,6 +2186,7 @@ i {
 .home {
     width: 95%;
     display: flex;
+    overflow: hidden;
     flex-wrap: wrap;
     align-content: flex-start;
     height: 100%;

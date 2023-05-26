@@ -7,9 +7,11 @@
             <el-table-column type="expand">
                 <template #default="props">
                     <el-table :data="props.row.agv_rollerList" style="width: 60%; margin-left: 20px">
+
                         <el-table-column v-for="(value, id, index) in sonColumns" :label="value.name" :prop="value.propName"
                             :key="index">
                         </el-table-column>
+
                         <!-- <el-table-column label="操作">
                             <template #default="scope">
                                 <el-button :type="primary" @click="changeStatus()">{{ props.row.status ? "完成" : "修改"
@@ -19,8 +21,21 @@
                     </el-table>
                 </template>
             </el-table-column>
+            <el-table-column label="框号">
+                <template #default="scope">
+                    <span v-if="scope.row.agv_carry">{{ scope.row.agv_carry.boxId }}</span>
+                </template>
+            </el-table-column>
             <el-table-column v-for="(value, key, index) in parentsCloums" :label="value.name" :prop="value.propName"
                 :key="index">
+            </el-table-column>
+            <el-table-column label="状态">
+                <template #default="scope">
+                    <span v-if="scope.row.caseStatus == 1">待用</span>
+                    <span v-if="scope.row.caseStatus == 2">待磨</span>
+                    <span v-if="scope.row.caseStatus == 3">待装</span>
+                    <span v-if="scope.row.caseStatus == 4">上机</span>
+                </template>
             </el-table-column>
         </el-table>
     </div>
@@ -113,10 +128,10 @@ const styleBack = (row: any) => {
 }
 const parentsCloums = ref([
     //外层table的表头
-    {
-        name: '框号',
-        propName: 'caseId',
-    },
+    // {
+    //     name: '框号',
+    //     propName: 'caseId',
+    // },
     {
         name: '锥度',
         propName: 'taper',
@@ -125,10 +140,10 @@ const parentsCloums = ref([
         name: '轧机号',
         propName: 'control_Number',
     },
-    {
-        name: '状态',
-        propName: 'caseStatus',
-    },
+    // {
+    //     name: '状态',
+    //     propName: 'caseStatus',
+    // },
     {
         name: '处理人',
         propName: 'processor_Man',

@@ -157,6 +157,15 @@
                 </template>
             </el-table-column>
             <el-table-column prop="slotPosition" label="库位号"></el-table-column>
+            <el-table-column label="轧辊状态">
+                <template #default="scope">
+                    <span v-if="scope.row.agv_roller.white_Roll_Status == 0">未知</span>
+                    <span v-if="scope.row.agv_roller.white_Roll_Status == 1">黑辊</span>
+                    <span v-if="scope.row.agv_roller.white_Roll_Status == 2">白辊</span>
+                    <span v-if="scope.row.agv_roller.white_Roll_Status == 3">新辊</span>
+                    <span v-if="scope.row.agv_roller.white_Roll_Status == 4">报废辊</span>
+                </template>
+            </el-table-column>
             <el-table-column label="组号">
                 <template #default="scope">
                     <span v-if="scope.row.agv_roller">
@@ -173,7 +182,7 @@
                 <div class="btfont">配辊出库时C11工位必须要有辊架和空辊框</div>
                 <el-button @click="dialogVisible = false">取消</el-button>
                 <el-button type="primary" @click="save(2)">磨削</el-button>
-                <el-button type="primary" @click="save(1)">确定</el-button>
+                <el-button type="primary" @click="save(1)">出库</el-button>
             </span>
         </template>
     </el-dialog>
@@ -212,14 +221,14 @@
                     </el-select>
                 </template>
             </el-table-column>
-            <el-table-column label="轧辊状态 ">
+            <el-table-column label="轧辊状态">
                 <template #default="scope">
-                    <span v-if="scope.row.white_Roll_Status == 0">未知</span>
-                    <span v-if="scope.row.white_Roll_Status == 1">黑辊</span>
-                    <span v-if="scope.row.white_Roll_Status == 2">白辊</span>
-                    <span v-if="scope.row.white_Roll_Status == 3">新辊</span>
-                    <span v-if="scope.row.white_Roll_Status == 4">报废辊</span>
+                    <el-select v-model="scope.row.white_Roll_Status" class="m-2" placeholder="请选择">
+                        <el-option v-for="item in whiteRollStatusList" :key="item.value" :label="item.label"
+                            :value="item.value" />
+                    </el-select>
                 </template>
+
             </el-table-column>
             <el-table-column prop="group" label="组号">
             </el-table-column>
@@ -257,6 +266,30 @@ const styleBack = (row: any) => {
 
     }
 }
+const whiteRollStatusList = ref(
+    [
+        {
+            label: '未知',
+            value: 0
+        },
+        {
+            label: '黑辊',
+            value: 1
+        },
+        {
+            label: '白辊',
+            value: 2
+        },
+        {
+            label: '新辊',
+            value: 3
+        },
+        {
+            label: '报废辊',
+            value: 4
+        }
+    ]
+)
 const center_ConuleList = ref([
     {
         value: '上'
@@ -392,28 +425,24 @@ const save = (i: any) => {
             }
             break;
         case 2:
-            if (multipleSelection.value.length > 1) {
-                ElMessage({
-                    message: '不能超过1个！',
-                    type: 'warning',
-                })
-            } else if (multipleSelection.value.length == 0) {
+            if (multipleSelection.value.length == 0) {
                 ElMessage({
                     message: '请选择！',
                     type: 'warning',
                 })
             } else {
                 let alex = new Alex
-                // for (let i = 0; i < multipleSelection.value.length; i++) {
-                //     delete multipleSelection.value[i].detection
-                //     delete multipleSelection.value[i].electronic
-                //     delete multipleSelection.value[i].grind
-                //     delete multipleSelection.value[i].produce
-                //     delete multipleSelection.value[i].register
-                //     delete multipleSelection.value[i].agv_roller
-                // }
+                for (let i = 0; i < multipleSelection.value.length; i++) {
+                    delete multipleSelection.value[i].detection
+                    delete multipleSelection.value[i].electronic
+                    delete multipleSelection.value[i].grind
+                    delete multipleSelection.value[i].produce
+                    delete multipleSelection.value[i].register
+                    delete multipleSelection.value[i].agv_roller
+                    delete multipleSelection.value[i].level
+                }
                 alex.parameter = {
-                    frameOne: multipleSelection.value[0]
+                    frameList: multipleSelection.value
                 }
                 insertGrindCarryCrush(alex).then((res: any) => {
                     ElMessage({
@@ -478,6 +507,7 @@ const getData = () => {
     selectFramePageSize(alex).then((res: any) => {
         ltable.value = res.result.frameListPageCount;
         count.value = res.result.count;
+        form.value.diameter = null
     })
 }
 const upd = (row: any) => {
