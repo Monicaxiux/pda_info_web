@@ -67,7 +67,8 @@
                         type="danger">机器人已接收</el-tag>
                     <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '3'"
                         type="success">通讯发送成功</el-tag>
-                    <el-tag v-else class="ml-2 fstatus2" type="danger">等待获取任务</el-tag>
+                       <el-tag v-if="data.tableData5[0].information.succeeStatus == ''" class=" ml-2 fstatus2"
+                            type="danger">等待获取任务</el-tag>
                 </div>
                 <div class="tableData3">
                     <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key" border>

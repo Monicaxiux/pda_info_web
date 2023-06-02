@@ -34,7 +34,7 @@
                 <el-table-column prop="position" label="位置"></el-table-column>
                 <el-table-column label="出库配辊">
                     <template #default="scope">
-                        <el-button @click="select([scope.row.position])">出库配辊</el-button>
+                        <el-button @click="select([scope.row.position], false)">出库配辊</el-button>
                     </template>
                 </el-table-column>
                 <el-table-column label="状态">
@@ -52,7 +52,7 @@
                 <el-table-column prop="position" label="位置"></el-table-column>
                 <el-table-column label="出库配辊">
                     <template #default="scope">
-                        <el-button @click="select([scope.row.position])">出库配辊</el-button>
+                        <el-button @click="select([scope.row.position], false)">出库配辊</el-button>
                     </template>
                 </el-table-column>
                 <el-table-column label="状态">
@@ -70,7 +70,7 @@
                 <el-table-column prop="position" label="位置"></el-table-column>
                 <el-table-column label="出库配辊">
                     <template #default="scope">
-                        <el-button @click="select([scope.row.position])">出库配辊</el-button>
+                        <el-button @click="select([scope.row.position], true)">出库配辊</el-button>
                     </template>
                 </el-table-column>
                 <el-table-column label="状态">
@@ -95,8 +95,8 @@
                     :value="item.position" />
             </el-select><br /><br />
             辊框号：{{ boxId }}<br /><br />
-            优先执行：
-            <el-switch v-model="value" active-text="是" inactive-text="否" />
+            <!-- 优先执行：
+            <el-switch v-model="value" active-text="是" inactive-text="否" /> -->
         </el-card>
         <br /><br />
         <el-table :data="agvrollerList">
@@ -107,7 +107,7 @@
                     </span>
                 </template>
             </el-table-column>
-            <el-table-column prop="" label="磨床号">
+            <el-table-column v-if="!is" prop="" label="磨床号">
                 <template #default="scope">
                     <span v-if="scope.row.agv_carry">
                         {{ scope.row.agv_carry.grinderNo }}
@@ -120,6 +120,10 @@
             </el-table-column>
             <el-table-column prop="rollerName" label="轧辊号" />
             <!-- <el-table-column prop="remarks" label="备注" /> -->
+            <el-table-column v-if="is" prop="roller_Dimension" label="锥度">
+            </el-table-column>
+            <el-table-column v-if="is" prop="last_Diameter" label="当前直径">
+            </el-table-column>
             <el-table-column prop="slotName" label="卡槽位置" />
             <el-table-column prop="rollType" label="轧辊类型" />
             <!-- <el-table-column prop="accident" label="轧辊事故类型" /> -->
@@ -202,7 +206,9 @@ const selectList = (i: any) => {
 const handleClose = (done: () => void) => {
     done()
 }
-const select = (row: any) => {
+const is = ref(false);
+const select = (row: any, i: any) => {
+    is.value = i
     position.value = ''
     stitle.value = row[0];
     console.log(row);
@@ -235,6 +241,8 @@ const select = (row: any) => {
 }
 const createTask = () => {
     console.log(agvrollerList.value);
+    let end = position.value.substring(position.value.length - 2)
+    let p = 5;
     if (agvrollerList.value) {
         let sn = '';
         if (stitle.value != 'A30' && stitle.value != 'A31' && stitle.value != 'A32' && stitle.value != 'A33' && stitle.value != 'A34' && stitle.value != 'A35') {
@@ -242,19 +250,28 @@ const createTask = () => {
         } else {
             sn = '中间辊货架'
         }
+
+        if (end == '02') {
+            p = 10
+        } else if (end == '01') {
+            p = 11
+        } else {
+            p = 5
+        }
         let alex = new Alex();
         alex.parameter = {
             rollerType: agvrollerList.value[0].agv_main ? agvrollerList.value[0].agv_main.rollType : agvrollerList.value[0].rollType,
             agv_Carry: {
-                workId: agvrollerList.value[0].rimNum,
-                boxId: agvrollerList.value[0].agv_main ? agvrollerList.value[0].agv_main.boxId : agvrollerList.value[0].agv_carry.boxId,
+                // workId: agvrollerList.value[0].rimNum,
+                // boxId: agvrollerList.value[0].agv_main ? agvrollerList.value[0].agv_main.boxId : agvrollerList.value[0].agv_carry.boxId,
                 start: stitle.value,
                 startName: sn,
                 end: position.value,
                 fname: '出入库区域',
                 ename: '叉车AGV',
-                priority: 5
-            }
+                priority: p
+            },
+            insertRollerList: []
         }
         selectAgv_CarryInfo(alex).then((res: any) => {
             ElMessage({
@@ -273,19 +290,27 @@ const createTask = () => {
         } else {
             sn = '中间辊货架'
         }
+        if (end == '02') {
+            p = 10
+        } else if (end == '01') {
+            p = 11
+        } else {
+            p = 5
+        }
         let alex = new Alex();
         alex.parameter = {
             rollerType: null,
             agv_Carry: {
-                workId: null,
-                boxId: null,
+                // workId: null,
+                // boxId: null,
                 start: stitle.value,
                 startName: sn,
                 end: position.value,
                 fname: '出入库区域',
                 ename: '叉车AGV',
-                priority: 5
-            }
+                priority: p
+            },
+            insertRollerList: []
         }
         selectAgv_CarryInfo(alex).then((res: any) => {
             ElMessage({

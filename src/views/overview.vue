@@ -595,10 +595,17 @@ const itemColor = (pstatus: any, emptyStatus: any, existStatus: any) => {
     }
 }
 const createTask = () => {
+    console.log(agvrollerList.value);
+    if (agvrollerList.value.length != 0) {
+        for (let i = 0; i < agvrollerList.value.length; i++) {
+            delete agvrollerList.value[i].agv_main
+            delete agvrollerList.value[i].agv_carry
+        }
+    }
     switch (radio.value) {
         case '工作辊缓存区':
             console.log('是半自动');
-            if (agvrollerList.value.length != 0 || stitle.value == 'C11') {
+            if (agvrollerList.value || stitle.value == 'C11') {
                 if (etitle.value || stitle.value == 'C11') {
                     // if (stitle.value == 'C11') {
                     //     loding.value = true;
@@ -652,24 +659,24 @@ const createTask = () => {
                                 type: 'success',
                             })
 
-                            if (stitle.value == 'C09' && agvrollerList.value[0].rimNum) {
-                                // alex.parameter = {
-                                //     caseId: agvrollerList.value[0].rimNum
-                                // }
-                                // insertCenter_rollerInfo(alex).then((res: any) => {
-                                //     ElMessage({
-                                //         message: res.message.msg,
-                                //         type: 'success',
-                                //     })
-                                //     loding.value = false;
-                                //     dialogVisible3.value = false;
-                                // })
-                                loding.value = false;
-                                dialogVisible3.value = false;
-                            } else {
-                                loding.value = false;
-                                dialogVisible3.value = false;
-                            }
+                            // if (stitle.value == 'C09' && agvrollerList.value[0].rimNum) {
+                            //     // alex.parameter = {
+                            //     //     caseId: agvrollerList.value[0].rimNum
+                            //     // }
+                            //     // insertCenter_rollerInfo(alex).then((res: any) => {
+                            //     //     ElMessage({
+                            //     //         message: res.message.msg,
+                            //     //         type: 'success',
+                            //     //     })
+                            //     //     loding.value = false;
+                            //     //     dialogVisible3.value = false;
+                            //     // })
+                            //     loding.value = false;
+                            //     dialogVisible3.value = false;
+                            // } else {
+                            loding.value = false;
+                            dialogVisible3.value = false;
+                            // }
                         })
 
                     })
@@ -791,7 +798,7 @@ const chang = (row: any, roe: any) => {
         selectAgvFrameRegionMany(alex).then((res: any) => {
             dialogVisible3.value = true
             if (res.result) {
-                agvrollerList.value = res.result.agv_rollerList;
+                agvrollerList.value = res.result.agv_rollerList ? res.result.agv_rollerList : [];
                 rollerList.value = res.result.rollerList;
             }
         })
@@ -844,7 +851,7 @@ const chang = (row: any, roe: any) => {
             dialogVisible3.value = true
             console.log(res);
             if (res.result) {
-                agvrollerList.value = res.result.agv_rollerList;
+                agvrollerList.value = res.result.agv_rollerList ? res.result.agv_rollerList : [];
                 rollerList.value = res.result.rollerList;
             }
         })

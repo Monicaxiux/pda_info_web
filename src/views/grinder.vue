@@ -61,12 +61,13 @@
                 </div>
                 <div v-if="data.tableData5.length != 0 && data.tableData5[0].information">
                     <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '1'"
-                        type="danger">未发送</el-tag>
+                        type="danger">任务未发送</el-tag>
                     <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '2'"
                         type="danger">机器人已接收</el-tag>
                     <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '3'"
                         type="success">通讯发送成功</el-tag>
-                    <el-tag v-else class="ml-2 fstatus2" type="danger">等待获取任务</el-tag>
+                    <el-tag v-if="data.tableData5[0].information.succeeStatus == ''" class=" ml-2 fstatus2"
+                        type="danger">等待获取任务</el-tag>
                 </div>
 
                 <div class="tableData3">
@@ -667,17 +668,18 @@
                 </el-form-item>
                 <el-form-item label="机组号">
                     <el-select v-model="form.unitNum" disabled class="m-2" placeholder="请选择机组号">
-                        <el-option v-for="item in unitNumList" :key="item.value" :label="item.label" :value="item.value" />
+                        <el-option v-for=" item  in  unitNumList " :key="item.value" :label="item.label"
+                            :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="班组">
                     <el-select v-model="form.team" disabled class="m-2" placeholder="请选择班组">
-                        <el-option v-for="item in teamList" :key="item.value" :label="item.label" :value="item.value" />
+                        <el-option v-for=" item  in  teamList " :key="item.value" :label="item.label" :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="班次">
                     <el-select v-model="form.classTimes" disabled class="m-2" placeholder="请选择班次">
-                        <el-option v-for="item in classTimesList" :key="item.value" :label="item.label"
+                        <el-option v-for=" item  in  classTimesList " :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
@@ -697,39 +699,41 @@
                 </el-form-item>
                 <el-form-item label="磨床号">
                     <el-select v-model="form.grindNum" class="m-2" placeholder="请选择磨床">
-                        <el-option v-for="item in grindNumNoList" :key="item.value" :label="item.label"
+                        <el-option v-for=" item  in  grindNumNoList " :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="辊种">
                     <el-select v-model="form.rollType" class="m-2" placeholder="请选择辊种">
-                        <el-option v-for="item in rollTypeList" :key="item.value" :label="item.label" :value="item.value" />
+                        <el-option v-for=" item  in  rollTypeList " :key="item.value" :label="item.label"
+                            :value="item.value" />
                     </el-select>
                 </el-form-item>
 
                 <el-form-item label="表面状态">
                     <el-select v-model="form.tableFace" class="m-2" placeholder="请选择轧辊表面状态">
-                        <el-option v-for="item in tableFaceList" :key="item.value" :label="item.label"
+                        <el-option v-for=" item  in  tableFaceList " :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="检测结果">
                     <el-select v-model="form.testResult" @change="sss" class="m-2" placeholder="请选择检测结果">
-                        <el-option v-for="item in testResultList" :key="item.value" :label="item.label"
+                        <el-option v-for=" item  in  testResultList " :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="异常处理">
                     <el-select v-model="form.exception" :disabled="form.testResult == 2 ? false : true" class="m-2"
                         placeholder="请选择异常处理">
-                        <el-option v-for="item in exceptionList" :key="item.value" :label="item.label"
+                        <el-option v-for=" item  in  exceptionList " :key="item.value" :label="item.label"
                             :value="item.value" />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="异常原因">
                     <el-select v-model="form.dremarks" :disabled="form.testResult == 2 ? false : true" class="m-2"
                         placeholder="请选择异常原因">
-                        <el-option v-for="item in dremarksList" :key="item.value" :label="item.label" :value="item.value" />
+                        <el-option v-for=" item  in  dremarksList " :key="item.value" :label="item.label"
+                            :value="item.value" />
                     </el-select>
                 </el-form-item>
             </el-form>
@@ -789,7 +793,7 @@
                     <el-table-column prop="" label="当前辊种">
                         <template #default="scope">
                             <el-select v-model="scope.row.rollType" class="m-2" placeholder="选择辊种" size="small">
-                                <el-option v-for="  item   in   rollTypeList2  " :key="item.value" :label="item.label"
+                                <el-option v-for="   item    in    rollTypeList2   " :key="item.value" :label="item.label"
                                     :value="item.value" />
                             </el-select>
                         </template>
@@ -797,7 +801,7 @@
                     <el-table-column prop="" label="轧机号 ">
                         <template #default="scope">
                             <el-select v-model="scope.row.turnstNum" class="m-2" placeholder="选择轧机号" size="small">
-                                <el-option v-for="  item   in   turnstNumList  " :key="item.value" :label="item.label"
+                                <el-option v-for="   item    in    turnstNumList   " :key="item.value" :label="item.label"
                                     :value="item.value" />
                             </el-select>
                         </template>
@@ -808,7 +812,7 @@
                         <template #default="scope">
                             <el-select @change="endChange(scope.$index)" v-model="scope.row.endName" class="m-2"
                                 placeholder="选择终点区域" size="small">
-                                <el-option v-for="  item   in   endNameList  " :key="item.value" :label="item.label"
+                                <el-option v-for="   item    in    endNameList   " :key="item.value" :label="item.label"
                                     :value="item.value" />
                             </el-select>
                         </template>
@@ -816,7 +820,7 @@
                     <el-table-column prop="" label="终点位置">
                         <template #default="scope">
                             <el-select v-model="scope.row.end" class="m-2" placeholder="选择终点位置" size="small">
-                                <el-option v-for="  item   in   scope.row.endList  " :key="item.slotPosition"
+                                <el-option v-for="   item    in    scope.row.endList   " :key="item.slotPosition"
                                     :label="item.slotPosition" :value="item.slotPosition" />
                             </el-select>
                         </template>
