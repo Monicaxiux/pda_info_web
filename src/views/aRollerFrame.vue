@@ -122,10 +122,10 @@
             <!-- <el-table-column prop="remarks" label="备注" /> -->
             <el-table-column v-if="is" prop="roller_Dimension" label="锥度">
             </el-table-column>
-            <el-table-column v-if="is" prop="last_Diameter" label="当前直径">
+            <el-table-column prop="last_Diameter" label="当前直径">
             </el-table-column>
-            <el-table-column prop="slotName" label="卡槽位置" />
-            <el-table-column prop="rollType" label="轧辊类型" />
+            <!-- <el-table-column prop="slotName" label="卡槽位置" /> -->
+            <el-table-column prop="last_RollTypeCode" label="辊种" />
             <!-- <el-table-column prop="accident" label="轧辊事故类型" /> -->
         </el-table>
         <template #footer>
@@ -189,7 +189,6 @@ const selectList = (i: any) => {
                 }
             })
             console.log(List2.value);
-
             break;
         case 3:
             alex.parameter = {

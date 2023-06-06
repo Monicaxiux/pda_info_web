@@ -216,7 +216,7 @@
         <el-dialog v-model="dialogVisible3" title="详情" draggable width="60%" :before-close="handleClose">
             <!-- <el-button style="position: relative;top: -66px;left: 58px;">出库</el-button> -->
             <div style="display: flex;">
-                <el-card style="width: 40%;margin-right:10px" class="box-card" shadow="hover">
+                <el-card style="width: 40%;margin-right:10px" shadow="hover">
                     起始位置：{{ stitle }}<br /><br />
                     <div>
                         终点位置： <el-select v-model="etitle" @change="echange" class="m-2" placeholder="请选择终点位置">
@@ -242,30 +242,29 @@
                         任务类型：半自动
                     </div>
                     <br />
-                    <div v-if="stitle != 'C11'">
-                        出库：
+                    <div v-if="stitle == 'C02' || stitle == 'C03' || stitle == 'C06' || stitle == 'C07' || stitle == 'C08'">
+                        暂存出库：
                         <el-switch v-model="value" active-text="是" inactive-text="否" />
                     </div>
                 </el-card>
-                <el-card style="width: 80%;" class=" box-card" shadow="hover">
+                <el-card style="width: 80%;" shadow="hover">
 
-                    起点区域：<span v-if="listText">{{ listText.startName }}</span><br /><br />
-                    起点位置：<span v-if="listText">{{ listText.start }}</span><br /><br />
-                    终点区域：<span v-if="listText">{{ listText.fname }}</span><br /><br />
-                    终点位置：<span v-if="listText">{{ listText.end }}</span><br /><br />
-                    创建时间：<span v-if="listText">{{ listText.createTime }}</span><br /><br />
-                    执行时间：<span v-if="listText">{{ listText.okTime }}</span><br /><br />
+                    起点区域：<span v-if="listText">{{ listText.startName }}</span><br />
+                    起点位置：<span v-if="listText">{{ listText.start }}</span><br />
+                    终点区域：<span v-if="listText">{{ listText.fname }}</span><br />
+                    终点位置：<span v-if="listText">{{ listText.end }}</span><br />
+                    创建时间：<span v-if="listText">{{ listText.createTime }}</span><br />
+                    执行时间：<span v-if="listText">{{ listText.okTime }}</span><br />
                     状态：<span v-if="listText">
                         <span v-if="listText.status == 0">未发送</span>
                         <span v-if="listText.status == 1">未发送</span>
                         <span v-if="listText.status == 2">未发送</span>
-                    </span><br /><br />
+                    </span><br />
 
                     AGV任务终止:
                     <el-button type="danger" size="small" @click="upDataList(null, 0, 0)">
                         终止
                     </el-button>
-                    <br />
                     <br />
                     辊框状态:
                     <a v-if="listText2.position == 'B01'">
@@ -649,9 +648,16 @@ const createTask = () => {
                                 fname: fname.value,
                                 ename: "背驼",
                                 priority: 10,
-                                confirm: true,
-                                out_Status: value.value == '是' ? 1 : 0
+                                confirm: false,
+                                out_Status: false
                             },
+                        }
+                        if (stitle.value == 'C02' || stitle.value == 'C03' || stitle.value == 'C06' || stitle.value == 'C07' || stitle.value == 'C08') {
+                            alex.parameter.agv_Carry.confirm = true
+                            alex.parameter.agv_Carry.out_Status = value.value == '是' ? true : false
+                        } else {
+                            alex.parameter.agv_Carry.confirm = false
+                            alex.parameter.agv_Carry.out_Status = false
                         }
                         selectAgv_CarryInfo(alex).then((res: any) => {
                             ElMessage({
@@ -1221,6 +1227,10 @@ onUnmounted(() => {
         bottom: 35px;
 
     }
+}
+
+.cardx_span {
+    margin-bottom: 20px;
 }
 
 #CRegion {
