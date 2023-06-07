@@ -654,7 +654,9 @@ const createTask = () => {
                         }
                         if (stitle.value == 'C02' || stitle.value == 'C03' || stitle.value == 'C06' || stitle.value == 'C07' || stitle.value == 'C08') {
                             alex.parameter.agv_Carry.confirm = true
-                            alex.parameter.agv_Carry.out_Status = value.value == '是' ? true : false
+                            console.log(value.value);
+                            alex.parameter.agv_Carry.out_Status = value.value
+                            //    value.value == '是' ? true : false
                         } else {
                             alex.parameter.agv_Carry.confirm = false
                             alex.parameter.agv_Carry.out_Status = false
