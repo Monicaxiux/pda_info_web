@@ -61,15 +61,15 @@
                     <el-tag v-else class="ml-2 fstatus" type="success">正常</el-tag>
                 </div>
                 <div v-if="data.tableData5.length != 0 && data.tableData5[0].information">
-                        <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '1'"
-                            type="danger">未发送</el-tag>
-                        <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '2'"
-                            type="danger">机器人已接收</el-tag>
-                        <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '3'"
-                            type="success">通讯发送成功</el-tag>
-                      <el-tag v-if="data.tableData5[0].information.succeeStatus == ''" class=" ml-2 fstatus2"
-                            type="danger">等待获取任务</el-tag>
-                    </div>
+                    <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '1'"
+                        type="danger">未发送</el-tag>
+                    <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '2'"
+                        type="danger">机器人已接收</el-tag>
+                    <el-tag class="ml-2 fstatus2" v-if="data.tableData5[0].information.succeeStatus == '3'"
+                        type="success">通讯发送成功</el-tag>
+                    <el-tag v-if="data.tableData5[0].information.succeeStatus == ''" class=" ml-2 fstatus2"
+                        type="danger">等待获取任务</el-tag>
+                </div>
 
                 <div class="tableData3">
                     <el-table name="C" class="t5" ref="dragTable" :data="data.tableData5" row-key="id" :key="key" border>
@@ -865,6 +865,7 @@ import { onMounted, reactive, ref, onBeforeUnmount, toRefs, getCurrentInstance, 
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { updateFrame, getFrameChild, insertProduce, deleteProduceList, selectProduceAll, selectFrameByType, getGrindAllAndData, getFrame, selectGrindParameterTry, updateFrameChild, updateElectronic, remFrame, addFrame, getDcad, updateDcad, getFrameInfo, insertOutGrindCarryMake, selectFrameRegionAndType } from '@/apis'
 import { Alex } from '@/types'//引入参数规范类型
+import axios from "axios";
 let data: any = reactive({
     tableData: [],
     tableData2: [],
@@ -1529,6 +1530,9 @@ const slot = (row: any, i: any) => {
                     message: '操作成功！',
                     type: 'success',
                 })
+                axios.get(`http://192.2.25.61/api/web/UpdateRollInfo?RollNo=${rollerIdx.value}&Diameter=${row.diameter}&Roll_Seed=${row.rollType}&Grinder_No=${row.grindNum}&SurfaceState=${row.tableFace}&Reason=${row.dremarks}&Result=${form.value.testResult}`).then((res: any) => {
+
+                })
             })
             break;
         case 3:
@@ -2135,6 +2139,7 @@ onUnmounted(() => {
     width: 800px;
     height: 780px;
 }
+
 .fstatus2 {
     position: absolute;
     /* font-weight: bold; */

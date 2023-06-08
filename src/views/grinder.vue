@@ -1539,11 +1539,11 @@ const slot = (row: any, i: any) => {
                     message: '操作成功！',
                     type: 'success',
                 })
+                axios.get(`http://192.2.25.61/api/web/UpdateRollInfo?RollNo=${rollerIdx.value}&Diameter=${row.diameter}&Roll_Seed=${row.rollType}&Grinder_No=${row.grindNum}&SurfaceState=${row.tableFace}&Reason=${row.dremarks}&Result=${row.testResult}`).then((res: any) => {
+
+                })
             })
             // & Taper=${ row.taper }& Plant_Code=${ }
-            axios.get(`http://192.2.25.61/api/web/UpdateRollInfo?RollNo=${rollerIdx.value}&Diameter=${row.diameter}&Roll_Seed=${row.rollType}&Grinder_No=${row.grindNum}&SurfaceState=${row.tableFace}&Reason=${row.dremarks}&Result=${row.testResult}`).then((res: any) => {
-
-            })
             break;
         case 3:
             break;
