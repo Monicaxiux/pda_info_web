@@ -119,7 +119,10 @@
     </div>
     <el-dialog v-model="dialogVisible" title="详情" width="50%">
         <el-input style="width: 200px;margin-right: 10px;" v-model="form.rollerName" clearable placeholder="请输入轧辊号" />
-        <el-input style="width: 200px;margin-right: 10px;" v-model="form.name" clearable placeholder="请输入直径" />
+        直径：
+        <el-input style="width: 70px;" v-model="form.name" clearable placeholder="请输入" />
+        -
+        <el-input style="width: 70px;margin-right: 10px;" v-model="form.name" clearable placeholder="请输入" />
         <el-select v-model="form.diameter" class="m-2" placeholder="请选择维度">
             <el-option v-for="item in options" :key="item.value" :label="item.value" :value="item.value" />
         </el-select>
@@ -127,8 +130,8 @@
         <el-button type="primary" class="button" @click="getData()">查询</el-button>
         <br />
         <br />
-        <el-table style="max-height: 450px;overflow: auto;" :data="ltable" :row-style="styleBack" @row-dblclick="dbSelected"
-            @selection-change="handleSelectionChange" border>
+        <el-table ref="multipleTableRef" style="max-height: 450px;overflow: auto;" :data="ltable" :row-style="styleBack"
+            @row-dblclick="dbSelected" @selection-change="handleSelectionChange" border>
             <el-table-column type="selection" width="55" />
             <el-table-column label="轧辊号">
                 <template #default="scope">
@@ -186,9 +189,9 @@
             </span>
         </template>
     </el-dialog>
-    <el-dialog v-model="dialogVisible2" title="详情" width="50%">
-        <el-table style="max-height: 450px;overflow: auto;" :data="tableData5" @selection-change="handleSelectionChange"
-            border>
+    <el-dialog v-model="dialogVisible2" title="详情" width="50%" @close='Clox'>
+        <el-table ref="multipleTableRef2" style="max-height: 450px;overflow: auto;" :data="tableData5"
+            @selection-change="handleSelectionChange" border>
             <el-table-column type="selection" width="55" />
             <el-table-column prop="rollerName" label="轧辊号">
             </el-table-column>
@@ -235,6 +238,10 @@
         </el-table>
         <br />
         <template #footer>
+            <div style="float: left;">
+                <el-button type="primary" @click="save(2)">磨削</el-button>
+                <el-button type="primary" @click="save(1)">出库</el-button>
+            </div>
             <span class="dialog-footer">
                 <el-button @click="dialogVisible2 = false, multipleSelection.value = []">取消</el-button>
                 <el-button type="primary" @click="save(3)">确定</el-button>
@@ -253,8 +260,16 @@ const tableData2 = ref([]);
 const tableData3 = ref([]);
 const tableData4 = ref([]);
 const tableData5 = ref([]);
+const multipleTableRef = ref();
+const multipleTableRef2 = ref();
+
 const dialogVisible = ref(false)
 const dialogVisible2 = ref(false)
+const Clox = () => {
+    multipleTableRef.value.clearSelection()
+    multipleTableRef2.value.clearSelection()
+    multipleSelection.value = []
+}
 const styleBack = (row: any) => {
     switch (row.row.agv_roller.center_Conule) {
         case '上':
@@ -330,6 +345,7 @@ const ltable = ref([])
 const page = ref(1)
 const count = ref(0)
 const dbSelected = (row: any) => {
+    multipleSelection.value = []
     let alex = new Alex
     alex.parameter = {
         agvRoller: row.agv_roller
@@ -414,12 +430,18 @@ const save = (i: any) => {
                 alex.parameter = {
                     frameList: multipleSelection.value
                 }
+                console.log(alex);
+
                 insertOutCarryInto(alex).then((res: any) => {
                     ElMessage({
                         message: '添加成功！',
                         type: 'success',
                     })
+                    multipleTableRef.value.clearSelection()
+                    multipleTableRef2.value.clearSelection()
+                    multipleSelection.value = []
                     dialogVisible.value = false;
+                    dialogVisible2.value = false;
                     selectDtat();
                 })
             }
@@ -444,12 +466,18 @@ const save = (i: any) => {
                 alex.parameter = {
                     frameList: multipleSelection.value
                 }
+                console.log(alex);
+
                 insertGrindCarryCrush(alex).then((res: any) => {
                     ElMessage({
                         message: '添加成功！',
                         type: 'success',
                     })
+                    multipleTableRef.value.clearSelection()
+                    multipleTableRef2.value.clearSelection()
+                    multipleSelection.value = []
                     dialogVisible.value = false;
+                    dialogVisible2.value = false;
                     selectDtat();
                 })
             }

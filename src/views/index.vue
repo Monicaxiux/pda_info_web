@@ -42,6 +42,8 @@
                         <span>AGV半自动任务查询</span>
                     </el-menu-item>
                     <el-menu-item @click="store.active = '/GrindAutoInfo'" index="/GrindAutoInfo">
+
+
                         <i class="iconfont icon-caidan"></i>&nbsp;
                         <span>机器人半自动任务查询</span>
                     </el-menu-item>
